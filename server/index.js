@@ -7,14 +7,14 @@ const app = express();
 
 
 // Serve the built client
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+// app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-// Unhandled requests which aren't for the API should serve index.html so
-// client-side routing using browserHistory can function
-app.get(/^(?!\/api(\/|$))/, (req, res) => {
-    const index = path.resolve(__dirname, '../client/build', 'index.html');
-    res.sendFile(index);
-});
+// // Unhandled requests which aren't for the API should serve index.html so
+// // client-side routing using browserHistory can function
+// app.get(/^(?!\/api(\/|$))/, (req, res) => {
+//     const index = path.resolve(__dirname, '../client/build', 'index.html');
+//     res.sendFile(index);
+// });
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -321,9 +321,11 @@ function closeServer() {
     });
 }
 
-if (require.main === module) {
-    runServer();
-}
+// if (require.main === module) {
+//     runServer();
+// }
+
+runServer();
 
 module.exports = {
     app, runServer, closeServer

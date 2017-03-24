@@ -12,9 +12,13 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.14.1",
+    "knex": "^0.12.9",
     "passport": "^0.3.2",
     "passport-google-oauth20": "^1.0.0",
-    "passport-http-bearer": "^1.0.1"
+    "passport-http-bearer": "^1.0.1",
+    "pg": "^6.1.5",
+    "web3": "^0.18.2"
   }
 }

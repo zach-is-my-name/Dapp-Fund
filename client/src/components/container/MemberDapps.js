@@ -33,6 +33,8 @@ export default class MemberDapps extends React.Component {
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
 
+    componentDidMount() {
+         window.addEventListener('load', function() {
 
         // SUBMIT PROPOSAL
         //      Checks to see if user is a member of the fund, if so, a proposal transaction is initiated using the user inputted data and data from "this.props.selectedDapp.userAddress"

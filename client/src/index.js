@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM  from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import {Provider} from 'react-redux';
+import store from './store'
 import {BrowserRouter,Route} from 'react-router-dom';
 import About from './components/container/About';
 import NotFound from './components/container/NotFound';
@@ -25,6 +27,8 @@ function Root() {
           }
 
 ReactDOM.render(
-  <Root />,
-  document.querySelector('#root')
-);
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+    document.getElementById('root')
+    );

@@ -1,9 +1,10 @@
-import 'isometric-fetch'
+import 'isomorphic-fetch'
+
 export const APPLY_FORM_POST_SUCCESS = 'APPLY_FORM_POST_SUCCESS'
-export const applyFormPostSuccess = (data) => ({type: APPLY_FORM_POST_SUCCESS, data})
-//Get to the bottom of syntax highlights
-//Find out how to use fetch() to send multiple req.body's
-//destructure inputs object to match api params
+
+/* On Hold, We're not Updateing the Store for Member Dapps Based on the Server Response from Post. Only on a GET * AFTER PUT */ 
+// export const applyFormPostSuccess = (data) => ({type: APPLY_FORM_POST_SUCCESS, data})
+
 export const submitApply = inputs => async dispatch => {
 
     try {
@@ -14,12 +15,10 @@ export const submitApply = inputs => async dispatch => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
-        }
-        let data = await response.json()
-        console.log(data)
-        data => dispatch(applyFormPostSuccess(data))
-        catch (e) {
-            console.error(e)
-        }
-    ) ();
-};
+        })
+        let _response = await response.json();
+        console.log("Response from Server", _response);
+    } catch (err) {
+        console.error(err)
+    }
+}

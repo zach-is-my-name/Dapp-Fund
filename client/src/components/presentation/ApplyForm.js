@@ -1,14 +1,14 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import * as actions from '../../Actions/actions'
 export default class ApplyForm extends React.Component {
-  constructor() {
+  constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);
   }
 
+
 sumbit(event) {
-  event.preventDefault;
 let applyObj = {
     username:this.refs.dappCreator.value ,
     useretheraddress:this.refs.creatorAddress.value,
@@ -17,9 +17,10 @@ let applyObj = {
     dappdescription: this.refs.dappDescription.value,
     dappimagelink: this.refs.imageLink.value,
     dappetheraddress: this.refs.dappLink.value ,
-    status: pending;
+    memberstatus: "pending"
   }
-this.props.dispatch(actions.submitApply(applyObj)
+this.props.dispatch(actions.submitApply(applyObj));
+  event.preventDefault();
 }
 
   render() {
@@ -47,13 +48,13 @@ this.props.dispatch(actions.submitApply(applyObj)
         </FormGroup>
         <FormGroup>
           <Label for="dapp-creator-address"> Dapp Creator Public Key</Label>
-          <Input type="text" name="dappCreatorAddress" id="dappCreatorAddress" placeholder="Enter Dapp Creatref=""or Public Key" ref="creatorAddress" required/>
+          <Input type="text" name="dappCreatorAddress" id="dappCreatorAddress" placeholder="Enter Dapp Creator Public Key" ref="creatorAddress" required/>
         </FormGroup>
         <FormGroup>
           <Label for="membership-hash"> Membership Hash</Label>
-          <Input type="text" name="membershipHash" id="membershipHash" placeholder="Enter Dapp Creatref=""or Public Key" ref="membershipHash" required/>
+          <Input type="text" name="membershipHash" id="membershipHash" placeholder="Enter Membership Transaction ID" ref="membershipHash" required/>
         </FormGroup>
-        <Input type="submit" name="submit" id="apply-submit" />
+        <Button type="submit" name="submit" id="apply-submit" />
       </Form>
             );
             }

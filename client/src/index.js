@@ -10,21 +10,24 @@ import NotFound from './components/container/NotFound';
 import Apply from './components/container/Apply'
 import MemberDapps from './components/container/MemberDapps'
 
-function Root() {
-
+class Root extends React.Component {
+render() {
   return (
-      <BrowserRouter>
-        <div>
-          {/* test */}
-          <Route exact path="/" component={About} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/apply" component={Apply} />
-          <Route exact path="/memberdapps" component={MemberDapps} />
-          {/* <Route component={NotFound} /> */}
-        </div>
-      </BrowserRouter>
+      <div>
+        <BrowserRouter>
+          <div>
+            {/* test */}
+            <Route exact path="/" component={About} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/apply" component={Apply} />
+            <Route exact path="/memberdapps" component={MemberDapps} />
+            {/* <Route component={NotFound} /> */}
+          </div>
+        </BrowserRouter>
+      </div>
           )
           }
+}
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,18 +1,20 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {  Form, FormGroup, Label, Input } from 'reactstrap';
+import {connect} from 'react-redux'
 import * as actions from '../../Actions/actions'
-export default class ApplyForm extends React.Component {
+
+export class ApplyForm extends React.Component {
   constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);
   }
 
 
-sumbit(event) {
+submit(event) {
 let applyObj = {
     username:this.refs.dappCreator.value ,
     useretheraddress:this.refs.creatorAddress.value,
-    entryfeetransaction:this.membershipHash.value ,
+    entryfeetransaction:this.refs.membershipHash.value ,
     dappname: this.refs.dappName.value,
     dappdescription: this.refs.dappDescription.value,
     dappimagelink: this.refs.imageLink.value,
@@ -54,8 +56,9 @@ this.props.dispatch(actions.submitApply(applyObj));
           <Label for="membership-hash"> Membership Hash</Label>
           <Input type="text" name="membershipHash" id="membershipHash" placeholder="Enter Membership Transaction ID" ref="membershipHash" required/>
         </FormGroup>
-        <Button type="submit" name="submit" id="apply-submit" />
+        <Input type="submit" name="submit" id="apply-submit" value="Submit"/>
       </Form>
             );
             }
             }
+  export default connect()(ApplyForm);

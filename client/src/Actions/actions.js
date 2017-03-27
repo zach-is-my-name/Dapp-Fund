@@ -6,9 +6,9 @@ export const APPLY_FORM_POST_SUCCESS = 'APPLY_FORM_POST_SUCCESS'
 // export const applyFormPostSuccess = (data) => ({type: APPLY_FORM_POST_SUCCESS, data})
 
 export const submitApply = (inputs) => async dispatch => {
-
+console.log("FETCH INPUT", JSON.stringify(inputs))
     try {
-        let response = await fetch('/users', {
+        let response = await fetch('http://localhost:3001/users', {
             method: 'POST',
             body: JSON.stringify(inputs),
             headers: {

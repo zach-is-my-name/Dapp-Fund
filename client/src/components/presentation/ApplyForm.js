@@ -21,6 +21,8 @@ let applyObj = {
     dappetheraddress: this.refs.dappLink.value ,
     memberstatus: "pending"
   }
+  console.log("APPLY OBJ", applyObj)
+  console.log(event.target.name.enterDapp)
 this.props.dispatch(actions.submitApply(applyObj));
   event.preventDefault();
 }
@@ -30,7 +32,7 @@ this.props.dispatch(actions.submitApply(applyObj));
       <Form onSubmit={this.submit}>
         <FormGroup>
           <Label for="dapp-name">Dapp Name</Label>
-          <Input type="" name="enterDapp" id="enterDapp" placeholder="Enter Dapp Name" ref="dappName" required/>
+          <Input type="text" name="enterDapp" id="enterDapp" placeholder="Enter Dapp Name"  required/>
         </FormGroup>
         <FormGroup>
           <Label for="dapp-description">Dapp Description</Label>

@@ -27,6 +27,9 @@ const knex = require('knex')({
         url: 'postgres://nyfibjdb:rfdZ6HnpaOAP8bKSqzxgN33hx1Z4jP2O@stampy.db.elephantsql.com:5432/nyfibjdb',
     },
 });
+
+//Source code
+
 // User submitting application
 app.post('/users', jsonParser, (req, res) => {
     let userName = req.body.userName;
@@ -151,7 +154,7 @@ app.get('/proposals', (req, res) => {
     let remainingMinutes = 60 - minutes;
   let remainingTime;
     if (remainingDays > 0 || remainingHours > 0 || remainingMinutes > 0) {
-      remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes before voting deadline.`;
+      remainingTime = [remainingDays, remainingHours, remainingMinutes];
     } else {
       remainingTime = 'Expired';
     }
@@ -166,7 +169,20 @@ app.get('/proposals', (req, res) => {
       let updatedProposals = proposals.map(proposal => {
         console.log("proposal.datecreated", proposal.datecreated);
         let o = Object.assign({}, proposal);
-        o.timeLeft = timeRemaining(String(proposal.datecreated));
+        let timeLeft = timeRemaining(String(proposal.datecreated));
+        if (typeof(timeLeft) === 'object') {
+          o.daysLeft = timeLeft[0];
+          o.hoursLeft = timeLeft[1];
+          o.minutesLeft = timeLeft[2];
+          o.timeLeft = 'Active';
+        } else {
+          o.daysLeft = 0;
+          o.hoursLeft = 0;
+          o.minutesLeft = 0;
+
+          o.timeLeft = 'Expired';
+        }
+        
         return o;
       })
       return updatedProposals;

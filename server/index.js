@@ -3,24 +3,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+// const config = require('./config');
+// app.use(function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', config.CLIENT_ROOT);
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//     next();
+// });
+
 const app = express();
 
-
-//Enable CORS for development
-
-const allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', ' http://localhost:3000');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    next();
-}
-
-app.use(allowCrossDomain);
 
 
 // Serve the built client
 // app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 
 // // Unhandled requests which aren't for the API should serve index.html so
 // // client-side routing using browserHistory can function
@@ -31,6 +27,17 @@ app.use(allowCrossDomain);
 
 
 //
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'example.com');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+  next();
+} 
+
+app.use(allowCrossDomain);
+
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -43,6 +50,9 @@ const knex = require('knex')({
         url: 'postgres://nyfibjdb:rfdZ6HnpaOAP8bKSqzxgN33hx1Z4jP2O@stampy.db.elephantsql.com:5432/nyfibjdb',
     },
 });
+
+//Source code
+
 // User submitting application
 app.post('/users', jsonParser, (req, res) => {
     console.log("MADE IT")
@@ -173,7 +183,7 @@ app.get('/proposals', (req, res) => {
     let remainingMinutes = 60 - minutes;
   let remainingTime;
     if (remainingDays > 0 || remainingHours > 0 || remainingMinutes > 0) {
-      remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes before voting deadline.`;
+      remainingTime = [remainingDays, remainingHours, remainingMinutes];
     } else {
       remainingTime = 'Expired';
     }
@@ -188,7 +198,20 @@ app.get('/proposals', (req, res) => {
       let updatedProposals = proposals.map(proposal => {
         console.log("proposal.datecreated", proposal.datecreated);
         let o = Object.assign({}, proposal);
-        o.timeLeft = timeRemaining(String(proposal.datecreated));
+        let timeLeft = timeRemaining(String(proposal.datecreated));
+        if (typeof(timeLeft) === 'object') {
+          o.daysLeft = timeLeft[0];
+          o.hoursLeft = timeLeft[1];
+          o.minutesLeft = timeLeft[2];
+          o.timeLeft = 'Active';
+        } else {
+          o.daysLeft = 0;
+          o.hoursLeft = 0;
+          o.minutesLeft = 0;
+
+          o.timeLeft = 'Expired';
+        }
+        
         return o;
       })
       return updatedProposals;

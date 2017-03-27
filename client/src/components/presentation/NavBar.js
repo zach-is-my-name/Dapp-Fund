@@ -18,6 +18,7 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <div>
+
         <Navbar color="faded" light toggleable>
           <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand href="/">DappFund</NavbarBrand>

@@ -13,7 +13,6 @@ export class ApplyForm extends React.Component {
       useretheraddress: '',
       entryfeetransaction: '',
       dappname: '',
-      dappname: '',
       dappdescription: '',
       dappimagelink:'',
       dappetheraddress:'',

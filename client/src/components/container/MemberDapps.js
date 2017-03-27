@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock, Jumbotron , FormGroup, Label, Input } from 'reactstrap';
+import { Card, CardImg, CardTitle, CardText, CardGroup, CardBlock, } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 import Heading from '../presentation//Heading';
@@ -25,6 +25,7 @@ window.addEventListener('load', function() {
 export class MemberDapps extends React.Component {
     constructor(props) {
         super(props);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentWillMount() {
@@ -50,7 +51,13 @@ export class MemberDapps extends React.Component {
                         <CardText><b>Description:</b> {dapp.dappdescription}</CardText>
                         <CardText><b>Source Code:</b> <a>{index}</a> </CardText>
                         <CardText><b>Creator:</b> {dapp.username}</CardText>
-                        <Button color="primary" onClick={() => this.onSubmit(dapp)} >Submit New Proposal</Button>
+                        {/*<Button color="primary" onClick={() => this.onSubmit(dapp)} >Submit New Proposal</Button>*/}
+
+                        <a href="http://localhost:3000/submitproposal" onClick={() => this.onSubmit(dapp)}>  
+                        Submit New Proposal      
+                        </a>
+
+
                         <CardText></CardText>
                     </CardBlock>
                 </Card>
@@ -61,16 +68,14 @@ export class MemberDapps extends React.Component {
             console.log(this.props.dappDescriptionArr);
 
                 return (
-                    <div className="container">
+                    <div className="container center">
                         <div className="space-out" > </div>
                         <Heading />
                         <br />
                         <NavBar />
                         <CardGroup>
-                            <h3>MEMBER DAPPS VIEW</h3>
                             {dapps}
                         </CardGroup>
-
                         <div className="space-out" > </div>
                     </div>
         )
@@ -79,7 +84,8 @@ export class MemberDapps extends React.Component {
 
 const mapStateToProps = (state, props) => ({
     dappDescriptionArr: state.DappDescription,
-    isFetched: state.isFetched
+    isFetched: state.isFetched,
+    congressContract: state.congressContract
 });
 
 export default connect(mapStateToProps)(MemberDapps);

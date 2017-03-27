@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import store from './store'
 import {BrowserRouter,Route} from 'react-router-dom';
 import About from './components/container/About';
-import NotFound from './components/container/NotFound';
+// import NotFound from './components/container/NotFound';
 import Apply from './components/container/Apply';
 import MemberDapps from './components/container/MemberDapps';
 import ActiveProposals from './components/container/ActiveProposals';

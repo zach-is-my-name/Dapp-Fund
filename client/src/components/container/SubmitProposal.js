@@ -1,7 +1,12 @@
 import React from 'react';
-import { Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock, Jumbotron , FormGroup, Label, Input } from 'reactstrap';
+import { Button, Jumbotron , FormGroup, Label, Input } from 'reactstrap';
+import { connect } from 'react-redux';
+// import * as actions from '../../Actions/actions';
+import Heading from '../presentation//Heading';
+import NavBar from '../presentation/NavBar';
 var Web3 = require('web3');
 let web3 = window.web3;
+
 
 window.addEventListener('load', function() {
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -17,7 +22,7 @@ window.addEventListener('load', function() {
         }
 })
 
-export default class SubmitProposal extends React.Component {
+export class SubmitProposal extends React.Component {
 	constructor(props) {
         super(props);
         // this.onSubmitProposal = this.onSubmitProposal.bind(this);
@@ -27,26 +32,22 @@ export default class SubmitProposal extends React.Component {
     }
 
     handleChangeFunding(event) {
-        console.log(event.target.value)
         this.setState({valueFunding: event.target.value});
     }
 
     handleChangeWhy(event) {
-        console.log(event.target.value)
         this.setState({valueWhy: event.target.value});
     }
 
     onSubmitProposal (XXX) {
-        let congressContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"proposals","outputs":[{"name":"recipient","type":"address"},{"name":"amount","type":"uint256"},{"name":"description","type":"string"},{"name":"votingDeadline","type":"uint256"},{"name":"executed","type":"bool"},{"name":"proposalPassed","type":"bool"},{"name":"numberOfVotes","type":"uint256"},{"name":"currentResult","type":"int256"},{"name":"proposalHash","type":"bytes32"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"targetMember","type":"address"}],"name":"removeMember","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proposalNumber","type":"uint256"},{"name":"transactionBytecode","type":"bytes"}],"name":"executeProposal","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"memberId","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"numProposals","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"members","outputs":[{"name":"member","type":"address"},{"name":"name","type":"string"},{"name":"memberSince","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"debatingPeriodInMinutes","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"minimumQuorum","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_value","type":"uint256"},{"name":"_token","type":"address"},{"name":"_extraData","type":"bytes"}],"name":"receiveApproval","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"majorityMargin","outputs":[{"name":"","type":"int256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"beneficiary","type":"address"},{"name":"etherAmount","type":"uint256"},{"name":"JobDescription","type":"string"},{"name":"transactionBytecode","type":"bytes"}],"name":"newProposal","outputs":[{"name":"proposalID","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"minimumQuorumForProposals","type":"uint256"},{"name":"minutesForDebate","type":"uint256"},{"name":"marginOfVotesForMajority","type":"int256"}],"name":"changeVotingRules","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"targetMember","type":"address"},{"name":"memberName","type":"string"}],"name":"addMember","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proposalNumber","type":"uint256"},{"name":"supportsProposal","type":"bool"},{"name":"justificationText","type":"string"}],"name":"vote","outputs":[{"name":"voteID","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"proposalNumber","type":"uint256"},{"name":"beneficiary","type":"address"},{"name":"etherAmount","type":"uint256"},{"name":"transactionBytecode","type":"bytes"}],"name":"checkProposalCode","outputs":[{"name":"codeChecksOut","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"},{"inputs":[{"name":"minimumQuorumForProposals","type":"uint256"},{"name":"minutesForDebate","type":"uint256"},{"name":"marginOfVotesForMajority","type":"int256"},{"name":"congressLeader","type":"address"}],"payable":true,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"proposalID","type":"uint256"},{"indexed":false,"name":"recipient","type":"address"},{"indexed":false,"name":"amount","type":"uint256"},{"indexed":false,"name":"description","type":"string"}],"name":"ProposalAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"proposalID","type":"uint256"},{"indexed":false,"name":"position","type":"bool"},{"indexed":false,"name":"voter","type":"address"},{"indexed":false,"name":"justification","type":"string"}],"name":"Voted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"proposalID","type":"uint256"},{"indexed":false,"name":"result","type":"int256"},{"indexed":false,"name":"quorum","type":"uint256"},{"indexed":false,"name":"active","type":"bool"}],"name":"ProposalTallied","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"member","type":"address"},{"indexed":false,"name":"isMember","type":"bool"}],"name":"MembershipChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"minimumQuorum","type":"uint256"},{"indexed":false,"name":"debatingPeriodInMinutes","type":"uint256"},{"indexed":false,"name":"majorityMargin","type":"int256"}],"name":"ChangeOfRules","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"sender","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"receivedEther","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_from","type":"address"},{"indexed":false,"name":"_value","type":"uint256"},{"indexed":false,"name":"_token","type":"address"},{"indexed":false,"name":"_extraData","type":"bytes"}],"name":"receivedTokens","type":"event"}]).at("0xeab55b499b2a9e33e84a66dcf186b954eeb1ed4f");
-        //  ^^^^ Put in store
-        let proposalRecipientAddress = "0x2938f08c710790b62ab3c796135c7474a4e65e02" // will come from this.props.selectedDapp.userAddress
+        let congressContract = this.props.congressContract
+        let proposalRecipientAddress = this.props.dappSelected.useretheraddress // will come from this.props.selectedDapp.userAddress
         let fundingAmount = this.state.valueFunding;   // will come from input
         let investmentThesis = this.state.valueWhy;   // will come from input
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
-        // SUBMIT PROPOSAL
-        //      Checks to see if user is a member of the fund, if so, a proposal transaction is initiated using the user inputted data and data from "this.props.selectedDapp.userAddress"
+       
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error)
@@ -72,27 +73,29 @@ export default class SubmitProposal extends React.Component {
     
 
         return (
-            <div className="container">
-
+            <div className="container center">
+                <Heading />
+                <br />
+                <NavBar />
                 <div className="space-out" > </div>
 
                 <div>
                     <div className="space-out" > </div>
                     <Jumbotron>
                         <h1 className="display-3">Selected Dapp</h1>
-                        <img src={'http://vignette4.wikia.nocookie.net/naval-ops/images/6/61/Full_image_placeholder.jpg/revision/latest?cb=20130727194242'} width={200} height={80} mode='fit' />
+                        <img src={'http://vignette4.wikia.nocookie.net/naval-ops/images/6/61/Full_image_placeholder.jpg/revision/latest?cb=20130727194242'} width={200} height={80} mode='fit' alt="dapp pic" />
                         <p className="lead">Description: A dapp that prints and manages the ThinkfulCoin cryptocurrency</p>
                         <hr className="my-2" />
                         <p>Source Code: https://github.com/johnfkneafsey/ethereum-capstone-project</p>
                         <p>Creator: Joe Turner</p>
-                        <p className="lead">
+                        
                         <FormGroup>
                         <Label for="">Proposal</Label>
                         <Input type="text" value={this.state.valueFunding} onChange={this.handleChangeFunding} name="Funding" id="Funding" placeholder="Funding Amount" />
                         <Input type="text" value={this.state.valueWhy} onChange={this.handleChangeWhy} name="Why" id="Why" placeholder="Why?" />
                         </FormGroup>
                         <Button color="primary" onClick={() => this.onSubmitProposal()} >Submit</Button>
-                        </p>
+                   
                     </Jumbotron>
                 </div>
 
@@ -103,6 +106,17 @@ export default class SubmitProposal extends React.Component {
     }
 
 }
+
+const mapStateToProps = (state, props) => ({
+    dappDescriptionArr: state.DappDescription,
+    isFetched: state.isFetched,
+    congressContract: state.congressContract,
+    dappSelected: state.dappSelected 
+});
+
+export default connect(mapStateToProps)(SubmitProposal);
+
+
 
 
 

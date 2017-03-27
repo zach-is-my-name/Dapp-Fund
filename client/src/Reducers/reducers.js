@@ -1,16 +1,17 @@
 import update from 'immutability-helper';
 const initialState = {
-//   //on hold pending /users server response
-// // DappDetails: [],
+DappDescription: [],
 // // array of objects
+isFetched: false
 };
-//
-// /* ON HOLD, SEE NOTE IN ACTIONS */
+
 export const appReducer = (state = initialState, action) => {
-// //   if (action.type === APPLY_FORM_POST_SUCCESS){
-// //     return update(state, {
-// //       DappDetails:{$set: action.data}
-// //     })
-// //   }
-// //   return state;
+  if (action.type === 'FETCH_MEMBERDAPPS_SUCCESS'){
+    return update(state, {
+     DappDescription:{$set: action.dappDescriptionArr},
+     isFetched:{$set: true}
+    })
+  }
+  console.log(state);
+  return state;
 }

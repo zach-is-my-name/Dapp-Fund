@@ -2,8 +2,9 @@ import 'isomorphic-fetch'
 
 export const APPLY_FORM_POST_SUCCESS = 'APPLY_FORM_POST_SUCCESS'
 
-/* On Hold, We're not Updateing the Store for Member Dapps Based on the Server Response from Post. Only on a GET * AFTER PUT */
-// export const applyFormPostSuccess = (data) => ({type: APPLY_FORM_POST_SUCCESS, data})
+
+export const FETCH_MEMBERDAPPS_SUCCESS = 'FETCH_MEMBERDAPPS_SUCCESS'
+export const fetchMemberDappsSuccess = (dappDescriptionArr) => ({type: FETCH_MEMBERDAPPS_SUCCESS, dappDescriptionArr})
 
 export const submitApply = (inputs) => async dispatch => {
 console.log("FETCH INPUT", JSON.stringify(inputs))
@@ -18,6 +19,19 @@ console.log("FETCH INPUT", JSON.stringify(inputs))
         })
         let _response = await response.json();
         console.log("Response from Server", _response);
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export const fetchMemberDapps = () => async dispatch => {
+    try {
+        let response = await fetch('http://localhost:3001/users', {
+            method: 'GET'
+        })
+    let _response = await response.json();
+    console.log("GET response from Server", _response);
+    dispatch(fetchMemberDappsSuccess(_response))
     } catch (err) {
         console.error(err)
     }

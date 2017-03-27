@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock } from 'reactstrap';
+import {connect} from 'react-redux'
+import * as actions from '../../Actions/actions'
 var Web3 = require('web3');
 let web3 = window.web3;
 
@@ -17,7 +19,7 @@ window.addEventListener('load', function() {
         }
 })
 
-export default class MemberDapps extends React.Component {
+export class MemberDapps extends React.Component {
         // this.onSubmitProposal = this.onSubmitProposal.bind(this);
 
 
@@ -31,6 +33,11 @@ export default class MemberDapps extends React.Component {
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
 }
+
+    componentWillMount() {
+    this.props.dispatch(actions.fetchMemberDapps())
+    }
+
 
 
 /*FIGURE OUT HOW TO GET THIS PAST THE LINTER */
@@ -249,6 +256,9 @@ export default class MemberDapps extends React.Component {
 
 
     render () {
+console.log(this.props.isFetched)
+if (this.props.isFetched)
+    console.log(this.props.dappDescriptionArr);
 
         let proposalObjTEST =
             {
@@ -307,6 +317,13 @@ export default class MemberDapps extends React.Component {
             </CardGroup>
         )
 
-    }
 
+    }
 }
+const mapStateToProps = (state,props) => {
+    return {
+        dappDescriptionArr:state.DappDescription,
+        isFetched: state.isFetched
+    }
+}
+  export default connect(mapStateToProps)(MemberDapps);

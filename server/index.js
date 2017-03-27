@@ -6,6 +6,19 @@ const jsonParser = bodyParser.json();
 const app = express();
 
 
+//Enable CORS for development
+
+const allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', ' http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
+app.use(allowCrossDomain);
+
+
 // Serve the built client
 // app.use(express.static(path.resolve(__dirname, '../client/build')));
 
@@ -15,6 +28,9 @@ const app = express();
 //     const index = path.resolve(__dirname, '../client/build', 'index.html');
 //     res.sendFile(index);
 // });
+
+
+//
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -29,30 +45,32 @@ const knex = require('knex')({
 });
 // User submitting application
 app.post('/users', jsonParser, (req, res) => {
-    console.log(req.body)
-    let userName = req.body.userName;
-    let etherAddress = req.body.etherAddress;
-    let confirmedEtherFeeTransactionAddress = req.body.confirmedEtherFeeTransactionAddress;
-    let dappName = req.body.dappName;
-    let dappDescription = req.body.dappDescription;
-    let dappImageLink = req.body.dappImageLink;
-    let dappEtherAddress = req.body.dappEtherAddress;
-    let status = "pending";
+    console.log("MADE IT")
+    console.log("THIS IS BODY",req.body)
+    let applyObj = req.body;
+    // let userName = req.body.userName;
+    // let etherAddress = req.body.etherAddress;
+    // let confirmedEtherFeeTransactionAddress = req.body.confirmedEtherFeeTransactionAddress;
+    // let dappName = req.body.dappName;
+    // let dappDescription = req.body.dappDescription;
+    // let dappImageLink = req.body.dappImageLink;
+    // let dappEtherAddress = req.body.dappEtherAddress;
+    // let status = "pending";
     // Now use create Knex function to create user in DB
-    // knex.insert(
-    //     req.body
-    //     username: userName,
-    //     useretheraddress: etherAddress,
-    //     entryfeetransaction: confirmedEtherFeeTransactionAddress,
-    //     dappname: dappName,
-    //     dappdescription: dappDescription,
-    //     dappimagelink: dappImageLink,
-    //     dappetheraddress: dappEtherAddress,
-    //     memberstatus: status
-    //   ).into('users').then(user => {
-    //         console.log("user created: ", user);
-    //         res.status(201).json(user);
-    //     })
+    knex.insert(
+        applyObj
+        // username: userName,
+        // useretheraddress: etherAddress,
+        // entryfeetransaction: confirmedEtherFeeTransactionAddress,
+        // dappname: dappName,
+        // dappdescription: dappDescription,
+        // dappimagelink: dappImageLink,
+        // dappetheraddress: dappEtherAddress,
+        // memberstatus: status
+      ).into('users').then(user => {
+            console.log("user created: ", user);
+            res.status(201).json(user)
+        })
 
     })
 
@@ -68,12 +86,12 @@ app.get('/users', (req, res) => {
     })
 })
 // Owner approving a user
-app.put('/users/:userID', jsonParser, (req, res) => {
-  let userID = parseInt(req.params.userID);
-  console.log("userID", userID);
+app.put('/users/:userAddress', jsonParser, (req, res) => {
+  let userAddress = req.params.userAddress;
+  console.log("userAddress", userAddress);
   knex('users')
     .update({ memberstatus: "confirmed" })
-    .where({id: userID})
+    .where({useretheraddress: userAddress})
     .then(user => {
       console.log("updated user: ", user);
       res.status(201).json(user);

@@ -46,6 +46,7 @@ const knex = require('knex')({
 
 // User submitting application
 app.post('/users', jsonParser, (req, res) => {
+    console.log(req.body)
     let userName = req.body.userName;
     let etherAddress = req.body.etherAddress;
     let confirmedEtherFeeTransactionAddress = req.body.confirmedEtherFeeTransactionAddress;
@@ -55,21 +56,24 @@ app.post('/users', jsonParser, (req, res) => {
     let dappEtherAddress = req.body.dappEtherAddress;
     let status = "pending";
     // Now use create Knex function to create user in DB
-    knex.insert({
-        username: userName,
-        useretheraddress: etherAddress,
-        entryfeetransaction: confirmedEtherFeeTransactionAddress,
-        dappname: dappName,
-        dappdescription: dappDescription,
-        dappimagelink: dappImageLink,
-        dappetheraddress: dappEtherAddress,
-        memberstatus: status
-    }).into('users').then(user => {
-        console.log("user created: ", user);
-        res.status(201).json(user);
+    // knex.insert(
+    //     req.body
+    //     username: userName,
+    //     useretheraddress: etherAddress,
+    //     entryfeetransaction: confirmedEtherFeeTransactionAddress,
+    //     dappname: dappName,
+    //     dappdescription: dappDescription,
+    //     dappimagelink: dappImageLink,
+    //     dappetheraddress: dappEtherAddress,
+    //     memberstatus: status
+    //   ).into('users').then(user => {
+    //         console.log("user created: ", user);
+    //         res.status(201).json(user);
+    //     })
+
     })
-    
-})
+
+
 // TO get list of Dapps for frontend and their details
 app.get('/users', (req, res) => {
     knex.select('id', 'username', 'useretheraddress', 'entryfeetransaction', 'dappname', 'dappdescription', 'dappimagelink', 'dappetheraddress')
@@ -78,7 +82,7 @@ app.get('/users', (req, res) => {
     .orderBy('id')
     .then(users => {
         res.status("200").json(users);
-    })    
+    })
 })
 // Owner approving a user
 app.put('/users/:userID', jsonParser, (req, res) => {
@@ -172,7 +176,7 @@ app.get('/proposals', (req, res) => {
     } else {
       remainingTime = 'Expired';
     }
-    
+
     return remainingTime;
   }
     knex.select(['proposals.id', 'proposals.proposaldescription', 'proposals.proposedfunding', 'proposals.yesvotes', 'proposals.novotes', 'proposals.datecreated', 'proposals.executed', 'users.username', 'users.dappname', 'users.dappdescription', 'users.dappimagelink'])
@@ -211,7 +215,7 @@ app.put('/proposals/:id/:value', (req, res) => {
   let proposalID = req.params.id;
   let vote = req.params.value;
   if (vote === "yes") {
-  
+
     knex.select('yesvotes').from('proposals')
       .where({ id: proposalID })
       .then(result => {
@@ -250,7 +254,7 @@ app.put('/proposals/:id/:value', (req, res) => {
     } else {
       res.status(400)
     }
-    
+
 })
 //To execute proposal
 app.put('/execute/:id', (req, res) => {
@@ -303,7 +307,7 @@ function timeRemaining(inputDate) {
     } else {
       remainingTime = 'Expired';
     }
-    
+
     return remainingTime;
   }
   let proposalID = req.params.id;
@@ -316,7 +320,7 @@ function timeRemaining(inputDate) {
       console.log("proposaleDate?", proposaleDate);
       console.log("date to string", String(proposaleDate));
       console.log(timeRemaining(String(proposaleDate)));
-      
+
       if(proposal.executed === 'false' && timeRemaining(String(proposaleDate)) === 'Expired' && proposal.yesvotes > proposal.novotes) {
         knex('proposals')
           .update({executed: 'true'})

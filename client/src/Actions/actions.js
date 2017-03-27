@@ -2,6 +2,11 @@ import 'isomorphic-fetch'
 
 export const APPLY_FORM_POST_SUCCESS = 'APPLY_FORM_POST_SUCCESS'
 
+export const USER_SELECTED_DAPP = 'USER_SELECTED_DAPP';
+export const userSelectedDapp = (dapp) => ({
+    type: USER_SELECTED_DAPP,
+    dapp: dapp
+})
 
 export const FETCH_MEMBERDAPPS_SUCCESS = 'FETCH_MEMBERDAPPS_SUCCESS'
 export const fetchMemberDappsSuccess = (dappDescriptionArr) => ({type: FETCH_MEMBERDAPPS_SUCCESS, dappDescriptionArr})
@@ -36,3 +41,5 @@ export const fetchMemberDapps = () => async dispatch => {
         console.error(err)
     }
 }
+
+

@@ -33,8 +33,12 @@ export default class NavBar extends React.Component {
                 <NavLink href="/apply"> Apply</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/proposals">Active Proposals</NavLink>
+                <NavLink href="/activeproposals">Active Proposals</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink href="/submitproposal">Submit Proposal</NavLink>
+              </NavItem>
+
             </Nav>
           </Collapse>
         </Navbar>

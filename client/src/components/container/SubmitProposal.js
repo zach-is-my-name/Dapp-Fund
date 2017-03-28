@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Jumbotron , FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-// import * as actions from '../../Actions/actions';
+import * as actions from '../../Actions/actions';
 import Heading from '../presentation//Heading';
 import NavBar from '../presentation/NavBar';
 var Web3 = require('web3');
@@ -29,6 +29,10 @@ export class SubmitProposal extends React.Component {
         this.state = {valueFunding: '', valueWhy: ''};
         this.handleChangeFunding = this.handleChangeFunding.bind(this);
         this.handleChangeWhy = this.handleChangeWhy.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.dispatch(actions.fetchMemberDapps())
     }
 
     handleChangeFunding(event) {
@@ -72,6 +76,7 @@ export class SubmitProposal extends React.Component {
     render () {
         
         let index = this.props.dappSelected;
+        let currentDapp = this.props.dappList[index];
         console.log('INDEX ON SUBMIT PROPOSAL ', index)
         console.log('DAPP SELECTED ON SUBMIT PROPOSAL',this.props.dappList[index])
         console.log('DAPPPP ', this.props.dappList)
@@ -85,12 +90,12 @@ export class SubmitProposal extends React.Component {
                 <div>
                     <div className="space-out" > </div>
                     <Jumbotron>
-                        <h1 className="display-3">fewfwefef</h1>
-                        <img src={'http://vignette4.wikia.nocookie.net/naval-ops/images/6/61/Full_image_placeholder.jpg/revision/latest?cb=20130727194242'} width={200} height={80} mode='fit' alt="dapp pic" />
-                        <p className="lead">Description: A dapp that prints and manages the ThinkfulCoin cryptocurrency</p>
+                        <h1 className="display-3">{currentDapp.dappname}</h1>
+                        <img src={currentDapp.dappimagelink} width={200} height={80} mode='fit' alt="dapp pic" />
+                        <p className="lead">{currentDapp.dappdescription}</p>
                         <hr className="my-2" />
                         <p>Source Code: https://github.com/johnfkneafsey/ethereum-capstone-project</p>
-                        <p>Creator: Joe Turner</p>
+                        <p>Creator: {currentDapp.username}</p>
                         
                         <FormGroup>
                         <Label for="">Proposal</Label>

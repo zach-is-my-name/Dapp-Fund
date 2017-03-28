@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, CardImg, CardTitle, CardText, CardGroup, CardBlock, } from 'reactstrap';
+import { Button, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock, } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 import Heading from '../presentation//Heading';
 import NavBar from '../presentation/NavBar';
+import { Link } from "react-router";
 
 var Web3 = require('web3');
 let web3 = window.web3;
@@ -67,9 +68,9 @@ export class MemberDapps extends React.Component {
                         <CardText><b>Creator:</b> {dapp.username}</CardText>
                         {/*<Button color="primary" onClick={() => this.onSubmit(dapp)} >Submit New Proposal</Button>*/}
 
-                        <a href="http://localhost:3000/submitproposal" onClick={() => this.onSubmit(index)}>  
-                        Submit New Proposal      
-                        </a>
+                        <Button  onClick={() => this.onSubmit(index)}>  
+                             <Link to="/submitproposal">Submit New Proposal</Link>
+                        </Button>
 
 
                         <CardText></CardText>

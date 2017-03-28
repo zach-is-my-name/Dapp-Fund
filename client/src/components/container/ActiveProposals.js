@@ -3,7 +3,7 @@ import { Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 
 import Heading from '../presentation//Heading'
 import NavBar from '../presentation/NavBar.js'
 import { connect } from 'react-redux';
-// import * as actions from '../../Actions/actions';
+import * as actions from '../../Actions/actions';
 
 var Web3 = require('web3');
 let web3 = window.web3;
@@ -26,6 +26,10 @@ export class ActiveProposals extends React.Component {
 	constructor(props) {
         super(props);
         this.state = {valueFunding: '', valueWhy: ''};
+    }
+
+    componentWillMount() {
+        this.props.dispatch(actions.fetchMemberDapps())
     }
 
      onVote (proposal, bool) {

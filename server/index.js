@@ -99,7 +99,7 @@ app.put('/users/:userAddress', jsonParser, (req, res) => {
 })
 // User submitting proposal
 app.post('/proposals', jsonParser, (req, res) => {
-    let userName = req.body.userName;
+    let userEtherAddress = req.body.userEtherAddress;
     let proposalDescription = req.body.proposalDescription;
     let proposedFunding = req.body.proposedFunding;
     let yesVotes = 0;
@@ -107,7 +107,7 @@ app.post('/proposals', jsonParser, (req, res) => {
     let dateCreated = new Date();
     knex.select('id')
       .from('users')
-      .where({username: userName})
+      .where({useretheraddress: userEtherAddress})
       .then(user => {
         console.log('is this correct user id?', user[0].id);
         let userID = user[0].id;

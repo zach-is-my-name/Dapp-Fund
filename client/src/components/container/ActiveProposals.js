@@ -85,6 +85,10 @@ export class ActiveProposals extends React.Component {
 
     render () {
     
+        console.log('MEMBER DAPPS ', this.props.dappList);
+        console.log('DAPP SELECTED ', this.props.dappSelected);
+
+
         let proposalObjTEST =         
             [
                 {
@@ -173,8 +177,10 @@ export class ActiveProposals extends React.Component {
 
 
 const mapStateToProps = (state, props) => ({
-    dappDescriptionArr: state.DappDescription,
-    isFetched: state.isFetched
+    dappList: state.dappList,
+    isFetched: state.isFetched,
+    congressContract: state.congressContract,
+    dappSelected: state.dappSelected
 });
 
 export default connect(mapStateToProps)(ActiveProposals);

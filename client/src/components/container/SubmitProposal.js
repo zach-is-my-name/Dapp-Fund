@@ -70,7 +70,11 @@ export class SubmitProposal extends React.Component {
     }
 
     render () {
-    
+        
+        let index = this.props.dappSelected;
+        console.log('INDEX ON SUBMIT PROPOSAL ', index)
+        console.log('DAPP SELECTED ON SUBMIT PROPOSAL',this.props.dappList[index])
+        console.log('DAPPPP ', this.props.dappList)
 
         return (
             <div className="container center">
@@ -78,11 +82,10 @@ export class SubmitProposal extends React.Component {
                 <br />
                 <NavBar />
                 <div className="space-out" > </div>
-
                 <div>
                     <div className="space-out" > </div>
                     <Jumbotron>
-                        <h1 className="display-3">Selected Dapp</h1>
+                        <h1 className="display-3">fewfwefef</h1>
                         <img src={'http://vignette4.wikia.nocookie.net/naval-ops/images/6/61/Full_image_placeholder.jpg/revision/latest?cb=20130727194242'} width={200} height={80} mode='fit' alt="dapp pic" />
                         <p className="lead">Description: A dapp that prints and manages the ThinkfulCoin cryptocurrency</p>
                         <hr className="my-2" />
@@ -100,18 +103,14 @@ export class SubmitProposal extends React.Component {
                 </div>
 
             </div>
-
         )
-
     }
-
 }
-
 const mapStateToProps = (state, props) => ({
-    dappDescriptionArr: state.DappDescription,
+    dappList: state.dappList,
     isFetched: state.isFetched,
     congressContract: state.congressContract,
-    dappSelected: state.dappSelected 
+    dappSelected: state.dappSelected
 });
 
 export default connect(mapStateToProps)(SubmitProposal);

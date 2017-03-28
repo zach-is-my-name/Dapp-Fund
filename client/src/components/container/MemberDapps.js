@@ -32,17 +32,31 @@ export class MemberDapps extends React.Component {
         this.props.dispatch(actions.fetchMemberDapps())
     }
 
-    onSubmit(dappSelected) {
-        console.log('user selected dapp ', dappSelected)
-        this.props.dispatch(actions.userSelectedDapp(dappSelected))
+    onSubmit(index) {
+        // let selectedDapp = {
+        //         dappdescription: dappSelected.dappdescription,
+        //         dappetheraddress: dappSelected.dappetheraddress,
+        //         dappimagelink: dappSelected.dappimagelink,
+        //         dappname: dappSelected.dappname,
+        //         entryfeetransaction: dappSelected.entryfeetransaction,
+        //         id: dappSelected.id,
+        //         useretheraddress: dappSelected. useretheraddress,
+        //         username: dappSelected.username
+        // }
+        console.log('index ', index)
+        let dappSelected = this.props.dappList[index]
+        console.log('dapp selected using index ', dappSelected)        
+       this.props.dispatch(actions.userSelectedDapp(index))
+        
     }
          
     render () {
     
-        let dapps = this.props.dappDescriptionArr.map((dapp, index) => {
+        let dapps = this.props.dappList.map((dapp, index) => {
             console.log("here is a dapp", dapp);
+            
             return (
-
+                
                 <Card key={index} className="card-border" >
                     <CardImg top width="30%" src={dapp.dappimagelink} alt="Card image cap" />
                     <CardBlock>
@@ -53,7 +67,7 @@ export class MemberDapps extends React.Component {
                         <CardText><b>Creator:</b> {dapp.username}</CardText>
                         {/*<Button color="primary" onClick={() => this.onSubmit(dapp)} >Submit New Proposal</Button>*/}
 
-                        <a href="http://localhost:3000/submitproposal" onClick={() => this.onSubmit(dapp)}>  
+                        <a href="http://localhost:3000/submitproposal" onClick={() => this.onSubmit(index)}>  
                         Submit New Proposal      
                         </a>
 
@@ -65,7 +79,7 @@ export class MemberDapps extends React.Component {
         })
 
         if (this.props.isFetched)
-            console.log(this.props.dappDescriptionArr);
+            console.log(this.props.dappList);
 
                 return (
                     <div className="container center">
@@ -83,7 +97,7 @@ export class MemberDapps extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    dappDescriptionArr: state.DappDescription,
+    dappList: state.dappList,
     isFetched: state.isFetched,
     congressContract: state.congressContract
 });

@@ -3,13 +3,16 @@ import 'isomorphic-fetch'
 export const APPLY_FORM_POST_SUCCESS = 'APPLY_FORM_POST_SUCCESS'
 
 export const USER_SELECTED_DAPP = 'USER_SELECTED_DAPP';
-export const userSelectedDapp = (dapp) => ({
+export const userSelectedDapp = (index) => ({
     type: USER_SELECTED_DAPP,
-    dapp: dapp
+    index: index
 })
 
 export const FETCH_MEMBERDAPPS_SUCCESS = 'FETCH_MEMBERDAPPS_SUCCESS'
-export const fetchMemberDappsSuccess = (dappDescriptionArr) => ({type: FETCH_MEMBERDAPPS_SUCCESS, dappDescriptionArr})
+export const fetchMemberDappsSuccess = (dappArray) => ({
+    type: FETCH_MEMBERDAPPS_SUCCESS, 
+    dappArray: dappArray
+})
 
 export const submitApply = (inputs) => async dispatch => {
 console.log("FETCH INPUT", JSON.stringify(inputs))

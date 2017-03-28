@@ -66,13 +66,9 @@ export class MemberDapps extends React.Component {
                         <CardText><b>Description:</b> {dapp.dappdescription}</CardText>
                         <CardText><b>Source Code:</b> <a>{index}</a> </CardText>
                         <CardText><b>Creator:</b> {dapp.username}</CardText>
-                        {/*<Button color="primary" onClick={() => this.onSubmit(dapp)} >Submit New Proposal</Button>*/}
-
                         <Button  onClick={() => this.onSubmit(index)}>  
                              <Link to="/submitproposal">Submit New Proposal</Link>
                         </Button>
-
-
                         <CardText></CardText>
                     </CardBlock>
                 </Card>
@@ -100,7 +96,8 @@ export class MemberDapps extends React.Component {
 const mapStateToProps = (state, props) => ({
     dappList: state.dappList,
     isFetched: state.isFetched,
-    congressContract: state.congressContract
+    congressContract: state.congressContract,
+    activeProposals: state.activeProposals
 });
 
 export default connect(mapStateToProps)(MemberDapps);

@@ -30,34 +30,3 @@ document.addEventListener('DOMContentLoaded', () =>
 );
 
 
-
-
-
-
-// class Root extends React.Component {
-// render() {
-//   return (
-//       <div>
-//         <BrowserRouter>
-//           <div>
-//             {/* test */}
-//             <Route exact path="/" component={About} />
-//             <Route exact path="/about" component={About} />
-//             <Route exact path="/apply" component={Apply} />
-//             <Route exact path="/memberdapps" component={MemberDapps} />
-//             <Route exact path="/activeproposals" component={ActiveProposals} />
-//             <Route exact path="/submitproposal" component={SubmitProposal} />
-//             {/* <Route component={NotFound} /> */}
-//           </div>
-//         </BrowserRouter>
-//       </div>
-//           )
-//       }
-// }
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <Root />
-//   </Provider>,
-//     document.getElementById('root')
-// );

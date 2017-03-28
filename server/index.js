@@ -99,15 +99,21 @@ app.put('/users/:userAddress', jsonParser, (req, res) => {
 })
 // User submitting proposal
 app.post('/proposals', jsonParser, (req, res) => {
-    let userEtherAddress = req.body.userEtherAddress;
-    let proposalDescription = req.body.proposalDescription;
-    let proposedFunding = req.body.proposedFunding;
+  console.log('BODY ', req.body)
+    let etherAddress = req.body.to;
+    let proposalDescription = req.body.thesis;
+    let proposedFunding = req.body.amount;
     let yesVotes = 0;
     let noVotes = 0;
     let dateCreated = new Date();
+    console.log('userEtherAddressXXX',etherAddress);
+    console.log('proposalDescriptionXXX',proposalDescription);
+    console.log('proposedFundingXXX',proposedFunding);
+
+    //UPDATED USERS TO PROPOSALS, STILL GETTING 'USERETHERADDRESS' COLUMN DOES NOT EXIST'
     knex.select('id')
       .from('users')
-      .where({useretheraddress: userEtherAddress})
+      .where({useretheraddress: etherAddress})
       .then(user => {
         console.log('is this correct user id?', user[0].id);
         let userID = user[0].id;

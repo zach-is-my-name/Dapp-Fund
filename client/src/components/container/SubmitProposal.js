@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 import Heading from '../presentation//Heading';
 import NavBar from '../presentation/NavBar';
+import { Link } from "react-router";
 var Web3 = require('web3');
 let web3 = window.web3;
 
@@ -44,14 +45,27 @@ export class SubmitProposal extends React.Component {
     }
 
     onSubmitProposal (XXX) {
+        let index = this.props.dappSelected;
+        let currentDapp = this.props.dappList[index];
+        // web3 
         let congressContract = this.props.congressContract
-        let proposalRecipientAddress = this.props.dappSelected.useretheraddress // will come from this.props.selectedDapp.userAddress
+        let proposalRecipientAddress = currentDapp.useretheraddress // will come from this.props.selectedDapp.userAddress
         let fundingAmount = this.state.valueFunding;   // will come from input
         let investmentThesis = this.state.valueWhy;   // will come from input
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
-       
+
+        // backend
+        let proposalObj = {
+            amount: fundingAmount,
+            thesis: investmentThesis,
+            to: proposalRecipientAddress
+        }
+        console.log('THIS IS THE REAL OBJ' ,proposalObj)
+
+        this.props.dispatch(actions.asyncPostProposal(proposalObj))
+
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error)
@@ -60,9 +74,8 @@ export class SubmitProposal extends React.Component {
                     congressContract.newProposal.sendTransaction(proposalRecipientAddress, fundingAmount, investmentThesis, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
                         console.log('CREATING NEW PROPOSAL');
                         if(!error) 
-                            console.log('PROPOSAL CREATED! TRANSACTION: ', result)
-                            // DISPATCH PROPOSAL POST ACTION HERE
-                        else
+                           console.log('PROPOSAL CREATED! TRANSACTION: ', result)
+                        else 
                             console.error('error: ', error)
                     })
                 } else {
@@ -96,17 +109,16 @@ export class SubmitProposal extends React.Component {
                         <hr className="my-2" />
                         <p>Source Code: https://github.com/johnfkneafsey/ethereum-capstone-project</p>
                         <p>Creator: {currentDapp.username}</p>
-                        
                         <FormGroup>
                         <Label for="">Proposal</Label>
                         <Input type="text" value={this.state.valueFunding} onChange={this.handleChangeFunding} name="Funding" id="Funding" placeholder="Funding Amount" />
                         <Input type="text" value={this.state.valueWhy} onChange={this.handleChangeWhy} name="Why" id="Why" placeholder="Why?" />
                         </FormGroup>
-                        <Button color="primary" onClick={() => this.onSubmitProposal()} >Submit</Button>
-                   
+                        <Button  color="primary" onClick={() => this.onSubmitProposal()}> 
+                             <Link to="/activeproposals">Submit</Link>
+                        </Button>
                     </Jumbotron>
                 </div>
-
             </div>
         )
     }
@@ -115,7 +127,8 @@ const mapStateToProps = (state, props) => ({
     dappList: state.dappList,
     isFetched: state.isFetched,
     congressContract: state.congressContract,
-    dappSelected: state.dappSelected
+    dappSelected: state.dappSelected,
+    activeProposals: state.activeProposals
 });
 
 export default connect(mapStateToProps)(SubmitProposal);

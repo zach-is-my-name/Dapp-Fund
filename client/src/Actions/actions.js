@@ -14,6 +14,14 @@ export const fetchMemberDappsSuccess = (dappArray) => ({
     dappArray: dappArray
 })
 
+export const FETCH_PROPOSALS_SUCCESS = 'FETCH_PROPOSALS_SUCCESS'
+export const fetchProposalsSuccess = (proposals) => ({
+    type: FETCH_PROPOSALS_SUCCESS, 
+    proposals: proposals
+})
+
+
+
 export const submitApply = (inputs) => async dispatch => {
 console.log("FETCH INPUT", JSON.stringify(inputs))
     try {
@@ -45,4 +53,36 @@ export const fetchMemberDapps = () => async dispatch => {
     }
 }
 
+
+export const asyncPostProposal = (proposal) => async dispatch => {
+    console.log('PROPOSALS ASYNC ACTION')
+    console.log("proposal post INPUT", JSON.stringify(proposal))
+    try {
+        let response = await fetch('http://localhost:3001/proposals', {
+            method: 'POST',
+            body: JSON.stringify(proposal),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        let _response = await response.json();
+        console.log("Response from Server", _response);
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export const fetchProposals = () => async dispatch => {
+    try {
+        let response = await fetch('http://localhost:3001/proposals', {
+            method: 'GET'
+        })
+    let _response = await response.json();
+    console.log("GET response from Server", _response);
+    dispatch(fetchProposalsSuccess(_response))
+    } catch (err) {
+        console.error(err)
+    }
+}
 

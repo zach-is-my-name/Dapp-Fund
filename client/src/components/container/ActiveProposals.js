@@ -30,6 +30,7 @@ export class ActiveProposals extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(actions.fetchMemberDapps())
+        this.props.dispatch(actions.fetchProposals())
     }
 
      onVote (proposal, bool) {
@@ -88,92 +89,61 @@ export class ActiveProposals extends React.Component {
     }
 
     render () {
-    
         console.log('MEMBER DAPPS ', this.props.dappList);
         console.log('DAPP SELECTED ', this.props.dappSelected);
-
-
-        let proposalObjTEST =         
-            [
-                {
-                id: 0,
-                username: "UserName0",
-                useretheraddress: "x000001",
-                entryfeetransaction: "x000001d",
-                dappname: "dank Dapp 1",
-                dappdescription: "description 1",
-                dappimagelink: "link 1",
-                dappetheraddress: "addy 1",
-                },
-                {
-                id: 1,
-                username: "UserName1",
-                useretheraddress: "x000001",
-                entryfeetransaction: "x000001d",
-                dappname: "dank Dapp 1",
-                dappdescription: "description 1",
-                dappimagelink: "link 1",
-                dappetheraddress: "addy 1",
-                },
-                {
-                id: 2,
-                username: "UserName2",
-                useretheraddress: "x000001",
-                entryfeetransaction: "x000001d",
-                dappname: "dank Dapp 1",
-                dappdescription: "description 1",
-                dappimagelink: "link 1",
-                dappetheraddress: "addy 1",
-                },
-                {
-                id: 3,
-                username: "UserName3",
-                useretheraddress: "x000001",
-                entryfeetransaction: "x000001d",
-                dappname: "dank Dapp 1",
-                dappdescription: "description 1",
-                dappimagelink: "link 1",
-                dappetheraddress: "addy 1",
-                }
-            ]
+        console.log('PROPOSAL LIST', this.props.activeProposals)
 
 
 
-        let proposals = proposalObjTEST.map((proposal, index) => {
-			return (
-                    <Card key={index} className="card-border" >
-                        <CardImg top width="30%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
-                        <CardBlock>
-                            <CardTitle>Active Proposals Vote TEST</CardTitle>
-                            <CardTitle><b>ThinkfulCoin Central Bank</b></CardTitle>                        
-                            <CardText><b>Description:</b> A dapp that prints and manages the ThinkfulCoin cryptocurrency</CardText>
-                            <CardText><b>Source Code:</b> <a>https://github.com/johnfkneafsey/ethereum-capstone-project</a> </CardText>
-                            <CardText><b>Creator:</b> Joe Turner</CardText>
-                            <Button color="primary" onClick={() => this.onVote({proposalObjTEST}, true)}>Yes</Button>  
-                            <Button color="primary" onClick={() => this.onVote({proposalObjTEST}, false)}>No</Button>  
-                            <Button color="primary" onClick={() => this.onExecuteProposal()} >Execute Proposal</Button>
-                            <CardText>Current Vote Results: XYZ</CardText>
-                            <CardText>Time Remaining: XYZ</CardText>
-                        </CardBlock>
-                    </Card>
-			);
-		})
 
+
+executed:"false"
+id:3
+
+
+
+
+        // NEED TO KNOW WHAT COMES BACK WITH PROPOSALS, WILL ADD ONCE I CAN USER SERVER AGAIN
+        let proposals;
+
+        if (this.props.activeProposals) {
+            proposals = this.props.activeProposals.map((proposal, index) => {
+                return (
+                        <Card key={index} className="card-border" >
+                            <CardImg top width="30%" src={proposal.dappimagelink} alt="Card image cap" />
+                            <CardBlock>
+                                <CardTitle>{proposal.dappname}</CardTitle>
+                                <CardTitle><b>{proposal.dappdescription}</b></CardTitle>     
+                                <CardTitle>Proposal</CardTitle>                   
+                                <CardText><b>Why:</b> {proposal.proposaldescription}</CardText>
+                                <CardText><b>Amount:</b> {proposal.proposedfunding}</CardText>  
+                                <CardText><b>Source Code:</b> <a>https://github.com/johnfkneafsey/ethereum-capstone-project</a> </CardText>
+                                <CardText><b>Creator:</b> {proposal.username}</CardText>
+                                <Button color="primary" onClick={() => this.onVote('hello', true)}>Yes</Button>  
+                                <Button color="primary" onClick={() => this.onVote('goodbye', false)}>No</Button>  
+                                <Button color="primary" onClick={() => this.onExecuteProposal()} >Execute Proposal</Button>
+                                <CardText>Current Vote Results:</CardText>
+                                <CardText>Yes: {proposal.yesvotes} No: {proposal.novotes}</CardText>
+                                <CardText>Time Remaining: {proposal.timeLeft}</CardText>
+                                <CardText>Created: {proposal.datecreated}</CardText>
+                                <CardText>Executed?: {proposal.executed}</CardText>
+                                <CardText>ID: {proposal.id}</CardText>                                
+                            </CardBlock>
+                        </Card>
+                );
+            })
+    }
 
         return (
             <div className="container center">
-
                 <div className="space-out" > </div>
                 <Heading />
                 <br />
                 <NavBar />
                 <CardGroup>
-                    <h3>ACTIVE PROPOSALS VIEW</h3>
                     {proposals}
                 </CardGroup>
-
                 <div className="space-out" > </div>
-
             </div>
         )
     }
@@ -184,7 +154,8 @@ const mapStateToProps = (state, props) => ({
     dappList: state.dappList,
     isFetched: state.isFetched,
     congressContract: state.congressContract,
-    dappSelected: state.dappSelected
+    dappSelected: state.dappSelected,
+    activeProposals: state.activeProposals
 });
 
 export default connect(mapStateToProps)(ActiveProposals);

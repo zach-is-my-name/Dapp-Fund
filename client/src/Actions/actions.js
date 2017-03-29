@@ -22,6 +22,8 @@ export const fetchProposalsSuccess = (proposals) => ({
 
 
 
+
+
 export const submitApply = (inputs) => async dispatch => {
 console.log("FETCH INPUT", JSON.stringify(inputs))
     try {
@@ -86,3 +88,23 @@ export const fetchProposals = () => async dispatch => {
     }
 }
 
+
+export const asyncTallyVote = (proposal, vote) => async dispatch => {
+    console.log('PROPOSALS ASYNC ACTION')
+    let id = proposal.id
+    console.log("proposal PUT INPUT", JSON.stringify(id))
+    try {
+        let response = await fetch(`http://localhost:3001/proposals/${id}/${vote}`, {
+            method: 'PUT',
+            body: JSON.stringify(proposal),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        let _response = await response.json();
+        console.log("Response from Server", _response);
+    } catch (err) {
+        console.error(err)
+    }
+}

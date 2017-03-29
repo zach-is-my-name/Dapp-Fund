@@ -29,8 +29,6 @@ app.use(allowCrossDomain);
 //     res.sendFile(index);
 // });
 
-
-//
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -43,30 +41,14 @@ const knex = require('knex')({
         url: 'postgres://nyfibjdb:rfdZ6HnpaOAP8bKSqzxgN33hx1Z4jP2O@stampy.db.elephantsql.com:5432/nyfibjdb',
     },
 });
+
 // User submitting application
 app.post('/users', jsonParser, (req, res) => {
     console.log("MADE IT")
     console.log("THIS IS BODY",req.body)
     let applyObj = req.body;
-    // let userName = req.body.userName;
-    // let etherAddress = req.body.etherAddress;
-    // let confirmedEtherFeeTransactionAddress = req.body.confirmedEtherFeeTransactionAddress;
-    // let dappName = req.body.dappName;
-    // let dappDescription = req.body.dappDescription;
-    // let dappImageLink = req.body.dappImageLink;
-    // let dappEtherAddress = req.body.dappEtherAddress;
-    // let status = "pending";
-    // Now use create Knex function to create user in DB
     knex.insert(
         applyObj
-        // username: userName,
-        // useretheraddress: etherAddress,
-        // entryfeetransaction: confirmedEtherFeeTransactionAddress,
-        // dappname: dappName,
-        // dappdescription: dappDescription,
-        // dappimagelink: dappImageLink,
-        // dappetheraddress: dappEtherAddress,
-        // memberstatus: status
       ).into('users').then(user => {
             console.log("user created: ", user);
             res.status(201).json(user)
@@ -79,7 +61,7 @@ app.post('/users', jsonParser, (req, res) => {
 app.get('/users', (req, res) => {
     knex.select('id', 'username', 'useretheraddress', 'entryfeetransaction', 'dappname', 'dappdescription', 'dappimagelink', 'dappetheraddress')
     .from('users')
-    .where({memberstatus: 'confirmed'})
+    // .where({memberstatus: 'confirmed'})
     .orderBy('id')
     .then(users => {
         res.status("200").json(users);
@@ -100,6 +82,7 @@ app.put('/users/:userAddress', jsonParser, (req, res) => {
 // User submitting proposal
 app.post('/proposals', jsonParser, (req, res) => {
   console.log('BODY ', req.body)
+
     let etherAddress = req.body.to;
     let proposalDescription = req.body.thesis;
     let proposedFunding = req.body.amount;
@@ -123,7 +106,9 @@ app.post('/proposals', jsonParser, (req, res) => {
           proposedfunding: proposedFunding,
           yesvotes: yesVotes,
           novotes: noVotes,
-          datecreated: dateCreated
+          datecreated: dateCreated,
+          recipientetheraddress: etherAddress,
+          proposedamount: proposedFunding,
         })
         .into('proposals')
         .then(proposal => {
@@ -186,8 +171,9 @@ app.get('/proposals', (req, res) => {
 
     return remainingTime;
   }
-    knex.select(['proposals.id', 'proposals.proposaldescription', 'proposals.proposedfunding', 'proposals.yesvotes', 'proposals.novotes', 'proposals.datecreated', 'proposals.executed', 'users.username', 'users.dappname', 'users.dappdescription', 'users.dappimagelink'])
+    knex.select(['proposals.id', 'proposals.proposaldescription', 'proposals.proposedfunding', 'proposals.yesvotes', 'proposals.novotes', 'proposals.datecreated', 'proposals.executed', 'users.username', 'proposals.recipientetheraddress', 'proposals.proposedamount', 'users.dappname', 'users.dappdescription', 'users.dappimagelink'])
     .from('users')
+    // .where({executed: 'false'})  holding off for now
     .join('proposals', 'proposals.user_id', 'users.id')
     .then(proposals => {
       console.log("proposal list: ", proposals);
@@ -208,8 +194,9 @@ app.get('/proposals', (req, res) => {
 app.put('/proposals/:id/:value', (req, res) => {
   let proposalID = req.params.id;
   let vote = req.params.value;
+  console.log('PROPOSAL ID VAL ', proposalID);
+  console.log('vote value ', vote);
   if (vote === "yes") {
-
     knex.select('yesvotes').from('proposals')
       .where({ id: proposalID })
       .then(result => {

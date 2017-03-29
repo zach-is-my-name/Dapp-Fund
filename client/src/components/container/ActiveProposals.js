@@ -39,26 +39,32 @@ export class ActiveProposals extends React.Component {
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
+        let vote;
+        if (bool === true) {
+            vote = "yes"
+        } else if (bool === false) {
+            vote ="no"
+        }
 
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
-            if(!error)
+            if(!error) {
                 if (result.c[0] !== 0) {
                     console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
                     congressContract.vote(proposalId, bool, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
                         console.log('SUBMITTING YES VOTE');
-                        if(!error)
+                        if(!error) {
                             console.log('YES VOTE SUBMITTED! TRANSACTION: ', result)
-                            // DISPATCH INCREMENT YES VOTE ACTION HERE
-                        else
+                            this.props.dispatch(actions.asyncTallyVote(proposal, bool))
+                        } else {
                             console.error('error: ', error)
-                    })
+                    }})
                 } else {
                     console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
                 }
-            else
+            } else {
                 console.error('error: ', error)
-        })
+        }})
     }
 
     onExecuteProposal() {
@@ -93,43 +99,32 @@ export class ActiveProposals extends React.Component {
         console.log('DAPP SELECTED ', this.props.dappSelected);
         console.log('PROPOSAL LIST', this.props.activeProposals)
 
-
-
-
-
-executed:"false"
-id:3
-
-
-
-
-        // NEED TO KNOW WHAT COMES BACK WITH PROPOSALS, WILL ADD ONCE I CAN USER SERVER AGAIN
         let proposals;
 
         if (this.props.activeProposals) {
             proposals = this.props.activeProposals.map((proposal, index) => {
                 return (
-                        <Card key={index} className="card-border" >
-                            <CardImg top width="30%" src={proposal.dappimagelink} alt="Card image cap" />
-                            <CardBlock>
-                                <CardTitle>{proposal.dappname}</CardTitle>
-                                <CardTitle><b>{proposal.dappdescription}</b></CardTitle>     
-                                <CardTitle>Proposal</CardTitle>                   
-                                <CardText><b>Why:</b> {proposal.proposaldescription}</CardText>
-                                <CardText><b>Amount:</b> {proposal.proposedfunding}</CardText>  
-                                <CardText><b>Source Code:</b> <a>https://github.com/johnfkneafsey/ethereum-capstone-project</a> </CardText>
-                                <CardText><b>Creator:</b> {proposal.username}</CardText>
-                                <Button color="primary" onClick={() => this.onVote('hello', true)}>Yes</Button>  
-                                <Button color="primary" onClick={() => this.onVote('goodbye', false)}>No</Button>  
-                                <Button color="primary" onClick={() => this.onExecuteProposal()} >Execute Proposal</Button>
-                                <CardText>Current Vote Results:</CardText>
-                                <CardText>Yes: {proposal.yesvotes} No: {proposal.novotes}</CardText>
-                                <CardText>Time Remaining: {proposal.timeLeft}</CardText>
-                                <CardText>Created: {proposal.datecreated}</CardText>
-                                <CardText>Executed?: {proposal.executed}</CardText>
-                                <CardText>ID: {proposal.id}</CardText>                                
-                            </CardBlock>
-                        </Card>
+                    <Card key={index} className="card-border" >
+                        <CardImg top width="30%" src={proposal.dappimagelink} alt="Card image cap" />
+                        <CardBlock>
+                            <CardTitle>{proposal.dappname}</CardTitle>
+                            <CardTitle><b>{proposal.dappdescription}</b></CardTitle>     
+                            <CardTitle>Proposal</CardTitle>                   
+                            <CardText><b>Why:</b> {proposal.proposaldescription}</CardText>
+                            <CardText><b>Amount:</b> {proposal.proposedfunding}</CardText>  
+                            <CardText><b>Source Code:</b> <a>https://github.com/johnfkneafsey/ethereum-capstone-project</a> </CardText>
+                            <CardText><b>Creator:</b> {proposal.username}</CardText>
+                            <Button color="primary" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
+                            <Button color="primary" onClick={() => this.onVote(proposal, false)}>No</Button>  
+                            <Button color="primary" onClick={() => this.onExecuteProposal()} >Execute Proposal</Button>
+                            <CardText>Current Vote Results:</CardText>
+                            <CardText>Yes: {proposal.yesvotes} No: {proposal.novotes}</CardText>
+                            <CardText>Time Remaining: {proposal.timeLeft}</CardText>
+                            <CardText>Created: {proposal.datecreated}</CardText>
+                            <CardText>Executed?: {proposal.executed}</CardText>
+                            <CardText>ID: {proposal.id}</CardText>                                
+                        </CardBlock>
+                    </Card>
                 );
             })
     }

@@ -34,16 +34,6 @@ export class MemberDapps extends React.Component {
     }
 
     onSubmit(index) {
-        // let selectedDapp = {
-        //         dappdescription: dappSelected.dappdescription,
-        //         dappetheraddress: dappSelected.dappetheraddress,
-        //         dappimagelink: dappSelected.dappimagelink,
-        //         dappname: dappSelected.dappname,
-        //         entryfeetransaction: dappSelected.entryfeetransaction,
-        //         id: dappSelected.id,
-        //         useretheraddress: dappSelected. useretheraddress,
-        //         username: dappSelected.username
-        // }
         console.log('index ', index)
         let dappSelected = this.props.dappList[index]
         console.log('dapp selected using index ', dappSelected)        

@@ -44,8 +44,6 @@ const knex = require('knex')({
 
 // User submitting application
 app.post('/users', jsonParser, (req, res) => {
-    console.log("MADE IT")
-    console.log("THIS IS BODY",req.body)
     let applyObj = req.body;
     knex.insert(
         applyObj
@@ -59,7 +57,7 @@ app.post('/users', jsonParser, (req, res) => {
 
 // TO get list of Dapps for frontend and their details
 app.get('/users', (req, res) => {
-    knex.select('id', 'username', 'useretheraddress', 'entryfeetransaction', 'dappname', 'dappdescription', 'dappimagelink', 'dappetheraddress')
+    knex.select('id', 'username', 'useretheraddress', 'entryfeetransaction', 'dappname', 'dappdescription', 'dappimagelink', 'dappetheraddress', 'memberstatus')
     .from('users')
     // .where({memberstatus: 'confirmed'})
     .orderBy('id')
@@ -67,10 +65,10 @@ app.get('/users', (req, res) => {
         res.status("200").json(users);
     })
 })
+
 // Owner approving a user
 app.put('/users/:userAddress', jsonParser, (req, res) => {
   let userAddress = req.params.userAddress;
-  console.log("userAddress", userAddress);
   knex('users')
     .update({ memberstatus: "confirmed" })
     .where({useretheraddress: userAddress})
@@ -79,26 +77,19 @@ app.put('/users/:userAddress', jsonParser, (req, res) => {
       res.status(201).json(user);
     })
 })
+
 // User submitting proposal
 app.post('/proposals', jsonParser, (req, res) => {
-  console.log('BODY ', req.body)
-
     let etherAddress = req.body.to;
     let proposalDescription = req.body.thesis;
     let proposedFunding = req.body.amount;
     let yesVotes = 0;
     let noVotes = 0;
     let dateCreated = new Date();
-    console.log('userEtherAddressXXX',etherAddress);
-    console.log('proposalDescriptionXXX',proposalDescription);
-    console.log('proposedFundingXXX',proposedFunding);
-
-    //UPDATED USERS TO PROPOSALS, STILL GETTING 'USERETHERADDRESS' COLUMN DOES NOT EXIST'
     knex.select('id')
       .from('users')
       .where({useretheraddress: etherAddress})
       .then(user => {
-        console.log('is this correct user id?', user[0].id);
         let userID = user[0].id;
         knex.insert({
           user_id: userID,
@@ -107,8 +98,6 @@ app.post('/proposals', jsonParser, (req, res) => {
           yesvotes: yesVotes,
           novotes: noVotes,
           datecreated: dateCreated,
-          recipientetheraddress: etherAddress,
-          proposedamount: proposedFunding,
         })
         .into('proposals')
         .then(proposal => {
@@ -117,10 +106,10 @@ app.post('/proposals', jsonParser, (req, res) => {
         })
       })
 })
+
 // To list of proposed Dapps
 app.get('/proposals', (req, res) => {
   function timeRemaining(inputDate) {
-    console.log("inputDate", inputDate);
     let year = inputDate.slice(11,15);
     let month = (inputDate.slice(4,7));
     if (month === "Jan") {
@@ -171,14 +160,12 @@ app.get('/proposals', (req, res) => {
 
     return remainingTime;
   }
-    knex.select(['proposals.id', 'proposals.proposaldescription', 'proposals.proposedfunding', 'proposals.yesvotes', 'proposals.novotes', 'proposals.datecreated', 'proposals.executed', 'users.username', 'proposals.recipientetheraddress', 'proposals.proposedamount', 'users.dappname', 'users.dappdescription', 'users.dappimagelink'])
+    knex.select(['proposals.id', 'proposals.proposaldescription', 'proposals.proposedfunding', 'proposals.yesvotes', 'proposals.novotes', 'proposals.datecreated', 'proposals.executed', 'users.username', 'users.useretheraddress', 'users.dappname', 'users.dappdescription', 'users.dappimagelink'])
     .from('users')
     // .where({executed: 'false'})  holding off for now
     .join('proposals', 'proposals.user_id', 'users.id')
     .then(proposals => {
-      console.log("proposal list: ", proposals);
       let updatedProposals = proposals.map(proposal => {
-        console.log("proposal.datecreated", proposal.datecreated);
         let o = Object.assign({}, proposal);
         o.timeLeft = timeRemaining(String(proposal.datecreated));
         return o;
@@ -186,7 +173,6 @@ app.get('/proposals', (req, res) => {
       return updatedProposals;
     })
     .then(results => {
-        console.log("proposal list: ", results);
         res.status(200).json(results);
       })
   })
@@ -297,7 +283,8 @@ function timeRemaining(inputDate) {
     .where({id: proposalID})
     .then(result => {
       let proposal = result[0];
-      let proposaleDate = proposal.datecreated
+      let proposaleDate = proposal.datecreated;
+      
       console.log("proposaleDate?", proposaleDate);
       console.log("date to string", String(proposaleDate));
       console.log(timeRemaining(String(proposaleDate)));
@@ -336,9 +323,7 @@ function closeServer() {
     });
 }
 
-// if (require.main === module) {
-//     runServer();
-// }
+
 
 runServer();
 

@@ -26,7 +26,6 @@ window.addEventListener('load', function() {
 export class SubmitProposal extends React.Component {
 	constructor(props) {
         super(props);
-        // this.onSubmitProposal = this.onSubmitProposal.bind(this);
         this.state = {valueFunding: '', valueWhy: ''};
         this.handleChangeFunding = this.handleChangeFunding.bind(this);
         this.handleChangeWhy = this.handleChangeWhy.bind(this);
@@ -35,6 +34,23 @@ export class SubmitProposal extends React.Component {
     componentWillMount() {
         this.props.dispatch(actions.fetchMemberDapps())
     }
+
+    // componentDidMount() {
+    //     let congressContract = this.props.congressContract;
+    //     let currentUserAddress = web3.eth.defaultAccount // 
+    //     congressContract.memberId(currentUserAddress, function(error,result) {
+    //         console.log('CHECKING FOR FUND MEMBERSHIP....');
+    //         if(!error) {
+    //             if (result.c[0] !== 0) {
+    //                 console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+    //                 this.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
+    //             } else {
+    //                 console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
+    //             }
+    //         } else {
+    //             console.error('error: ', error)
+    //     }})
+    // }
 
     handleChangeFunding(event) {
         this.setState({valueFunding: event.target.value});
@@ -56,13 +72,13 @@ export class SubmitProposal extends React.Component {
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
 
-        // backend
+
         let proposalObj = {
             amount: fundingAmount,
             thesis: investmentThesis,
             to: proposalRecipientAddress
         }
-        console.log('THIS IS THE REAL OBJ' ,proposalObj)
+
         let self = this;
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
@@ -74,11 +90,8 @@ export class SubmitProposal extends React.Component {
                         if(!error) {
                            console.log('PROPOSAL CREATED! TRANSACTION: ', result)
                            console.log('POSTING PROPOSAL TO BACKEND')
-
                             self.props.dispatch(actions.asyncPostProposal(proposalObj))
-                            
                         } else {
-
                             console.error('error: ', error)
                     }})
                 } else {
@@ -93,9 +106,6 @@ export class SubmitProposal extends React.Component {
         
         let index = this.props.dappSelected;
         let currentDapp = this.props.dappList[index];
-        console.log('INDEX ON SUBMIT PROPOSAL ', index)
-        console.log('DAPP SELECTED ON SUBMIT PROPOSAL',this.props.dappList[index])
-        console.log('DAPPPP ', this.props.dappList)
 
         return (
             <div className="container center">

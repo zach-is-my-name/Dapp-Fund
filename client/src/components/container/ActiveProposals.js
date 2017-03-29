@@ -33,6 +33,24 @@ export class ActiveProposals extends React.Component {
         this.props.dispatch(actions.fetchProposals())
     }
 
+    // componentDidMount() {
+    //     let congressContract = this.props.congressContract;
+    //     let currentUserAddress = web3.eth.defaultAccount // 
+    //     let self = this;
+    //     congressContract.memberId(currentUserAddress, function(error,result) {
+    //         console.log('CHECKING FOR FUND MEMBERSHIP....');
+    //         if(!error) {
+    //             if (result.c[0] !== 0) {
+    //                 console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+    //                 self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
+    //             } else {
+    //                 console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
+    //             }
+    //         } else {
+    //             console.error('error: ', error)
+    //     }})
+    // }
+
      onVote (proposal, bool) {
         let congressContract = this.props.congressContract;
         let proposalId = 0; 
@@ -45,7 +63,7 @@ export class ActiveProposals extends React.Component {
         } else if (bool === false) {
             vote ="no"
         }
-
+        let self = this;
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
@@ -55,7 +73,7 @@ export class ActiveProposals extends React.Component {
                         console.log('SUBMITTING YES VOTE');
                         if(!error) {
                             console.log('YES VOTE SUBMITTED! TRANSACTION: ', result)
-                            this.props.dispatch(actions.asyncTallyVote(proposal, bool))
+                            self.props.dispatch(actions.asyncTallyVote(proposal, vote))
                         } else {
                             console.error('error: ', error)
                     }})
@@ -67,40 +85,39 @@ export class ActiveProposals extends React.Component {
         }})
     }
 
-    onExecuteProposal() {
+    onExecuteProposal(proposal) {
         let congressContract = this.props.congressContract
         let proposalId = 0; 
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 3000000 //put this in store???
         let defaultBytes = "" //put this in store???
-
+        let self = this;
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
-            if(!error)
+            if(!error) {
                 if (result.c[0] !== 0) {
                     console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
                     congressContract.executeProposal.sendTransaction(proposalId, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
-                    console.log('execute proposal');
-                        if(!error)
-                        console.log('result: ', result)
-                        else 
-                        console.error('error: ', error)
-                })
+                        console.log('execute proposal');
+                        if(!error) {
+                            console.log('result: ', result)
+                            console.log('updating proposal status on back end')
+                            let backEndProposalId = proposal.id;
+                            self.props.dispatch(actions.asyncExecuteProposal(backEndProposalId));
+                        } else {
+                            console.error('error: ', error)
+                }})
                 } else {
                     console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
                 }
-            else
+             } else {
                 console.error('error: ', error)
-        })
+        }})
     }
 
     render () {
-        console.log('MEMBER DAPPS ', this.props.dappList);
-        console.log('DAPP SELECTED ', this.props.dappSelected);
-        console.log('PROPOSAL LIST', this.props.activeProposals)
 
         let proposals;
-
         if (this.props.activeProposals) {
             proposals = this.props.activeProposals.map((proposal, index) => {
                 return (
@@ -116,7 +133,7 @@ export class ActiveProposals extends React.Component {
                             <CardText><b>Creator:</b> {proposal.username}</CardText>
                             <Button color="primary" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
                             <Button color="primary" onClick={() => this.onVote(proposal, false)}>No</Button>  
-                            <Button color="primary" onClick={() => this.onExecuteProposal()} >Execute Proposal</Button>
+                            <Button color="primary" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>
                             <CardText>Current Vote Results:</CardText>
                             <CardText>Yes: {proposal.yesvotes} No: {proposal.novotes}</CardText>
                             <CardText>Time Remaining: {proposal.timeLeft}</CardText>

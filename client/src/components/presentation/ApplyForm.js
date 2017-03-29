@@ -17,28 +17,28 @@ export class ApplyForm extends React.Component {
       dappimagelink:'',
       dappetheraddress:'',
       memberstatus:'pending',
-  }
+    }
   }
 
-handleChange(event) {
-this.setState({[event.target.name]: event.target.value})
-}
-
-submit(event) {
-let applyObj = {
-    username:this.state.username ,
-    useretheraddress:this.state.useretheraddress,
-    entryfeetransaction:this.state.entryfeetransaction,
-    dappname: this.state.dappname,
-    dappdescription: this.state.dappdescription,
-    dappimagelink: this.state.dappimagelink,
-    dappetheraddress: this.state.dappetheraddress,
-    memberstatus: this.state.memberstatus,
+  handleChange(event) {
+  this.setState({[event.target.name]: event.target.value})
   }
-  console.log("APPLY OBJ", applyObj)
-this.props.dispatch(actions.submitApply(applyObj));
-  event.preventDefault();
-}
+
+  submit(event) {
+  let applyObj = {
+      username:this.state.username ,
+      useretheraddress:this.state.useretheraddress,
+      entryfeetransaction:this.state.entryfeetransaction,
+      dappname: this.state.dappname,
+      dappdescription: this.state.dappdescription,
+      dappimagelink: this.state.dappimagelink,
+      dappetheraddress: this.state.dappetheraddress,
+      memberstatus: this.state.memberstatus,
+    }
+
+    this.props.dispatch(actions.submitApply(applyObj));
+    event.preventDefault();
+  }
 
   render() {
     return (
@@ -74,6 +74,6 @@ this.props.dispatch(actions.submitApply(applyObj));
         <Input type="submit" name="submit" id="apply-submit" value="Submit"/>
       </Form>
             );
-            }
-            }
+          }
+        }
   export default connect()(ApplyForm);

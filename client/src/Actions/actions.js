@@ -108,3 +108,42 @@ export const asyncTallyVote = (proposal, vote) => async dispatch => {
         console.error(err)
     }
 }
+
+
+export const asyncConfirmUser = (currentUserAddress) => async dispatch => {
+    console.log("USERS CONFIRM PUT INPUT", JSON.stringify(currentUserAddress))
+    try {
+        let response = await fetch(`http://localhost:3001/users/${currentUserAddress}`, {
+            method: 'PUT',
+            body: JSON.stringify(currentUserAddress),
+            headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json'
+            }
+        })
+        let _response = await response.json();
+        console.log("Response from Server", _response);
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+
+export const asyncExecuteProposal = (proposalId) => async dispatch => {
+    console.log("USERS CONFIRM PUT INPUT", JSON.stringify(proposalId))
+    try {
+        let response = await fetch(`http://localhost:3001/execute/${proposalId}`, {
+            method: 'PUT',
+            body: JSON.stringify(proposalId),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+
+            }
+        })
+        let _response = await response.json();
+        console.log("Response from Server", _response);
+    } catch (err) {
+        console.error(err)
+    }
+}

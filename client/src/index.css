@@ -7,3 +7,10 @@ body {
 .center {
   text-align: center;
 }
+
+
+.input-width {
+  width: 50% !important;
+  margin-left: auto;
+  margin-right: auto;
+}

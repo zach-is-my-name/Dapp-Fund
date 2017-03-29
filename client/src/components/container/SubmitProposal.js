@@ -115,19 +115,22 @@ export class SubmitProposal extends React.Component {
                 <div className="space-out" > </div>
                 <div>
                     <div className="space-out" > </div>
+                    <div className="">
+                        <h2 className="">Submit New Proposal </h2>
+                        <p className="">Initiate an investment proposal by providing a funding amount and your rationale for investment!</p>
+                    </div>                    
                     <Jumbotron>
-                        <h1 className="display-3">{currentDapp.dappname}</h1>
                         <img src={currentDapp.dappimagelink} width={200} height={80} mode='fit' alt="dapp pic" />
-                        <p className="lead">{currentDapp.dappdescription}</p>
-                        <hr className="my-2" />
-                        <p>Source Code: https://github.com/johnfkneafsey/ethereum-capstone-project</p>
-                        <p>Creator: {currentDapp.username}</p>
+                        <h4 className="display-3">{currentDapp.dappname}</h4>                        
+                        <p><b>Description:</b> {currentDapp.dappdescription}</p>
+                        <p><b>Creator:</b> {currentDapp.username}</p>
+                        <hr className="my-2" />                        
                         <FormGroup>
-                        <Label for="">Proposal</Label>
-                        <Input type="text" value={this.state.valueFunding} onChange={this.handleChangeFunding} name="Funding" id="Funding" placeholder="Funding Amount" />
-                        <Input type="text" value={this.state.valueWhy} onChange={this.handleChangeWhy} name="Why" id="Why" placeholder="Why?" />
+                        <h5>Enter Proposal</h5>
+                        <Input className="input-width" type="text" value={this.state.valueFunding} onChange={this.handleChangeFunding} name="Funding" id="Funding" placeholder="Enter proposed funding amount" />
+                        <Input className="input-width" type="text" value={this.state.valueWhy} onChange={this.handleChangeWhy} name="Why" id="Why" placeholder="Why should the fund invest in this dapp?" />
                         </FormGroup>
-                        <Button  color="primary" onClick={() => this.onSubmitProposal()}> 
+                        <Button  color="success" onClick={() => this.onSubmitProposal()}> 
                              <Link to="/activeproposals">Submit</Link>
                         </Button>
                     </Jumbotron>

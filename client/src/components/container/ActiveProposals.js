@@ -122,24 +122,22 @@ export class ActiveProposals extends React.Component {
             proposals = this.props.activeProposals.map((proposal, index) => {
                 return (
                     <Card key={index} className="card-border" >
+                        <CardTitle><b>Dapp Info</b></CardTitle>                           
                         <CardImg top width="30%" src={proposal.dappimagelink} alt="Card image cap" />
                         <CardBlock>
-                            <CardTitle>{proposal.dappname}</CardTitle>
-                            <CardTitle><b>{proposal.dappdescription}</b></CardTitle>     
-                            <CardTitle>Proposal</CardTitle>                   
-                            <CardText><b>Why:</b> {proposal.proposaldescription}</CardText>
-                            <CardText><b>Amount:</b> {proposal.proposedfunding}</CardText>  
-                            <CardText><b>Source Code:</b> <a>https://github.com/johnfkneafsey/ethereum-capstone-project</a> </CardText>
-                            <CardText><b>Creator:</b> {proposal.username}</CardText>
-                            <Button color="primary" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
-                            <Button color="primary" onClick={() => this.onVote(proposal, false)}>No</Button>  
-                            <Button color="primary" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>
-                            <CardText>Current Vote Results:</CardText>
-                            <CardText>Yes: {proposal.yesvotes} No: {proposal.novotes}</CardText>
-                            <CardText>Time Remaining: {proposal.timeLeft}</CardText>
-                            <CardText>Created: {proposal.datecreated}</CardText>
-                            <CardText>Executed?: {proposal.executed}</CardText>
-                            <CardText>ID: {proposal.id}</CardText>                                
+                            <CardText><b> Name:</b> {proposal.dappname}</CardText>
+                            <CardText><b>Description:</b> {proposal.dappdescription}</CardText>    
+                            <CardText><b>Creator:</b> {proposal.username}</CardText> 
+                            <CardTitle><b>Proposal Info</b></CardTitle>                   
+                            <CardText><b>Reason:</b> {proposal.proposaldescription}</CardText>
+                            <CardText><b>Amount:</b> {proposal.proposedfunding} ether</CardText>  
+                            <CardTitle><b>Vote</b></CardTitle>                              
+                            <Button color="success" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
+                            <Button color="success" onClick={() => this.onVote(proposal, false)}>No</Button>  
+                            {/*<Button color="success" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>*/}
+                            <CardTitle><b>Current Results</b></CardTitle>
+                            <CardText><b>Yes</b>: {proposal.yesvotes} <b>No:</b> {proposal.novotes}</CardText>
+                            <CardText>{proposal.timeLeft}</CardText>                           
                         </CardBlock>
                     </Card>
                 );
@@ -152,6 +150,10 @@ export class ActiveProposals extends React.Component {
                 <Heading />
                 <br />
                 <NavBar />
+                <div className="">
+                    <h2 className="">Active Proposals </h2>
+                    <p className="">Browse and vote for investment proposals raised by fund investors!</p>
+                </div>
                 <CardGroup>
                     {proposals}
                 </CardGroup>

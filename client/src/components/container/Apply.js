@@ -13,9 +13,8 @@ return (
   <NavBar />
   <br />
   <div className="apply-description">
-    <h2 className="apply-h2">Post Your Dapp </h2>
-    <p className="apply-text-description">Post your Dapp's info to the Board,
-    where members can view it and propose it as a candidate for funding!  </p>
+    <h2 className="apply-h2">Apply to DappFund </h2>
+    <p className="apply-text-description">Provide information about your dapp. Users will review this information in order to make investment proposals!</p>
   </div>
   <br/>
   <ApplyForm />

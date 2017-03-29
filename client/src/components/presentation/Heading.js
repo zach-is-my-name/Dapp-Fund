@@ -5,7 +5,7 @@ export default function Heading() {
 
 return (
     <div>
-      <h1 className="heading">The Dankest Dapp Fund</h1>
+      <h1 className="heading">DappFund</h1>
     </div>
    )
   }

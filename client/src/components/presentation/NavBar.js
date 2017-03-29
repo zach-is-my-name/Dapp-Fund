@@ -28,17 +28,17 @@ export default class NavBar extends React.Component {
                 <NavLink href="/about">About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/memberdapps">Member Dapps</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="/apply"> Apply</NavLink>
+              </NavItem>              
+              <NavItem>
+                <NavLink href="/memberdapps">Member Dapps</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/activeproposals">Active Proposals</NavLink>
               </NavItem>
-              <NavItem>
+              {/*<NavItem>
                 <NavLink href="/submitproposal">Submit Proposal</NavLink>
-              </NavItem>
+              </NavItem>*/}
 
             </Nav>
           </Collapse>

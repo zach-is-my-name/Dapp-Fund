@@ -1,5 +1,6 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Link, IndexLink } from "react-router";
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -25,16 +26,16 @@ export default class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/about">About</NavLink>
+                <NavLink><IndexLink to="/">About</IndexLink></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/apply"> Apply</NavLink>
+                <NavLink><Link to="/apply">Apply</Link></NavLink>
               </NavItem>              
               <NavItem>
-                <NavLink href="/memberdapps">Member Dapps</NavLink>
+                <NavLink><Link to="/memberdapps">Member Dapps</Link></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/activeproposals">Active Proposals</NavLink>
+                <NavLink><Link to="/activeproposals">Active Proposals</Link></NavLink>
               </NavItem>
               {/*<NavItem>
                 <NavLink href="/submitproposal">Submit Proposal</NavLink>

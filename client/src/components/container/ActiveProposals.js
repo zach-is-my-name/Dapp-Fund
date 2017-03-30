@@ -5,6 +5,7 @@ import NavBar from '../presentation/NavBar.js'
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 
+
 var Web3 = require('web3');
 let web3 = window.web3;
 
@@ -121,25 +122,30 @@ export class ActiveProposals extends React.Component {
         if (this.props.activeProposals) {
             proposals = this.props.activeProposals.map((proposal, index) => {
                 return (
-                    <Card key={index} className="card-border" >
-                        <CardTitle><b>Dapp Info</b></CardTitle>                           
-                        <CardImg top width="30%" src={proposal.dappimagelink} alt="Card image cap" />
-                        <CardBlock>
-                            <CardText><b> Name:</b> {proposal.dappname}</CardText>
-                            <CardText><b>Description:</b> {proposal.dappdescription}</CardText>    
-                            <CardText><b>Creator:</b> {proposal.username}</CardText> 
-                            <CardTitle><b>Proposal Info</b></CardTitle>                   
-                            <CardText><b>Reason:</b> {proposal.proposaldescription}</CardText>
-                            <CardText><b>Amount:</b> {proposal.proposedfunding} ether</CardText>  
-                            <CardTitle><b>Vote</b></CardTitle>                              
-                            <Button color="success" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
-                            <Button color="success" onClick={() => this.onVote(proposal, false)}>No</Button>  
-                            {/*<Button color="success" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>*/}
-                            <CardTitle><b>Current Results</b></CardTitle>
-                            <CardText><b>Yes</b>: {proposal.yesvotes} <b>No:</b> {proposal.novotes}</CardText>
-                            <CardText>{proposal.timeLeft}</CardText>                           
-                        </CardBlock>
-                    </Card>
+                    <div className="activeProposalsCard" >
+                        <Card key={index} className="activeProposalsCard" >     
+                            <br></br>                                          
+                            <CardImg top width="85%" src={proposal.dappimagelink} alt="Card image cap" />
+                            <CardBlock className="fitContainer" >
+                                <CardTitle><b> {proposal.dappname}</b></CardTitle>
+                                <CardText><b><u>Description:</u></b> {proposal.dappdescription}</CardText>    
+                                <CardText><b><u>Creator:</u></b> {proposal.username}</CardText> 
+                                <hr className="my-2" /> 
+                                <CardText ><p className="boldText">Proposal</p></CardText>                
+                                <CardText><b><u>Reason:</u></b> {proposal.proposaldescription}</CardText>
+                                <CardText><b><u>Amount:</u></b> {proposal.proposedfunding} ether</CardText>
+                                <hr className="my-2" />                                   
+                                <CardText ><p className="boldText">Current Results</p></CardText>  
+                                <CardText><b>Yes</b>: {proposal.yesvotes} <b>No:</b> {proposal.novotes}</CardText>
+                                <CardText>{proposal.timeLeft}</CardText>   
+                                <hr className="my-2" />                                     
+                                <CardText ><p className="boldText">Vote </p></CardText>  
+                                <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
+                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>                                  
+                            </CardBlock>                                            
+
+                        </Card>
+                    </div>
                 );
             })
     }
@@ -174,3 +180,4 @@ const mapStateToProps = (state, props) => ({
 
 export default connect(mapStateToProps)(ActiveProposals);
 
+                                    {/*<Button color="success" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>*/}

@@ -6,7 +6,7 @@ import { Button} from 'reactstrap';
  export default function About() {
 
 return (
-<div>
+<div >
   <Heading />
   <NavBar />
   <br/>

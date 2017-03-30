@@ -4,6 +4,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Provider} from 'react-redux';
 import store from './store'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import About from './components/container/About';
 import Apply from './components/container/Apply';
 import MemberDapps from './components/container/MemberDapps';
@@ -15,6 +16,7 @@ import { Router, Route, browserHistory } from 'react-router';
 document.addEventListener('DOMContentLoaded', () =>
     ReactDOM.render(
         <Provider store={store} >
+            <MuiThemeProvider>
             <Router history={browserHistory}>
                 <Route exact path="/" component={About} ></Route>
                 <Route exact path="/about" component={About} ></Route>
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () =>
                 <Route exact path="/activeproposals" component={ActiveProposals} ></Route>
                 <Route exact path="/submitproposal" component={SubmitProposal} ></Route>
             </Router>
+            </MuiThemeProvider>   
         </Provider>, document.getElementById('root')
     )
 );

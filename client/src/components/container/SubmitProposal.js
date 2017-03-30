@@ -1,10 +1,13 @@
 import React from 'react';
-import { Button, Jumbotron , FormGroup, Label, Input } from 'reactstrap';
+import { Button, Jumbotron , FormGroup, Label, Input, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 import Heading from '../presentation//Heading';
 import NavBar from '../presentation/NavBar';
 import { Link } from "react-router";
+
+
+
 var Web3 = require('web3');
 let web3 = window.web3;
 
@@ -115,25 +118,36 @@ export class SubmitProposal extends React.Component {
                 <div className="space-out" > </div>
                 <div>
                     <div className="space-out" > </div>
-                    <div className="">
                         <h2 className="">Submit New Proposal </h2>
-                        <p className="">Initiate an investment proposal by providing a funding amount and your rationale for investment!</p>
-                    </div>                    
-                    <Jumbotron>
-                        <img src={currentDapp.dappimagelink} width={200} height={80} mode='fit' alt="dapp pic" />
-                        <h4 className="display-3">{currentDapp.dappname}</h4>                        
-                        <p><b>Description:</b> {currentDapp.dappdescription}</p>
-                        <p><b>Creator:</b> {currentDapp.username}</p>
-                        <hr className="my-2" />                        
+                        <p className="">Initiate an investment proposal by providing a funding amount and your rationale for investment!</p>                
+                 
+                 
+                    <Card className="submitProposalContainer" >
+                    <br></br>
+                    <CardImg top width="60%" src={currentDapp.dappimagelink} alt="Card image cap" />
+                    <CardBlock>  
+                        <CardTitle><p className="boldText proposedDapp">{currentDapp.dappname}</p></CardTitle>    
+
+                        <CardText > <p className="boldText ">Description</p></CardText>
+                        <CardText >{currentDapp.dappdescription}</CardText>
+                        <CardText ><p className="boldText">Creator </p></CardText>         
+                        <CardText>{currentDapp.username}</CardText>   
+
+                        <hr className="my-2" />    
+
                         <FormGroup>
-                        <h5>Enter Proposal</h5>
-                        <Input className="input-width" type="text" value={this.state.valueFunding} onChange={this.handleChangeFunding} name="Funding" id="Funding" placeholder="Enter proposed funding amount" />
-                        <Input className="input-width" type="text" value={this.state.valueWhy} onChange={this.handleChangeWhy} name="Why" id="Why" placeholder="Why should the fund invest in this dapp?" />
+                            <CardText ><p className="boldText">Enter Proposal </p></CardText>  
+                            <Input className="input-width" type="text" value={this.state.valueFunding} onChange={this.handleChangeFunding} name="Funding" id="Funding" placeholder="Enter proposed funding amount" />
+                            <Input className="input-width" type="text" value={this.state.valueWhy} onChange={this.handleChangeWhy} name="Why" id="Why" placeholder="Why should the fund invest in this dapp?" />                        
                         </FormGroup>
-                        <Button  color="success" onClick={() => this.onSubmitProposal()}> 
-                             <Link to="/activeproposals">Submit</Link>
+
+                        <Button color="gray" className="cardButton lightShadow" onClick={() => this.onSubmitProposal()}> 
+                             <Link className="cardButton" to="/activeproposals">Submit</Link>
                         </Button>
-                    </Jumbotron>
+                    </CardBlock>  
+                    </Card>
+
+
                 </div>
             </div>
         )

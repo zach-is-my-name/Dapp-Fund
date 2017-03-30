@@ -72,7 +72,6 @@ export class ApplyForm extends React.Component {
         web3.eth.sendTransaction({from: currentUserAddress, to: congress, value: web3.toWei(fee, 'ether')}, function(error,result) {
             console.log('SENDING ENTRY FEE');
             if(!error) {
-                console.log('SUCCESS, SENDING ENTRY FEE')
                 console.log('result: ', result)
 
             } else {
@@ -85,27 +84,29 @@ export class ApplyForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="center">
+        <p className="boldText proposedDapp" >Application</p>
+        <br></br>
         <Form onSubmit={this.submit}>
           <FormGroup>
-            <Label for="dapp-creator-address"> Dapp Creator Public Key</Label>
-            <Input type="text" value={this.state.useretheraddress} name="useretheraddress" id="dappCreatorAddress"onChange={this.handleChange} placeholder="Enter your public key on the ethereum blockchain"  required/>
+            {/*<Label className="boldText" for="dapp-creator-address"> Dapp Creator Public Key</Label>*/}
+            <Input type="text"  className="input-width-skinny" value={this.state.useretheraddress} name="useretheraddress" id="dappCreatorAddress"onChange={this.handleChange} placeholder="Enter your ethereum public key"  required/>
           </FormGroup>
         <FormGroup>
-            <Label for="dapp-creator"> Dapp Creator</Label>
-            <Input type="text" value={this.state.username} name="username" id="dappCreator"onChange={this.handleChange} placeholder="Enter your name"  required/>
+            {/*<Label className="boldText" for="dapp-creator"> Dapp Creator Name</Label>*/}
+            <Input type="text" className="input-width-skinny" value={this.state.username} name="username" id="dappCreator"onChange={this.handleChange} placeholder="Enter your name"  required/>
           </FormGroup>
           <FormGroup>
-            <Label for="dapp-name">Dapp Name</Label>
-            <Input type="text" value={this.state.dappname} name="dappname"  id="enterDapp"onChange={this.handleChange} placeholder="Enter the name of your dapp"  required/>
+            {/*<Label className="boldText" for="dapp-name">Dapp Name</Label>*/}
+            <Input type="text"  className="input-width-skinny" value={this.state.dappname} name="dappname"  id="enterDapp"onChange={this.handleChange} placeholder="Enter the name of your dapp"  required/>
           </FormGroup>
           <FormGroup>
-            <Label for="dapp-description">Dapp Description</Label>
-            <Input type="text" value={this.state.dappdescription} name="dappdescription" id="dappDescription"onChange={this.handleChange} placeholder="Enter a description including a link to the source code"  required/>
+            {/*<Label className="boldText" for="dapp-description">Dapp Description</Label>*/}
+            <Input type="text"  className="input-width" value={this.state.dappdescription} name="dappdescription" id="dappDescription"onChange={this.handleChange} placeholder="Enter a description including a link to the source code"  required/>
           </FormGroup>
           <FormGroup>
-            <Label for="dapp-image-link"> Dapp Image Link</Label>
-            <Input type="text" value={this.state.dappimagelink} name="dappimagelink" id="dappImage"onChange={this.handleChange} placeholder="Provide a URL address containg an image of your dapp"  required/>
+            {/*<Label className="boldText" for="dapp-image-link"> Dapp Image Link</Label>*/}
+            <Input type="text"  className="input-width-skinny" value={this.state.dappimagelink} name="dappimagelink" id="dappImage"onChange={this.handleChange} placeholder="Provide URL of dapp screenshot"  required/>
           </FormGroup>
 
   
@@ -118,17 +119,15 @@ export class ApplyForm extends React.Component {
             <Input type="text"value={this.state.entryfeetransaction} name="entryfeetransaction" id="membershipHash"onChange={this.handleChange} placeholder="Enter Membership Transaction ID"  required/>
           </FormGroup>*/}
 
-          <Button  color="success" onClick={() => this.submit()}> 
+          <Button  color="gray" className="cardButton lightShadow" onClick={() => this.submit()}> 
               Submit Application
           </Button>
-
-
-
         </Form>
-
-        <p>Click below to send the entry fee of {this.props.entryFee} ether to the investment fund</p>
-
-        <Button  color="success" onClick={() => this.submitPayment()}> 
+        <br></br>
+        <br></br>        
+        <p className="boldText" >Click below to pay entry fee of {this.props.entryFee} ether</p>
+        <br></br>
+        <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.submitPayment()}> 
             Initiate Entry Fee Transaction
         </Button>
       </div>

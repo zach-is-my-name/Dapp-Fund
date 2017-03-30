@@ -153,7 +153,7 @@ app.get('/proposals', (req, res) => {
     let remainingMinutes = 60 - minutes;
   let remainingTime;
     if (remainingDays > 0 || remainingHours > 0 || remainingMinutes > 0) {
-      remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes before voting deadline.`;
+      remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes remaining`;
     } else {
       remainingTime = 'Expired';
     }
@@ -270,7 +270,7 @@ function timeRemaining(inputDate) {
     let remainingMinutes = 60 - minutes;
   let remainingTime;
     if (remainingDays > 0 || remainingHours > 0 || remainingMinutes > 0) {
-      remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes before voting deadline.`;
+      remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes remaining`;
     } else {
       remainingTime = 'Expired';
     }
@@ -284,7 +284,7 @@ function timeRemaining(inputDate) {
     .then(result => {
       let proposal = result[0];
       let proposaleDate = proposal.datecreated;
-      
+
       console.log("proposaleDate?", proposaleDate);
       console.log("date to string", String(proposaleDate));
       console.log(timeRemaining(String(proposaleDate)));

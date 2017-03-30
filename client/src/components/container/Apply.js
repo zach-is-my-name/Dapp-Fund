@@ -7,7 +7,7 @@ export default function Apply() {
 
 
 return (
-<div>
+<div className="center">
   <Heading />
   <br />
   <NavBar />

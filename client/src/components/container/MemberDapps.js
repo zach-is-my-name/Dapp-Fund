@@ -64,21 +64,26 @@ export class MemberDapps extends React.Component {
     
         let dapps = this.props.dappList.map((dapp, index) => {
             console.log("here is a dapp", dapp);
-            
             return (
-                
-                <Card key={index} className="card-border" >
-                    <CardImg top width="30%" src={dapp.dappimagelink} alt="Card image cap" />
+
+            <div className="memberDappsCard">
+                <Card key={index}  >
+                    <br></br>
+                    <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
                     <CardBlock>                        
                         <CardTitle><b>{dapp.dappname}</b></CardTitle>
-                        <CardText><b>Description:</b> {dapp.dappdescription}</CardText>
-                        <CardText><b>Creator:</b> {dapp.username}</CardText>         
-                        <Button  color="success" onClick={() => this.onSubmit(index)}>  
-                             <Link to="/submitproposal">Submit New Proposal</Link>
+                        <br></br>
+                        <CardText > <p className="boldText">Description:</p></CardText>
+                        <CardText >{dapp.dappdescription}</CardText>
+                        <CardText ><p className="boldText">Creator: </p></CardText>         
+                        <CardText>{dapp.username}</CardText>                         
+                        <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>  
+                             <Link className="cardButton"  to="/submitproposal">Submit New Proposal</Link>
                         </Button>
                         <CardText></CardText>
                     </CardBlock>
                 </Card>
+            </div>
             );
         })
 

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+
 }
 
 .center {
@@ -10,7 +10,93 @@ body {
 
 
 .input-width {
-  width: 50% !important;
+  width: 30% !important;
   margin-left: auto;
   margin-right: auto;
+}
+
+.input-width-skinny {
+  width: 30% !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.memberDappsCard {
+  width: 450px;
+  min-height: 700px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;  
+}
+
+.card-img-top {
+  text-align: center !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+  height: 700px;
+}
+
+.cardButton {
+  color: white;
+  text-decoration: none;
+  background-color: gray;
+}
+
+.lightShadow {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.boldText {
+  font-weight: 900;
+  margin-bottom: 2px !important;
+  font-size: 120%;
+}
+
+.activeProposalsCard {
+  width: 510px ;
+  min-height: 950px;
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;  
+}
+
+.card.activeProposalsCard {
+  height: 700px !important;
+}
+
+.fitContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.fitContainer.card-block {
+  height: 900px;
+}
+
+.voteButton {
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+
+.submitProposalContainer.card {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+  height: 850px !important; 
+  margin-bottom: 50px;
+}
+
+.proposedDapp {
+  font-size: 160%
 }

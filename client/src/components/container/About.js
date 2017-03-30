@@ -1,14 +1,10 @@
 import React from 'react';
-import Heading from '../presentation//Heading';
-import NavBar from '../presentation/NavBar';
 import { Link } from "react-router";
 import { Button} from 'reactstrap';
  export default function About() {
 
 return (
 <div >
-  <Heading />
-  <NavBar />
   <br/>
   <h3>What is DappFund?</h3>
 

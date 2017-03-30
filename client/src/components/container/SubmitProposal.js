@@ -2,8 +2,6 @@ import React from 'react';
 import { Button, Jumbotron , FormGroup, Label, Input, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
-import Heading from '../presentation//Heading';
-import NavBar from '../presentation/NavBar';
 import { Link } from "react-router";
 
 
@@ -112,9 +110,6 @@ export class SubmitProposal extends React.Component {
 
         return (
             <div className="container center">
-                <Heading />
-                <br />
-                <NavBar />
                 <div className="space-out" > </div>
                 <div>
                     <div className="space-out" > </div>

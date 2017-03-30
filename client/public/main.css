@@ -1,3 +1,4 @@
+
 .maindiv {
 	margin: 0;
 	height: 100%;
@@ -66,6 +67,12 @@ transform: translateX(0%);
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+}
+
+.heading {
+  margin-top: 40px;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
 }
 
 ul.work a {

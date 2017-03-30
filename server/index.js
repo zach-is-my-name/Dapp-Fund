@@ -304,7 +304,7 @@ function timeRemaining(inputDate) {
 //   res.sendFile(path.resolve(__dirname, 'build/index.html'));
 // });
 
-app.get(/^(?!\/api(\/|$))/, (req, res) => {
+app.get('*', function(req, res) {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
     res.sendFile(index);
 });

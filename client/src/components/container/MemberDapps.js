@@ -3,8 +3,6 @@ import React from 'react';
 import { Button, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock, } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
-import Heading from '../presentation//Heading';
-import NavBar from '../presentation/NavBar';
 import { Link } from "react-router";
 
 var Web3 = require('web3');
@@ -92,9 +90,6 @@ export class MemberDapps extends React.Component {
                 return (
                     <div className="container center">
                         <div className="space-out" > </div>
-                        <Heading />
-                        <br />
-                        <NavBar />
                         <div className="">
                             <h2 className="">Member Dapps </h2>
                             <p className="">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>

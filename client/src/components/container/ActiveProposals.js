@@ -1,7 +1,5 @@
 import React from 'react';
 import { Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
-import Heading from '../presentation//Heading'
-import NavBar from '../presentation/NavBar.js'
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 
@@ -155,9 +153,6 @@ export class ActiveProposals extends React.Component {
         return (
             <div className="container center">
                 <div className="space-out" > </div>
-                <Heading />
-                <br />
-                <NavBar />
                 <div className="">
                     <h2 className="">Active Proposals </h2>
                     <p className="">Browse and vote for investment proposals raised by fund investors!</p>

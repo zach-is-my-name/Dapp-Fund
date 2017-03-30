@@ -304,8 +304,8 @@ function timeRemaining(inputDate) {
 })
 
 app.get('*', function(req, res) {
-  res.send("hello")
-  // res.sendFile(path.resolve(__dirname, 'build/index.html'));
+  // res.send("hello")
+  res.sendFile(path.resolve(__dirname, 'build/index.html'));
 });
 
 let server;

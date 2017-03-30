@@ -86,6 +86,7 @@ app.post('/proposals', jsonParser, (req, res) => {
     let yesVotes = 0;
     let noVotes = 0;
     let dateCreated = new Date();
+    let executed = false;
     knex.select('id')
       .from('users')
       .where({useretheraddress: etherAddress})
@@ -98,6 +99,7 @@ app.post('/proposals', jsonParser, (req, res) => {
           yesvotes: yesVotes,
           novotes: noVotes,
           datecreated: dateCreated,
+          executed: executed,
         })
         .into('proposals')
         .then(proposal => {

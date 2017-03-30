@@ -44,8 +44,7 @@ export class ApplyForm extends React.Component {
       this.setState({[event.target.name]: event.target.value})
     }
 
-    submit(event) {
-
+    submit() {
       let applyObj = {
           username:this.state.username ,
           useretheraddress:this.state.useretheraddress,
@@ -56,7 +55,7 @@ export class ApplyForm extends React.Component {
           dappetheraddress: this.state.dappetheraddress,
           memberstatus: this.state.memberstatus,
         }
-        this.props.dispatch(actions.submitApply(applyObj));       
+      this.props.dispatch(actions.submitApply(applyObj));       
     }
 
     submitPayment () {
@@ -83,27 +82,22 @@ export class ApplyForm extends React.Component {
       <div className="center">
         <p className="boldText proposedDapp" >Application</p>
         <br></br>
-        <Form onSubmit={this.submit}>
-          <FormGroup>
+
             {/*<Label className="boldText" for="dapp-creator-address"> Dapp Creator Public Key</Label>*/}
             <Input type="text"  className="input-width-skinny" value={this.state.useretheraddress} name="useretheraddress" id="dappCreatorAddress"onChange={this.handleChange} placeholder="Enter your ethereum public key"  required/>
-          </FormGroup>
-        <FormGroup>
+
             {/*<Label className="boldText" for="dapp-creator"> Dapp Creator Name</Label>*/}
             <Input type="text" className="input-width-skinny" value={this.state.username} name="username" id="dappCreator"onChange={this.handleChange} placeholder="Enter your name"  required/>
-          </FormGroup>
-          <FormGroup>
+
             {/*<Label className="boldText" for="dapp-name">Dapp Name</Label>*/}
             <Input type="text"  className="input-width-skinny" value={this.state.dappname} name="dappname"  id="enterDapp"onChange={this.handleChange} placeholder="Enter the name of your dapp"  required/>
-          </FormGroup>
-          <FormGroup>
+
             {/*<Label className="boldText" for="dapp-description">Dapp Description</Label>*/}
             <Input type="text"  className="input-width" value={this.state.dappdescription} name="dappdescription" id="dappDescription"onChange={this.handleChange} placeholder="Enter a description including a link to the source code"  required/>
-          </FormGroup>
-          <FormGroup>
+
             {/*<Label className="boldText" for="dapp-image-link"> Dapp Image Link</Label>*/}
             <Input type="text"  className="input-width-skinny" value={this.state.dappimagelink} name="dappimagelink" id="dappImage"onChange={this.handleChange} placeholder="Provide URL of dapp screenshot"  required/>
-          </FormGroup>
+
 
   
           {/*<FormGroup>
@@ -114,12 +108,10 @@ export class ApplyForm extends React.Component {
             <Label for="membership-hash"> Membership Hash</Label>
             <Input type="text"value={this.state.entryfeetransaction} name="entryfeetransaction" id="membershipHash"onChange={this.handleChange} placeholder="Enter Membership Transaction ID"  required/>
           </FormGroup>*/}
-
-          <Button  color="gray" className="cardButton lightShadow" onClick={this.submit()}> 
+          <br></br>
+          <Button  color="gray" className="cardButton lightShadow" onClick={() => this.submit()}> 
               Submit Application
           </Button>
-
-        </Form>
 
 
         <br></br>

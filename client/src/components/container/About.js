@@ -28,8 +28,8 @@ return (
     <li>3. Browse dapps and make investment proposals</li>
     <li>4. Vote on active proposals</li>
   </ul>
-  <Button  color="success" > 
-        <Link to="/apply">Apply Now</Link>
+  <Button  color="gray" className="cardButton lightShadow" > 
+        <Link className="cardButton"  to="/apply">Apply Now</Link>
   </Button>
 
 

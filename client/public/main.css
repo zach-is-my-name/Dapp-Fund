@@ -10,8 +10,31 @@
 	z-index: 10;
 }
 
+.maindiv h1 {
+  padding-left: 5px;
+  padding-right: 5px; 
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  cursor: pointer;
+}
+
 .maindiv-view {
 transform: translateX(0%);
+}
+
+.top {
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}
+
+.bottom {
+  width: 100%;
+  position: absolute;
+  bottom: -7px;
+    border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+
 }
 
 .button1 {
@@ -23,12 +46,8 @@ transform: translateX(0%);
     border-radius: 6px;
     color: white;
     font-family: 'Raleway', sans-serif;
-    margin-top: 300px;
     white-space: nowrap;
     z-index: 100;
-    position: absolute;
-    top: 15%;
-    left: 40%;
 }
 
 .button1:hover {
@@ -43,8 +62,7 @@ transform: translateX(0%);
 #particles-js{
   width: 100%;
   height: 100%;
-/*  background-color: #3D3F47;
-*/  background-image: url('https://farm6.static.flickr.com/5285/5225032589_de530351a6_b.jpg');
+  background-image: url('http://www.t-tutorials.com/data/Image/tutorials/Night-sky-with-stars/space02.jpg');
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;

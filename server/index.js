@@ -20,14 +20,10 @@ app.use(allowCrossDomain);
 
 
 // Serve the built client
-// app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // // Unhandled requests which aren't for the API should serve index.html so
 // // client-side routing using browserHistory can function
-// app.get(/^(?!\/api(\/|$))/, (req, res) => {
-//     const index = path.resolve(__dirname, '../client/build', 'index.html');
-//     res.sendFile(index);
-// });
 
 const knex = require('knex')({
     client: 'pg',
@@ -303,10 +299,16 @@ function timeRemaining(inputDate) {
     })
 })
 
-app.get('*', function(req, res) {
-  // res.send("hello")
-  res.sendFile(path.resolve(__dirname, 'build/index.html'));
+// app.get('*', function(req, res) {
+//   // res.send("hello")
+//   res.sendFile(path.resolve(__dirname, 'build/index.html'));
+// });
+
+app.get(/^(?!\/api(\/|$))/, (req, res) => {
+    const index = path.resolve(__dirname, '../client/build', 'index.html');
+    res.sendFile(index);
 });
+
 
 let server;
 function runServer(port=3001) {

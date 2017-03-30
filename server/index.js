@@ -303,6 +303,11 @@ function timeRemaining(inputDate) {
     })
 })
 
+app.get('*', function(req, res) {
+  res.send("hello")
+  // res.sendFile(path.resolve(__dirname, 'build/index.html'));
+});
+
 let server;
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {

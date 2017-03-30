@@ -1,0 +1,69 @@
+.maindiv {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+/*	background-color: #3D3F47;
+*/	position: fixed;
+	top: 0;
+	text-align: center;
+	transform: translateX(100%);
+	z-index: 10;
+}
+
+.maindiv h1 {
+  padding-left: 5px;
+  padding-right: 5px; 
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  cursor: pointer;
+}
+
+.maindiv-view {
+transform: translateX(0%);
+}
+
+.top {
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}
+
+.bottom {
+  width: 100%;
+  position: absolute;
+  bottom: -7px;
+    border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+
+}
+
+.button1 {
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    font-size: 60px;
+    border: none;
+    background-color: #3D3F47;
+    border-radius: 6px;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+.button1:hover {
+    background-color: #4CAF50;   
+    color: white;
+}
+
+.hidden {
+	display: none;
+}
+
+#particles-js{
+  width: 100%;
+  height: 100%;
+  background-image: url('http://www.t-tutorials.com/data/Image/tutorials/Night-sky-with-stars/space02.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}

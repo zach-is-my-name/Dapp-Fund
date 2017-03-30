@@ -45,19 +45,18 @@ export class ApplyForm extends React.Component {
     }
 
     submit(event) {
-    let applyObj = {
-        username:this.state.username ,
-        useretheraddress:this.state.useretheraddress,
-        entryfeetransaction:this.state.entryfeetransaction,
-        dappname: this.state.dappname,
-        dappdescription: this.state.dappdescription,
-        dappimagelink: this.state.dappimagelink,
-        dappetheraddress: this.state.dappetheraddress,
-        memberstatus: this.state.memberstatus,
-      }
 
-      this.props.dispatch(actions.submitApply(applyObj));
-      event.preventDefault();
+      let applyObj = {
+          username:this.state.username ,
+          useretheraddress:this.state.useretheraddress,
+          entryfeetransaction:this.state.entryfeetransaction,
+          dappname: this.state.dappname,
+          dappdescription: this.state.dappdescription,
+          dappimagelink: this.state.dappimagelink,
+          dappetheraddress: this.state.dappetheraddress,
+          memberstatus: this.state.memberstatus,
+        }
+        this.props.dispatch(actions.submitApply(applyObj));       
     }
 
     submitPayment () {
@@ -78,9 +77,6 @@ export class ApplyForm extends React.Component {
                 console.error('error: ', error);
         }})
     }
-
-
-
 
   render() {
     return (
@@ -119,10 +115,13 @@ export class ApplyForm extends React.Component {
             <Input type="text"value={this.state.entryfeetransaction} name="entryfeetransaction" id="membershipHash"onChange={this.handleChange} placeholder="Enter Membership Transaction ID"  required/>
           </FormGroup>*/}
 
-          <Button  color="gray" className="cardButton lightShadow" onClick={() => this.submit()}> 
+          <Button  color="gray" className="cardButton lightShadow" onClick={this.submit()}> 
               Submit Application
           </Button>
+
         </Form>
+
+
         <br></br>
         <br></br>        
         <p className="boldText" >Click below to pay entry fee of {this.props.entryFee} ether</p>

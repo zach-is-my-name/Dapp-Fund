@@ -42,9 +42,10 @@ export class ActiveProposals extends React.Component {
     //         console.log('CHECKING FOR FUND MEMBERSHIP....');
     //         if(!error) {
     //             if (result.c[0] !== 0) {
+    //                 alert('YOU ARE A MEMBER')
     //                 console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
-    //                 self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
     //             } else {
+    //                 alert('YOU ARE NOT A MEMBER')
     //                 console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
     //             }
     //         } else {
@@ -141,7 +142,8 @@ export class ActiveProposals extends React.Component {
                                 <hr className="my-2" />                                     
                                 <CardText ><p className="boldText">Vote </p></CardText>  
                                 <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
-                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>                                  
+                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>   
+                                <Button color="success" size="lg" className="voteButton" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>                                                               
                             </CardBlock>                                            
 
                         </Card>
@@ -180,4 +182,3 @@ const mapStateToProps = (state, props) => ({
 
 export default connect(mapStateToProps)(ActiveProposals);
 
-                                    {/*<Button color="success" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>*/}

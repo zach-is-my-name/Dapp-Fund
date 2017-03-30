@@ -57,7 +57,6 @@ export class MemberDapps extends React.Component {
         let dappSelected = this.props.dappList[index]
         console.log('dapp selected using index ', dappSelected)        
         this.props.dispatch(actions.userSelectedDapp(index))
-        
     }
          
     render () {

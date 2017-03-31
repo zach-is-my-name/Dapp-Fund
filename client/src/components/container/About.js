@@ -5,6 +5,7 @@ import { Button} from 'reactstrap';
 
 return (
 <div>
+  <div className='about'>
     <h2>What is the Syndicate?</h2>
 
 
@@ -37,10 +38,10 @@ return (
       check for a majority 3) execute the proposal if the minimum quorum and "yes" vote majority conditions are met. The proposed funding amount is immediately debited from the Syndicate's aggregate investment pool and sent over the blockchain to the creator of the
       dapp.</p>
       <p> The Syndicate harnesses the two best features of the Ethereum blockchain: autonomy and decentralization, and exemplifies how they can be applied to the world of private investment.</p>
-
-    <Button  color="gray" className="cardButton lightShadow" > 
-          <Link className="cardButton"  to="/apply">Apply Now</Link>
-    </Button>
+    <div className="buttonWrapper">
+      <Link to="/apply"><Button  color="gray" className="buttonCenter cardButton lightShadow" >Apply Now</Button></Link>
+    </div>
+  </div>
 </div>
   )
   }

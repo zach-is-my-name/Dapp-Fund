@@ -10,10 +10,13 @@ import Apply from './components/container/Apply';
 import MemberDapps from './components/container/MemberDapps';
 import ActiveProposals from './components/container/ActiveProposals';
 import SubmitProposal from './components/container/SubmitProposal';
+import Heading from './components/presentation//Heading';
+import NavBar from './components/presentation/NavBar';
 
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 document.addEventListener('DOMContentLoaded', () =>
+
   ReactDOM.render(
     <Provider store={store} >
       <Router history={browserHistory}>

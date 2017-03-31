@@ -3,7 +3,6 @@ import { Alert, Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 
-
 var Web3 = require('web3');
 let web3 = window.web3;
 
@@ -47,9 +46,10 @@ export class ActiveProposals extends React.Component {
     //         console.log('CHECKING FOR FUND MEMBERSHIP....');
     //         if(!error) {
     //             if (result.c[0] !== 0) {
+    //                 alert('YOU ARE A MEMBER')
     //                 console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
-    //                 self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
     //             } else {
+    //                 alert('YOU ARE NOT A MEMBER')
     //                 console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
     //             }
     //         } else {
@@ -59,7 +59,7 @@ export class ActiveProposals extends React.Component {
 
      onVote (proposal, bool) {
         let congressContract = this.props.congressContract;
-        let proposalId = 0; 
+        let proposalId = proposal.id - 3; 
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
@@ -70,6 +70,9 @@ export class ActiveProposals extends React.Component {
             vote ="no"
         }
         let self = this;
+
+        console.log('proposal id vote', proposalId);
+
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
@@ -96,17 +99,21 @@ export class ActiveProposals extends React.Component {
 
     onExecuteProposal(proposal) {
         let congressContract = this.props.congressContract
-        let proposalId = 0; 
+        let congressContractAddress = this.props.congressContractAddress
+        let proposalId = proposal.id - 3; 
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 3000000 //put this in store???
         let defaultBytes = "" //put this in store???
         let self = this;
+
+        console.log('proposal id execute', proposalId);
+
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
                 if (result.c[0] !== 0) {
                     console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
-                    congressContract.executeProposal.sendTransaction(proposalId, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
+                    congressContract.executeProposal(proposalId, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
                         console.log('execute proposal');
                         if(!error) {
                             console.log('result: ', result)
@@ -156,6 +163,7 @@ export class ActiveProposals extends React.Component {
                                 <CardText ><p className="boldText">Vote </p></CardText> 
                                 <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
                                 <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>    
+
                             </CardBlock>                                            
 
                         </Card>
@@ -193,9 +201,9 @@ const mapStateToProps = (state, props) => ({
     isFetched: state.isFetched,
     congressContract: state.congressContract,
     dappSelected: state.dappSelected,
-    activeProposals: state.activeProposals
+    activeProposals: state.activeProposals,
+    congressContractAddress: state.congressContractAddress,
 });
 
 export default connect(mapStateToProps)(ActiveProposals);
 
-                                    {/*<Button color="success" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>*/}

@@ -62,7 +62,7 @@ body {
 
 .activeProposalsCard {
   width: 510px ;
-  min-height: 950px;
+  min-height: 1000px;
   margin-left: 10px;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -73,7 +73,7 @@ body {
 }
 
 .card.activeProposalsCard {
-  height: 700px !important;
+  height: 750px !important;
 }
 
 .fitContainer {

@@ -132,4 +132,53 @@ ul.work li.active {
   border-bottom: 2px solid #000;
 }
 
+.about {
+  width: 70%;
+  margin: 0 auto;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 100px;
+
+}
+
+.about h2 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.about h4 {
+  margin-bottom: 15px;
+}
+
+.cardButton:hover {
+  text-decoration: none !important;
+  color: white;
+  background-color: #3D3F47;
+  cursor: pointer;
+}
+
+.cardButton a:hover {
+  text-decoration: none !important;
+  color: white;
+  background-color: #3D3F47;
+}
+
+.cardButton a:visited {
+  text-decoration: none !important;
+  color: white;
+}
+
+.cardButton a {
+  text-decoration: none !important;
+  color: white;
+}
+
+.buttonWrapper {
+  width: 100%;
+}
+
+.buttonCenter {
+  width: 115px !important;
+  margin: 0 auto !important;
+}
+
 

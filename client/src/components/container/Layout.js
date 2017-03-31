@@ -60,8 +60,8 @@ export class Layout extends React.Component {
     return (
       <div>
       	<div className="heading">
-      		<h1>The DAO</h1>
-      		<h2>A Dapp Advancement Organization</h2>
+      		<h1>The DAS</h1>
+      		<h2>A Dapp Advancement Syndicate</h2>
       	</div>
 
             <ul className="work">

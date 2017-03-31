@@ -68,8 +68,8 @@ transform: translateX(0%);
   display: inherit;
   z-index: 999;
   position: fixed;
-  top: 50%;
-  right: 30%;
+  top: 40%;
+  right: 20%;
 }
 
 #particles-js{

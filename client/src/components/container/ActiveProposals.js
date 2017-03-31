@@ -175,7 +175,7 @@ export class ActiveProposals extends React.Component {
         return (
             <div>
                 <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
-                    Only organization members are permitted to submit proposals. Please see the About page for details.
+                    Only organization members are permitted to vote on active proposals. Please see the About page for details.
                 </Alert>
 
 

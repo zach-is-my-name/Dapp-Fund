@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock, } from 'reactstrap';
+import { Alert, Button, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock, } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 import { Link } from "react-router";
@@ -24,6 +24,12 @@ window.addEventListener('load', function() {
 export class MemberDapps extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            member: false,
+            visible: false
+        }
+        this.onDismiss = this.onDismiss.bind(this);
+        this.handleReject = this.handleReject.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -31,29 +37,39 @@ export class MemberDapps extends React.Component {
         this.props.dispatch(actions.fetchMemberDapps())
     }
 
-    // componentDidMount() {
-    //     let congressContract = this.props.congressContract;
-    //     let currentUserAddress = web3.eth.defaultAccount // 
-    //     let self = this;
-    //     congressContract.memberId(currentUserAddress, function(error,result) {
-    //         console.log('CHECKING FOR FUND MEMBERSHIP....');
-    //         if(!error) {
-    //             if (result.c[0] !== 0) {
-    //                 console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
-    //                 self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
-    //             } else {
-    //                 console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
-    //             }
-    //         } else {
-    //             console.error('error: ', error)
-    //     }})
-    // }
+    componentDidMount() {
+        let congressContract = this.props.congressContract;
+        let currentUserAddress = web3.eth.defaultAccount // 
+        let self = this;
+        congressContract.memberId(currentUserAddress, function(error,result) {
+            console.log('CHECKING FOR FUND MEMBERSHIP....');
+            if(!error) {
+                if (result.c[0] !== 0) {
+                    console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+                    self.setState({member: true});
+                    self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
+                } else {
+                    console.log('YOU ARE NOT A MEMBER. GET OUT!!!!');
+                }
+            } else {
+                console.error('error: ', error)
+        }})
+    }
 
     onSubmit(index) {
         console.log('index ', index)
         let dappSelected = this.props.dappList[index]
         console.log('dapp selected using index ', dappSelected)        
         this.props.dispatch(actions.userSelectedDapp(index))
+    }
+
+    onDismiss() {
+        this.setState({ visible: false });  
+    }
+
+    handleReject(e) {
+        e.preventDefault();
+        this.setState({ visible: true }); 
     }
          
     render () {
@@ -74,7 +90,7 @@ export class MemberDapps extends React.Component {
                         <CardText ><p className="boldText">Creator: </p></CardText>         
                         <CardText>{dapp.username}</CardText>                         
                         <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>  
-                             <Link className="cardButton"  to="/submitproposal">Submit New Proposal</Link>
+                             <Link className="cardButton"  onClick={this.state.member === false ? this.handleReject  : ''} to="/submitproposal">Submit New Proposal</Link>
                         </Button>
                         <CardText></CardText>
                     </CardBlock>
@@ -88,6 +104,12 @@ export class MemberDapps extends React.Component {
 
                 return (
                     <div className="container center">
+
+                        <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
+                            Only organization members are permitted to submit proposals.
+                            Please see the About page for details.
+                        </Alert>
+
                         <div className="space-out" > </div>
                         <div className="">
                             <h2 className="">Member Dapps </h2>

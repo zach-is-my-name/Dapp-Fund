@@ -7,6 +7,7 @@ export default class NavBar extends React.Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.setActive = this.setActive.bind(this);
     this.state = {
       isOpen: false
     };
@@ -16,7 +17,14 @@ export default class NavBar extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+  setActive(e) {
+    e.preventDefault();
+    console.log('event target', e.target);
+    e.target.className = 'active';
+  }
+
   render() {
+
     return (
       <div>
 
@@ -24,24 +32,24 @@ export default class NavBar extends React.Component {
           <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand href="/">DappFund</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink><IndexLink to="/">About</IndexLink></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink><Link to="/apply">Apply</Link></NavLink>
-              </NavItem>              
-              <NavItem>
-                <NavLink><Link to="/memberdapps">Member Dapps</Link></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink><Link to="/activeproposals">Active Proposals</Link></NavLink>
-              </NavItem>
+            <ul className="work">
+              <li role='presentation' onClick={this.setActive}>
+                <IndexLink to="/">About</IndexLink>
+              </li>
+              <li role='presentation' onClick={this.setActive}>
+                <Link to="/apply">Apply</Link>
+              </li>              
+              <li role='presentation' onClick={this.setActive}>
+                <Link to="/memberdapps">Member Dapps</Link>
+              </li>
+              <li role='presentation' onClick={this.setActive}>
+                <Link to="/activeproposals">Active Proposals</Link>
+              </li>
               {/*<NavItem>
                 <NavLink href="/submitproposal">Submit Proposal</NavLink>
               </NavItem>*/}
 
-            </Nav>
+            </ul>
           </Collapse>
         </Navbar>
       </div>

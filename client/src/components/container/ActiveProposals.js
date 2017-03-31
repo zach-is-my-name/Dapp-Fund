@@ -1,10 +1,7 @@
 import React from 'react';
-import { Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
-import Heading from '../presentation//Heading'
-import NavBar from '../presentation/NavBar.js'
+import { Alert, Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
-
 
 var Web3 = require('web3');
 let web3 = window.web3;
@@ -26,7 +23,14 @@ window.addEventListener('load', function() {
 export class ActiveProposals extends React.Component {
 	constructor(props) {
         super(props);
-        this.state = {valueFunding: '', valueWhy: ''};
+        this.state = {
+            valueFunding: '',
+            valueWhy: '',
+            visible: false
+        };
+
+        this.onDismiss = this.onDismiss.bind(this);
+
     }
 
     componentWillMount() {
@@ -42,9 +46,10 @@ export class ActiveProposals extends React.Component {
     //         console.log('CHECKING FOR FUND MEMBERSHIP....');
     //         if(!error) {
     //             if (result.c[0] !== 0) {
+    //                 alert('YOU ARE A MEMBER')
     //                 console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
-    //                 self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
     //             } else {
+    //                 alert('YOU ARE NOT A MEMBER')
     //                 console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
     //             }
     //         } else {
@@ -54,7 +59,7 @@ export class ActiveProposals extends React.Component {
 
      onVote (proposal, bool) {
         let congressContract = this.props.congressContract;
-        let proposalId = 0; 
+        let proposalId = proposal.id - 3; 
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 1000000 //put this in store???
         let defaultBytes = '' //put this in store???
@@ -65,6 +70,9 @@ export class ActiveProposals extends React.Component {
             vote ="no"
         }
         let self = this;
+
+        console.log('proposal id vote', proposalId);
+
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
@@ -79,7 +87,10 @@ export class ActiveProposals extends React.Component {
                             console.error('error: ', error)
                     }})
                 } else {
-                    console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
+                    console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
+                    self.setState({visible: true})
+                    
+
                 }
             } else {
                 console.error('error: ', error)
@@ -88,17 +99,21 @@ export class ActiveProposals extends React.Component {
 
     onExecuteProposal(proposal) {
         let congressContract = this.props.congressContract
-        let proposalId = 0; 
+        let congressContractAddress = this.props.congressContractAddress
+        let proposalId = proposal.id - 3; 
         let currentUserAddress = web3.eth.defaultAccount // 
         let defaultGas = 3000000 //put this in store???
         let defaultBytes = "" //put this in store???
         let self = this;
+
+        console.log('proposal id execute', proposalId);
+
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
                 if (result.c[0] !== 0) {
                     console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
-                    congressContract.executeProposal.sendTransaction(proposalId, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
+                    congressContract.executeProposal(proposalId, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
                         console.log('execute proposal');
                         if(!error) {
                             console.log('result: ', result)
@@ -109,14 +124,20 @@ export class ActiveProposals extends React.Component {
                             console.error('error: ', error)
                 }})
                 } else {
-                    console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
+                    console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
                 }
              } else {
                 console.error('error: ', error)
         }})
     }
 
+    onDismiss() {
+        this.setState({ visible: false });  
+    }
+
     render () {
+
+
 
         let proposals;
         if (this.props.activeProposals) {
@@ -139,9 +160,10 @@ export class ActiveProposals extends React.Component {
                                 <CardText><b>Yes</b>: {proposal.yesvotes} <b>No:</b> {proposal.novotes}</CardText>
                                 <CardText>{proposal.timeLeft}</CardText>   
                                 <hr className="my-2" />                                     
-                                <CardText ><p className="boldText">Vote </p></CardText>  
+                                <CardText ><p className="boldText">Vote </p></CardText> 
                                 <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
-                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>                                  
+                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>    
+
                             </CardBlock>                                            
 
                         </Card>
@@ -151,19 +173,23 @@ export class ActiveProposals extends React.Component {
     }
 
         return (
-            <div className="container center">
-                <div className="space-out" > </div>
-                <Heading />
-                <br />
-                <NavBar />
-                <div className="">
-                    <h2 className="">Active Proposals </h2>
-                    <p className="">Browse and vote for investment proposals raised by fund investors!</p>
+            <div>
+                <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
+                    Only organization members are permitted to vote on active proposals. Please see the About page for details.
+                </Alert>
+
+
+                <div className="container center">
+                    <div className="space-out" > </div>
+                    <div className="">
+                        <h2 className="">Active Proposals </h2>
+                        <p className="">Browse and vote for investment proposals raised by fund investors!</p>
+                    </div>
+                    <CardGroup>
+                        {proposals}
+                    </CardGroup>
+                    <div className="space-out" > </div>
                 </div>
-                <CardGroup>
-                    {proposals}
-                </CardGroup>
-                <div className="space-out" > </div>
             </div>
         )
     }
@@ -175,9 +201,9 @@ const mapStateToProps = (state, props) => ({
     isFetched: state.isFetched,
     congressContract: state.congressContract,
     dappSelected: state.dappSelected,
-    activeProposals: state.activeProposals
+    activeProposals: state.activeProposals,
+    congressContractAddress: state.congressContractAddress,
 });
 
 export default connect(mapStateToProps)(ActiveProposals);
 
-                                    {/*<Button color="success" onClick={() => this.onExecuteProposal(proposal)} >Execute Proposal</Button>*/}

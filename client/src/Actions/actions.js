@@ -23,7 +23,6 @@ export const fetchProposalsSuccess = (proposals) => ({
 
 
 
-
 export const submitApply = (inputs) => async dispatch => {
 console.log("FETCH INPUT", JSON.stringify(inputs))
     try {

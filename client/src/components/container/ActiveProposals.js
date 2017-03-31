@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
+import { Alert, Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 
@@ -24,7 +24,14 @@ window.addEventListener('load', function() {
 export class ActiveProposals extends React.Component {
 	constructor(props) {
         super(props);
-        this.state = {valueFunding: '', valueWhy: ''};
+        this.state = {
+            valueFunding: '',
+            valueWhy: '',
+            visible: false
+        };
+
+        this.onDismiss = this.onDismiss.bind(this);
+
     }
 
     componentWillMount() {
@@ -77,7 +84,10 @@ export class ActiveProposals extends React.Component {
                             console.error('error: ', error)
                     }})
                 } else {
-                    console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
+                    console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
+                    self.setState({visible: true})
+                    
+
                 }
             } else {
                 console.error('error: ', error)
@@ -107,14 +117,20 @@ export class ActiveProposals extends React.Component {
                             console.error('error: ', error)
                 }})
                 } else {
-                    console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
+                    console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
                 }
              } else {
                 console.error('error: ', error)
         }})
     }
 
+    onDismiss() {
+        this.setState({ visible: false });  
+    }
+
     render () {
+
+
 
         let proposals;
         if (this.props.activeProposals) {
@@ -137,9 +153,9 @@ export class ActiveProposals extends React.Component {
                                 <CardText><b>Yes</b>: {proposal.yesvotes} <b>No:</b> {proposal.novotes}</CardText>
                                 <CardText>{proposal.timeLeft}</CardText>   
                                 <hr className="my-2" />                                     
-                                <CardText ><p className="boldText">Vote </p></CardText>  
+                                <CardText ><p className="boldText">Vote </p></CardText> 
                                 <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
-                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>                                  
+                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>    
                             </CardBlock>                                            
 
                         </Card>
@@ -149,16 +165,23 @@ export class ActiveProposals extends React.Component {
     }
 
         return (
-            <div className="container center">
-                <div className="space-out" > </div>
-                <div className="">
-                    <h2 className="">Active Proposals </h2>
-                    <p className="">Browse and vote for investment proposals raised by fund investors!</p>
+            <div>
+                <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
+                    Only organization members are permitted to submit proposals. Please see the About page for details.
+                </Alert>
+
+
+                <div className="container center">
+                    <div className="space-out" > </div>
+                    <div className="">
+                        <h2 className="">Active Proposals </h2>
+                        <p className="">Browse and vote for investment proposals raised by fund investors!</p>
+                    </div>
+                    <CardGroup>
+                        {proposals}
+                    </CardGroup>
+                    <div className="space-out" > </div>
                 </div>
-                <CardGroup>
-                    {proposals}
-                </CardGroup>
-                <div className="space-out" > </div>
             </div>
         )
     }

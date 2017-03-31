@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Jumbotron , FormGroup, Label, Input, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
+import { Alert, Button, Jumbotron , FormGroup, Label, Input, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock} from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/actions';
 import { Link } from "react-router";
@@ -27,7 +27,11 @@ window.addEventListener('load', function() {
 export class SubmitProposal extends React.Component {
 	constructor(props) {
         super(props);
-        this.state = {valueFunding: '', valueWhy: ''};
+        this.state = {
+            valueFunding: '',
+            valueWhy: '',
+        };
+
         this.handleChangeFunding = this.handleChangeFunding.bind(this);
         this.handleChangeWhy = this.handleChangeWhy.bind(this);
     }
@@ -96,7 +100,7 @@ export class SubmitProposal extends React.Component {
                             console.error('error: ', error)
                     }})
                 } else {
-                    console.log('YOU ARE NOT A MEMBER. GET OUT!!!!')
+                    console.log('Only organization members are permitted to submit proposals. Please see the About page for details.')
                 }
              } else {
                 console.error('error: ', error)

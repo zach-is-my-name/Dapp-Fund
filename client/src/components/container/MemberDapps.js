@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button, Card, CardImg, CardTitle, CardText, CardGroup, CardBlock, } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -55,7 +54,6 @@ export class MemberDapps extends React.Component {
         let dappSelected = this.props.dappList[index]
         console.log('dapp selected using index ', dappSelected)        
         this.props.dispatch(actions.userSelectedDapp(index))
-        
     }
          
     render () {
@@ -112,6 +110,3 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps)(MemberDapps);
-
-
-

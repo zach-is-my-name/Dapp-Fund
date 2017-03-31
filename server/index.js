@@ -86,6 +86,7 @@ app.post('/proposals', jsonParser, (req, res) => {
     let yesVotes = 0;
     let noVotes = 0;
     let dateCreated = new Date();
+    let executed = false;
     knex.select('id')
       .from('users')
       .where({useretheraddress: etherAddress})
@@ -98,6 +99,7 @@ app.post('/proposals', jsonParser, (req, res) => {
           yesvotes: yesVotes,
           novotes: noVotes,
           datecreated: dateCreated,
+          executed: executed
         })
         .into('proposals')
         .then(proposal => {
@@ -150,9 +152,11 @@ app.get('/proposals', (req, res) => {
     let minutes = diff.getUTCMinutes(); // Gives minute count of difference
     let remainingDays = 4 - days;
     let remainingHours = 23 - hours;
-    let remainingMinutes = 60 - minutes;
+    // let remainingMinutes = 60 - minutes;
+    let remainingMinutes = 5 - minutes;
   let remainingTime;
-    if (remainingDays > 0 || remainingHours > 0 || remainingMinutes > 0) {
+    // if (remainingDays > 0 || remainingHours > 0 || remainingMinutes > 0) {
+    if (remainingMinutes > 0) {
       remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes remaining`;
     } else {
       remainingTime = 'Expired';

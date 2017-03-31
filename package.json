@@ -33,6 +33,7 @@
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
+    "react-toastr": "^2.8.2",
     "reactstrap": "^4.3.0",
     "web3": "^0.18.2",
     "xp": "^1.0.1"

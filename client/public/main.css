@@ -38,26 +38,38 @@ transform: translateX(0%);
 
 }
 
-.button1 {
+.button {
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
     font-size: 60px;
     border: none;
-    background-color: #3D3F47;
+    
     border-radius: 6px;
-    color: white;
+    color: #D7DBDD;
     font-family: 'Raleway', sans-serif;
     white-space: nowrap;
     z-index: 100;
 }
 
-.button1:hover {
+.button:hover {
     background-color: #4CAF50;   
     color: white;
 }
 
+.button1 {
+  background-color: #3D3F47;
+}
+
 .hidden {
 	display: none;
+}
+
+.show {
+  display: inherit;
+  z-index: 999;
+  position: fixed;
+  top: 50%;
+  right: 30%;
 }
 
 #particles-js{

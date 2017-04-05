@@ -12,7 +12,7 @@ The Syndicate is a trustless, decentralized organization built by and for its me
 
 We cannot talk about the benefits of the Syndicate without referencing of the blockchain technology used by Ethereum. What you see on your browser is merely a styled graphical user interface of the data living in the Syndicate's contract on Ethereum's blockchain. Because the Syndicate's contract exists on Ethereum's blockchain it cannot be changed by any person and ensures that the Syndicate is governed by decentralized parameters. In other words, there is no owner, no manager, no 'trusted' third party who will skim off the top.
 
-###T he benefit to users
+### The benefit to users
 
 The Syndicate provides an accessible space for Ethereum develops to get honest feedback and trustless crowdfunding for their dapp ideas.
 

@@ -35,6 +35,11 @@ To participate in the Syndicate, you must be a member. As part of your applicati
 
 As a member, you can raise an "investment proposal" for any members' dapp. Raising a proposal is simple. Users must input a proposed investment amount (in ether) and a reason for their suggestion. Upon submission, proposals become viewable by the entire Syndicate for a pre-determined "debate period".
 
-During this time, members can either vote "yes", to support the proposal, or "no", if they disagree with the proposal. At the end of the debate period, the Syndicate runs an internal process to 1) determine if a minimum quorum was reached 2) tally the votes and check for a majority 3) execute the proposal if the minimum quorum and "yes" vote majority conditions are met. The proposed funding amount is immediately debited from the Syndicate's aggregate investment pool and sent over the blockchain to the creator of the dapp.
+During this time, members can either vote "yes", to support the proposal, or "no", if they disagree with the proposal. At the end of the debate period, the Syndicate runs an internal process to:
+1. determine if a minimum quorum was reached 
+2. tally the votes and check for a majority 
+3. execute the proposal if the minimum quorum and "yes" vote majority conditions are met.
+
+The proposed funding amount is immediately debited from the Syndicate's aggregate investment pool and sent over the blockchain to the creator of the dapp.
 
 The Syndicate harnesses the two best features of the Ethereum blockchain: autonomy and decentralization, and exemplifies how they can be applied to the world of private investment.

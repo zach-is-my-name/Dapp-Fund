@@ -104,8 +104,6 @@ export class ActiveProposals extends React.Component {
                 } else {
                     console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
                     self.setState({visible: true})
-                    
-
                 }
             } else {
                 console.error('error: ', error)
@@ -164,11 +162,11 @@ export class ActiveProposals extends React.Component {
                             <CardImg top width="85%" src={proposal.dappimagelink} alt="Card image cap" />
                             <CardBlock className="fitContainer" >
                                 <CardTitle><b> {proposal.dappname}</b></CardTitle>
-                                <CardText style="overflow-y:scroll;"><b><u>Description:</u></b> {proposal.dappdescription}</CardText>    
+                                <CardText className="scroll"><b><u>Description:</u></b> {proposal.dappdescription}</CardText>    
                                 <CardText><b><u>Creator:</u></b> {proposal.username}</CardText> 
                                 <hr className="my-2" /> 
                                 <CardText ><p className="boldText">Proposal</p></CardText>                
-                                <CardText style="overflow-y:scroll;"><b><u>Reason:</u></b> {proposal.proposaldescription}</CardText>
+                                <CardText className="scroll"><b><u>Reason:</u></b> {proposal.proposaldescription}</CardText>
                                 <CardText><b><u>Amount:</u></b> {proposal.proposedfunding} ether</CardText>
                                 <hr className="my-2" />                                   
                                 <CardText ><p className="boldText">Current Results</p></CardText>  
@@ -178,7 +176,6 @@ export class ActiveProposals extends React.Component {
                                 <CardText ><p className="boldText">Vote </p></CardText> 
                                 <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
                                 <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>    
-
                             </CardBlock>                                            
 
                         </Card>
@@ -199,7 +196,11 @@ export class ActiveProposals extends React.Component {
                     <div className="">
                         <h2 className="componentHeader">Active Proposals </h2>
                         <p className="componentHeader">Browse and vote for investment proposals raised by fund investors!</p>
-                        <p className="componentHeader">Fund Balance: {this.props.fundBalance} Ether</p>
+                        <br></br>
+                        <div className="bold">
+                            <h5 className="componentHeader">Current Fund Balance:</h5>
+                            <p className="componentHeader">{this.props.fundBalance} Ether</p>
+                        </div>
                     </div>
                     <CardGroup>
                         {proposals}

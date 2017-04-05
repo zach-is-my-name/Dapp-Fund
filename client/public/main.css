@@ -183,6 +183,23 @@ ul.work li.active {
 
 .componentHeader {
    font-family: 'Raleway', sans-serif;
+   margin-bottom: 3px;
 } 
 
+.scroll {
+  height:100px;
+  overflow-y: scroll;
+}
+
+.bold {
+  font-weight: 900 !important;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  width: 250px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3px;
+}
 

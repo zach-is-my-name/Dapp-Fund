@@ -86,7 +86,7 @@ export class MemberDapps extends React.Component {
                         <CardTitle><b>{dapp.dappname}</b></CardTitle>
                         <br></br>
                         <CardText > <p className="boldText">Description:</p></CardText>
-                        <CardText style="overflow-y:scroll;" >{dapp.dappdescription}</CardText>
+                        <CardText className="scroll" >{dapp.dappdescription}</CardText>
                         <CardText ><p className="boldText">Creator: </p></CardText>         
                         <CardText>{dapp.username}</CardText>                         
                         <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>  
@@ -115,6 +115,11 @@ export class MemberDapps extends React.Component {
                             <h2 className="componentHeader">Member Dapps </h2>
                             <p className="componentHeader">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>
                         </div>
+                        <br></br>                        
+                        <div className="bold">
+                            <h5 className="componentHeader">Current Fund Balance:</h5>
+                            <p className="componentHeader">{this.props.fundBalance} Ether</p>
+                        </div>                        
                         <CardGroup>
                             {dapps}
                         </CardGroup>
@@ -128,7 +133,8 @@ const mapStateToProps = (state, props) => ({
     dappList: state.dappList,
     isFetched: state.isFetched,
     congressContract: state.congressContract,
-    activeProposals: state.activeProposals
+    activeProposals: state.activeProposals,
+    fundBalance: state.fundBalance    
 });
 
 export default connect(mapStateToProps)(MemberDapps);

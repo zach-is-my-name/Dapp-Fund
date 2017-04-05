@@ -118,6 +118,11 @@ export class SubmitProposal extends React.Component {
                     <div className="space-out" > </div>
                         <h2 className="componentHeader">Submit New Proposal </h2>
                         <p className="componentHeader">Initiate an investment proposal by providing a funding amount and your rationale for investment!</p>                
+                        <br></br>                       
+                        <div className="bold">
+                            <h5 className="componentHeader">Current Fund Balance:</h5>
+                            <p className="componentHeader">{this.props.fundBalance} Ether</p>
+                        </div>
                         <Card className="submitProposalContainer" >
                         <br></br>
                         <CardImg top width="60%" src={currentDapp.dappimagelink} alt="Card image cap" />
@@ -148,7 +153,8 @@ const mapStateToProps = (state, props) => ({
     isFetched: state.isFetched,
     congressContract: state.congressContract,
     dappSelected: state.dappSelected,
-    activeProposals: state.activeProposals
+    activeProposals: state.activeProposals,
+    fundBalance: state.fundBalance
 });
 
 export default connect(mapStateToProps)(SubmitProposal);

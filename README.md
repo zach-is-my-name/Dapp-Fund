@@ -10,7 +10,7 @@ The Syndicate is a trustless, decentralized organization built by and for its me
 
 ### The technology
 
-We cannot talk about the benefits of the Syndicate without referencing of the blockchain technology used by Ethereum. What you see on your browser is merely a styled graphical user interface of the data living in the Syndicate's contract on Ethereum's blockchain. Because the Syndicate's contract exists on Ethereum's blockchain it cannot be changed by any person and ensures that the Syndicate is governed by decentralized parameters. In other words, there is no owner, no manager, no 'trusted' third party who will skim off the top.
+We cannot talk about the benefits of the Syndicate without referencing of the blockchain technology used by Ethereum. What you see on the [Syndicate's website](https://capstone-ethereum.herokuapp.com/) is merely a styled graphical user interface of the data living in the Syndicate's contract on Ethereum's blockchain. Because the Syndicate's contract exists on Ethereum's blockchain it cannot be changed by any person and ensures that the Syndicate is governed by decentralized parameters. In other words, there is no owner, no manager, no 'trusted' third party who will skim off the top.
 
 ### The benefit to users
 

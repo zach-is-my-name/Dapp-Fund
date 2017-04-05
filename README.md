@@ -2,7 +2,12 @@
 
 ## What is the Syndicate?
 
-The Syndicate is a decentralized investment fund located on the [Ethereum Blockchain](https://www.ethereum.org/). You can find the Syndicate's exact blockchain address at [0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562](https://ropsten.etherscan.io/tx/0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562). At its heart, The Syndicate is meant to be a non-profit "dapp incubator" that leverages the insights of the Ethereum community to invest in innovative and creative dapps.
+The Syndicate is a decentralized investment fund located on the [Ethereum Blockchain](https://www.ethereum.org/). You can find the Syndicate's exact blockchain address at [0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562](https://ropsten.etherscan.io/tx/0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562). All members:
+* 1. Join the Syndicate with maximum of 1 original Dapp idea.
+* 2. Raise an investment proposal for any member's Dapp.
+* 3. Vote to fund a proposed Dapp with the Syndicate's fund.
+
+At its heart, The Syndicate is meant to be a non-profit "dapp incubator" that leverages the insights of the Ethereum community to invest in innovative and creative dapps.
 
 The Syndicate is a trustless, decentralized organization built by and for its members.
 

@@ -86,7 +86,7 @@ export class MemberDapps extends React.Component {
                         <CardTitle><b>{dapp.dappname}</b></CardTitle>
                         <br></br>
                         <CardText > <p className="boldText">Description:</p></CardText>
-                        <CardText >{dapp.dappdescription}</CardText>
+                        <CardText style="overflow-y:scroll;" >{dapp.dappdescription}</CardText>
                         <CardText ><p className="boldText">Creator: </p></CardText>         
                         <CardText>{dapp.username}</CardText>                         
                         <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>  
@@ -112,8 +112,8 @@ export class MemberDapps extends React.Component {
 
                         <div className="space-out" > </div>
                         <div className="">
-                            <h2 className="">Member Dapps </h2>
-                            <p className="">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>
+                            <h2 className="componentHeader">Member Dapps </h2>
+                            <p className="componentHeader">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>
                         </div>
                         <CardGroup>
                             {dapps}

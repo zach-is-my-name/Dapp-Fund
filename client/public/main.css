@@ -181,4 +181,8 @@ ul.work li.active {
   margin: 0 auto !important;
 }
 
+.componentHeader {
+   font-family: 'Raleway', sans-serif;
+} 
+
 

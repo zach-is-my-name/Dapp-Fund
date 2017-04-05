@@ -2,7 +2,9 @@
 
 ## What is the Syndicate?
 
-The Syndicate is a decentralized investment fund located on the [Ethereum Blockchain](https://www.ethereum.org/). You can find the Syndicate's exact blockchain address at [0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562](https://ropsten.etherscan.io/tx/0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562). All members:
+The Syndicate is a decentralized investment fund located on the [Ethereum Blockchain](https://www.ethereum.org/). You can find the Syndicate's exact blockchain address at [0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562](https://ropsten.etherscan.io/tx/0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562). The Sydicate's democratic governance is based on the solidity code created by the Ethereum community and can be examined [here](https://www.ethereum.org/dao).
+
+In summary, all Syndicate members:
 1. Join the Syndicate with maximum of 1 original Dapp idea.
 2. Raise an investment proposal for any member's Dapp.
 3. Vote to fund a proposed Dapp with the Syndicate's fund.
@@ -36,9 +38,9 @@ To participate in the Syndicate, you must be a member. As part of your applicati
 As a member, you can raise an "investment proposal" for any members' dapp. Raising a proposal is simple. Users must input a proposed investment amount (in ether) and a reason for their suggestion. Upon submission, proposals become viewable by the entire Syndicate for a pre-determined "debate period".
 
 During this time, members can either vote "yes", to support the proposal, or "no", if they disagree with the proposal. At the end of the debate period, the Syndicate runs an internal process to:
-1. determine if a minimum quorum was reached 
-2. tally the votes and check for a majority 
-3. execute the proposal if the minimum quorum and "yes" vote majority conditions are met.
+1. Determine if a minimum quorum was reached.
+2. Tally the votes and check for a majority.
+3. Execute the proposal if the minimum quorum and "yes" vote majority conditions are met.
 
 The proposed funding amount is immediately debited from the Syndicate's aggregate investment pool and sent over the blockchain to the creator of the dapp.
 

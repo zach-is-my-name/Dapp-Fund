@@ -20,8 +20,9 @@ The Syndicate provides an accessible space for Ethereum develops to get honest f
 
 ### Connect to the Ethereum's blockchain
 
-This application requires an active connection to the Ethereum blockchain. The simplest way to connect to the Syndicate is by installing the MetaMask browser extension for Google Chrome. Visit MetaMask's Chrome Web Store page to download the extension and learn more about it's role in running Ethereum applications. To learn about alternative ways to connect to the Syndicate visit the official repo.
-Join the Syndicate
+This application requires an active connection to the Ethereum blockchain. The simplest way to connect to the Syndicate is by installing the MetaMask browser extension for Google Chrome. Visit [MetaMask's Chrome Web Store page](https://metamask.io/) to download the extension and learn more about it's role in running Ethereum applications. 
+
+### Join the Syndicate
 
 To participate in the Syndicate, you must be a member. As part of your application to the Syndicate, you must submit a username, a description for your dapp, a link to your dapp, your personal Ethereum contact information, and submit a membership fee. The fee is deposited in its entirety into the pool of investable capital for the Syndicate. Not a single wei is taken by any principals or administrators.
 

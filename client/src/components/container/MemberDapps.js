@@ -107,12 +107,12 @@ export class MemberDapps extends React.Component {
                 return (
                     <div className="container center">
 
-                      <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
-                        Only organization members are permitted to submit proposals.
-                        Please see the About page for details.
-                      </Alert>
+                        <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
+                            Only organization members are permitted to submit proposals.
+                            Please see the About page for details.
+                        </Alert>
 
-                      <div className="space-out" > </div>
+                        <div className="space-out" > </div>
                       <div className="">
                         <h2 className="componentHeader">Member Dapps </h2>
                         <p className="componentHeader">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>

@@ -39,7 +39,7 @@ export class MemberDapps extends React.Component {
 
     componentDidMount() {
         let congressContract = this.props.congressContract;
-        let currentUserAddress = web3.eth.defaultAccount // 
+        let currentUserAddress = web3.eth.defaultAccount //
         let self = this;
         congressContract.memberId(currentUserAddress, function(error,result) {
             console.log('CHECKING FOR FUND MEMBERSHIP....');
@@ -59,21 +59,21 @@ export class MemberDapps extends React.Component {
     onSubmit(index) {
         console.log('index ', index)
         let dappSelected = this.props.dappList[index]
-        console.log('dapp selected using index ', dappSelected)        
+        console.log('dapp selected using index ', dappSelected)
         this.props.dispatch(actions.userSelectedDapp(index))
     }
 
     onDismiss() {
-        this.setState({ visible: false });  
+        this.setState({ visible: false });
     }
 
     handleReject(e) {
         e.preventDefault();
-        this.setState({ visible: true }); 
+        this.setState({ visible: true });
     }
-         
+
     render () {
-    
+
         let dapps = this.props.dappList.map((dapp, index) => {
             console.log("here is a dapp", dapp);
             return (
@@ -82,15 +82,15 @@ export class MemberDapps extends React.Component {
                 <Card key={index}  >
                     <br></br>
                     <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
-                    <CardBlock>                        
+                    <CardBlock>
                         <CardTitle><b>{dapp.dappname}</b></CardTitle>
                         <br></br>
                         <CardText > <p className="boldText">Description:</p></CardText>
                         <CardText >{dapp.dappdescription}</CardText>
-                        <CardText ><p className="boldText">Creator: </p></CardText>         
-                        <CardText>{dapp.username}</CardText>                         
-                        <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>  
-                             <Link className="cardButton"  onClick={this.state.member === false ? this.handleReject  : ''} to="/submitproposal">Submit New Proposal</Link>
+                        <CardText ><p className="boldText">Creator: </p></CardText>
+                        <CardText>{dapp.username}</CardText>
+                        <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>
+                            <Link className="cardButton"  onClick={this.state.member === false ? this.handleReject  : ''} to="/submitproposal">Submit New Proposal</Link>
                         </Button>
                         <CardText></CardText>
                     </CardBlock>

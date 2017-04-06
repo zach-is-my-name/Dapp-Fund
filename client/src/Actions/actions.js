@@ -20,6 +20,12 @@ export const fetchProposalsSuccess = (proposals) => ({
     proposals: proposals
 })
 
+// export const UPDATE_FUND_BALANCE = 'UPDATE_FUND_BALANCE'
+// export const updateFundBalance = (balance) => ({
+//     type: UPDATE_FUND_BALANCE, 
+//     balance: balance
+// })
+
 
 
 

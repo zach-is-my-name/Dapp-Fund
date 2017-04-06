@@ -116,8 +116,13 @@ export class SubmitProposal extends React.Component {
                 <div className="space-out" > </div>
                 <div>
                     <div className="space-out" > </div>
-                        <h2 className="">Submit New Proposal </h2>
-                        <p className="">Initiate an investment proposal by providing a funding amount and your rationale for investment!</p>                
+                        <h2 className="componentHeader">Submit New Proposal </h2>
+                        <p className="componentHeader">Initiate an investment proposal by providing a funding amount and your rationale for investment!</p>                
+                        <br></br>                       
+                        <div className="bold">
+                            <h5 className="componentHeader">Current Fund Balance:</h5>
+                            <p className="componentHeader">{this.props.fundBalance} Ether</p>
+                        </div>
                         <Card className="submitProposalContainer" >
                         <br></br>
                         <CardImg top width="60%" src={currentDapp.dappimagelink} alt="Card image cap" />
@@ -148,136 +153,8 @@ const mapStateToProps = (state, props) => ({
     isFetched: state.isFetched,
     congressContract: state.congressContract,
     dappSelected: state.dappSelected,
-    activeProposals: state.activeProposals
+    activeProposals: state.activeProposals,
+    fundBalance: state.fundBalance
 });
 
 export default connect(mapStateToProps)(SubmitProposal);
-
-
-
-
-
-    // ***NOTES as of 3.27***
-        //  Congress Contract Address = 0xeab55b499b2a9e33e84a66dcf186b954eeb1ed4f
-        //  John0 Address = 0x3bfa62ac5a79ba819aa2011a3acb55235b19c7f4
-        //  John1 Address = 0xd98c016900dd37ec4beaf7b58152c7c63a499814
-        //  John2 Address = 0x919bcad1b25bb48bef6cee752f834ce24dd580be
-
-        // ***GENERAL COMMANDS***
-            // SEND ETHER 
-                // web3.eth.sendTransaction({from:"0x88bf6349f7947920789c12d38b87e4fe7c1590de", to:"0xeb7a9543c17bed74dcfe6a899853114c8e740b32", value: web3.toWei('10', 'ether')}, function(error,result) {
-                //     console.log('SEND ETHER');
-                //     if(!error)
-                //         console.log('result: ', result)
-
-                //     else
-                //         console.error('error: ', error);
-                // })
-
-            // GET TRANSACTION
-                // web3.eth.getTransaction("0x598ace1ecc9d2f36ac4672620c61981b96bd76a5a5b59df37a272b68d4b7ec70", function(error,result) {
-                //     console.log('GET TRANSACTION');
-                //     if(!error)
-                //         console.log('result: ', result)
-                //     else
-                //         console.error('error: ', error);
-                // })
-
-            // GET BALANCE
-                // web3.eth.getBalance("0x88bf6349f7947920789c12d38b87e4fe7c1590de", function(error,result) {
-                //     console.log('GET BALANCE');
-                //     if(!error)
-                //         console.log('result: ', result.c[0]/1000)
-                //     else
-                //         console.error('error: ', error);
-                // })
-
-        // ***CONGRESS CONTRACT COMMANDS*** (Assumes contract has been deployed - https://ethereum.github.io/browser-solidity/#version=soljson-v0.4.7+commit.822622cf.js)
-
-            // DEBATING PERIOD IN MINUTES (returns debate period integer)
-                // congressContract.debatingPeriodInMinutes('', function(error,result) {
-                //     console.log('DEBATING PERIOD IN MINUTES');
-                //     if(!error)
-                //         console.log('result: ', result.c[0])
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            // MAJORITY MARGIN (returns majority margin integer)
-                // congressContract.majorityMargin('', function(error,result) {
-                //     console.log('MAJORITY MARGIN');
-                //     if(!error)
-                //         console.log('result: ', result.c[0])
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            // MINIMUM QUORUM (returns minium quorum integer)
-                // congressContract.minimumQuorum('', function(error,result) {
-                //     console.log('MINIMUM QUORUM');
-                //     if(!error)
-                //         console.log('result: ', result.c[0])
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            // OWNER (returns address of contract owner)
-                // congressContract.owner('', function(error,result) {
-                //     console.log('OWNER');
-                //     if(!error)
-                //         console.log('result: ', result)
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            // NUMBER OF PROPOSALS (active or ever????)
-                // congressContract.numProposals('', function(error,result) {
-                //     console.log('NUMBER OF PROPOSALS');
-                //     if(!error)
-                //         console.log('result: ', result.c[0])
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            // MEMBER LIST (returns array with index 0 = memberAddress, index 1 = memberName)
-                // Param(s): integer (member list index)
-                // congressContract.members(2, function(error,result) {
-                //     console.log('MEMBER LIST');
-                //     if(!error)
-                //         console.log('result: ', result)
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            // MEMBER ID (returns member Id associated with address)
-                // Param(s): string (member address)
-                // congressContract.memberId("0xadb61f4613a9c87b58d7ff2ebde82af2fb925e5c", function(error,result) {
-                //     console.log('MEMBER ID');
-                //     if(!error)
-                //         console.log('result: ', result.c[0])
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            //  ~~~CORE CONGRESS COMMANDS~~~
-
-
-
-            // VOTE (returns transaction hex code)
-                // Param(s): string (dapp owner address), string (ether amount), string (reason for proposal), string (empty), object ({from: "accountAddress", gas:integer}) 
-                // congressContract.vote(0, "true", "Love it!!!!", {from: "0x4d98323b81815ae169500dad373515adfadfe370", gas:1000000}, function(error,result) {
-                //     console.log('VOTE');
-                //     if(!error)
-                //         console.log('result: ', result)
-                //     else
-                //         console.error('error: ', error)
-                // })
-
-            // EXECUTE CONTRACT (returns transaction hex code)
-                // congressContract.executeProposal.sendTransaction(0, "", {from: "0xd081965ec84be43d923591896932bbe25cfe1a49", gas:1000000000000000}, function(error,result) {
-                //     console.log('VOTE');
-                //     if(!error)
-                //         console.log('result: ', result)
-                //     else
-                //         console.error('error: ', error)
-                // })

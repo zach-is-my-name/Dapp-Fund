@@ -57,6 +57,21 @@ export class ActiveProposals extends React.Component {
     //     }})
     // }
 
+    // componentDidMount() {
+    //     let congressContractAddress = this.props.congressContractAddress
+    //     congressContract.checkBalance(congressContractAddress, function(error,result) {
+    //     console.log('check balance');
+    //         if(!error) {
+    //             console.log('result: ', result)
+    //             console.log('updating proposal status on back end')
+    //             //replace
+    //             let balance = 1;
+    //             this.props.dispatch(actions.updateFundBalance(balance))
+    //         } else {
+    //             console.error('error: ', error)
+    //     }})
+    // }
+
      onVote (proposal, bool) {
         let congressContract = this.props.congressContract;
         let proposalId = proposal.id - 3; 
@@ -89,8 +104,6 @@ export class ActiveProposals extends React.Component {
                 } else {
                     console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
                     self.setState({visible: true})
-                    
-
                 }
             } else {
                 console.error('error: ', error)
@@ -149,11 +162,11 @@ export class ActiveProposals extends React.Component {
                             <CardImg top width="85%" src={proposal.dappimagelink} alt="Card image cap" />
                             <CardBlock className="fitContainer" >
                                 <CardTitle><b> {proposal.dappname}</b></CardTitle>
-                                <CardText><b><u>Description:</u></b> {proposal.dappdescription}</CardText>    
+                                <CardText className="scroll"><b><u>Description:</u></b> {proposal.dappdescription}</CardText>    
                                 <CardText><b><u>Creator:</u></b> {proposal.username}</CardText> 
                                 <hr className="my-2" /> 
                                 <CardText ><p className="boldText">Proposal</p></CardText>                
-                                <CardText><b><u>Reason:</u></b> {proposal.proposaldescription}</CardText>
+                                <CardText className="scroll"><b><u>Reason:</u></b> {proposal.proposaldescription}</CardText>
                                 <CardText><b><u>Amount:</u></b> {proposal.proposedfunding} ether</CardText>
                                 <hr className="my-2" />                                   
                                 <CardText ><p className="boldText">Current Results</p></CardText>  
@@ -163,7 +176,6 @@ export class ActiveProposals extends React.Component {
                                 <CardText ><p className="boldText">Vote </p></CardText> 
                                 <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
                                 <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>    
-
                             </CardBlock>                                            
 
                         </Card>
@@ -182,8 +194,13 @@ export class ActiveProposals extends React.Component {
                 <div className="container center">
                     <div className="space-out" > </div>
                     <div className="">
-                        <h2 className="">Active Proposals </h2>
-                        <p className="">Browse and vote for investment proposals raised by fund investors!</p>
+                        <h2 className="componentHeader">Active Proposals </h2>
+                        <p className="componentHeader">Browse and vote for investment proposals raised by fund investors!</p>
+                        <br></br>
+                        <div className="bold">
+                            <h5 className="componentHeader">Current Fund Balance:</h5>
+                            <p className="componentHeader">{this.props.fundBalance} Ether</p>
+                        </div>
                     </div>
                     <CardGroup>
                         {proposals}
@@ -203,6 +220,7 @@ const mapStateToProps = (state, props) => ({
     dappSelected: state.dappSelected,
     activeProposals: state.activeProposals,
     congressContractAddress: state.congressContractAddress,
+    fundBalance: state.fundBalance
 });
 
 export default connect(mapStateToProps)(ActiveProposals);

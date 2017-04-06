@@ -79,22 +79,24 @@ export class MemberDapps extends React.Component {
             return (
 
             <div className="memberDappsCard">
-                <Card key={index}  >
-                    <br></br>
-                    <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
-                    <CardBlock>
-                        <CardTitle><b>{dapp.dappname}</b></CardTitle>
-                        <br></br>
-                        <CardText > <p className="boldText">Description:</p></CardText>
-                        <CardText >{dapp.dappdescription}</CardText>
-                        <CardText ><p className="boldText">Creator: </p></CardText>
-                        <CardText>{dapp.username}</CardText>
-                        <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>
-                            <Link className="cardButton"  onClick={this.state.member === false ? this.handleReject  : ''} to="/submitproposal">Submit New Proposal</Link>
-                        </Button>
-                        <CardText></CardText>
-                    </CardBlock>
-                </Card>
+              <Card key={index}  >
+                <br></br>
+                <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
+                <CardBlock>
+                  <CardTitle><b>{dapp.dappname}</b></CardTitle>
+                  <br></br>
+                  <CardText > <p className="boldText">Description:</p></CardText>
+
+                  <CardText className="scroll" >{dapp.dappdescription}</CardText>
+                  <CardText ><p className="boldText">Creator: </p></CardText>
+                  <CardText>{dapp.username}</CardText>
+                  <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>
+                    <Link className="cardButton"  onClick={this.state.member === false ? this.handleReject  : ''} to="/submitproposal">Submit New Proposal</Link>
+                    >>>>>>> c752733e848f433e9f0bdfd334706532ed31421c
+                  </Button>
+                  <CardText></CardText>
+                </CardBlock>
+              </Card>
             </div>
             );
         })
@@ -105,20 +107,25 @@ export class MemberDapps extends React.Component {
                 return (
                     <div className="container center">
 
-                        <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
-                            Only organization members are permitted to submit proposals.
-                            Please see the About page for details.
-                        </Alert>
+                      <Alert className = {this.state.visible === false ? "hidden" : "show"} color="danger" toggle={this.onDismiss}>
+                        Only organization members are permitted to submit proposals.
+                        Please see the About page for details.
+                      </Alert>
 
-                        <div className="space-out" > </div>
-                        <div className="">
-                            <h2 className="">Member Dapps </h2>
-                            <p className="">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>
-                        </div>
-                        <CardGroup>
-                            {dapps}
-                        </CardGroup>
-                        <div className="space-out" > </div>
+                      <div className="space-out" > </div>
+                      <div className="">
+                        <h2 className="componentHeader">Member Dapps </h2>
+                        <p className="componentHeader">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>
+                      </div>
+                      <br></br>
+                      <div className="bold">
+                        <h5 className="componentHeader">Current Fund Balance:</h5>
+                        <p className="componentHeader">{this.props.fundBalance} Ether</p>
+                      </div>
+                      <CardGroup>
+                        {dapps}
+                      </CardGroup>
+                      <div className="space-out" > </div>
                     </div>
         )
     }
@@ -128,7 +135,8 @@ const mapStateToProps = (state, props) => ({
     dappList: state.dappList,
     isFetched: state.isFetched,
     congressContract: state.congressContract,
-    activeProposals: state.activeProposals
+    activeProposals: state.activeProposals,
+    fundBalance: state.fundBalance
 });
 
 export default connect(mapStateToProps)(MemberDapps);

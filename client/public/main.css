@@ -29,14 +29,6 @@ transform: translateX(0%);
   background-color: white;
 }
 
-.warning {
-  z-index: -10;
-  width: 200px;
-  height: 200px;
-  position: fixed;
-  left: 100px;
-}
-
 .top {
   border-top-right-radius: 0px !important;
   border-top-left-radius: 0px !important;

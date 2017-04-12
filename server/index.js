@@ -149,15 +149,13 @@ app.get('/proposals', (req, res) => {
     let remainingDays = 4 - days;
     let remainingHours = 23 - hours;
     let remainingMinutes = 60 - minutes;
-    // let remainingMinutes = 5 - minutes;
     let remainingTime;
-    if (remainingDays > 0 || remainingHours > 0 || remainingMinutes > 0) {
+    if (remainingDays >= 0 && remainingHours >= 0 && remainingMinutes > 0) {
     // if (remainingMinutes > 0) {
       remainingTime = `${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes remaining`;
     } else {
       remainingTime = 'Expired';
     }
-
     return remainingTime;
   }
     knex.select(['proposals.id', 'proposals.proposaldescription', 'proposals.proposedfunding', 'proposals.yesvotes', 'proposals.novotes', 'proposals.datecreated', 'proposals.executed', 'users.username', 'users.useretheraddress', 'users.dappname', 'users.dappdescription', 'users.dappimagelink'])

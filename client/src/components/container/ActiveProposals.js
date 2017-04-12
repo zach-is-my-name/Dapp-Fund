@@ -73,41 +73,47 @@ export class ActiveProposals extends React.Component {
     // }
 
      onVote (proposal, bool) {
-        let congressContract = this.props.congressContract;
-        let proposalId = proposal.id - 3; 
-        let currentUserAddress = web3.eth.defaultAccount // 
-        let defaultGas = 1000000 //put this in store???
-        let defaultBytes = '' //put this in store???
-        let vote;
-        if (bool === true) {
-            vote = "yes"
-        } else if (bool === false) {
-            vote ="no"
-        }
-        let self = this;
+        if (typeof web3 !== 'undefined') {
+            let congressContract = this.props.congressContract;
+            let proposalId = proposal.id - 3; 
+        
+            let currentUserAddress = web3.eth.defaultAccount // 
+            let defaultGas = 1000000 //put this in store???
+            let defaultBytes = '' //put this in store???
+            let vote;
+            if (bool === true) {
+                vote = "yes"
+            } else if (bool === false) {
+                vote ="no"
+            }
+            let self = this;
 
-        console.log('proposal id vote', proposalId);
+            console.log('proposal id vote', proposalId);
 
-        congressContract.memberId(currentUserAddress, function(error,result) {
-            console.log('CHECKING FOR FUND MEMBERSHIP....');
-            if(!error) {
-                if (result.c[0] !== 0) {
-                    console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
-                    congressContract.vote(proposalId, bool, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
-                        console.log('SUBMITTING YES VOTE');
-                        if(!error) {
-                            console.log('YES VOTE SUBMITTED! TRANSACTION: ', result)
-                            self.props.dispatch(actions.asyncTallyVote(proposal, vote))
-                        } else {
-                            console.error('error: ', error)
-                    }})
+            congressContract.memberId(currentUserAddress, function(error,result) {
+                console.log('CHECKING FOR FUND MEMBERSHIP....');
+                if(!error) {
+                    if (result.c[0] !== 0) {
+                        console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+                        congressContract.vote(proposalId, bool, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
+                            console.log('SUBMITTING YES VOTE');
+                            if(!error) {
+                                console.log('YES VOTE SUBMITTED! TRANSACTION: ', result)
+                                self.props.dispatch(actions.asyncTallyVote(proposal, vote))
+                            } else {
+                                console.error('error: ', error)
+                        }})
+                    } else {
+                        console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
+                        self.setState({visible: true})
+                    }
                 } else {
-                    console.log('Only organization members are permitted to submit proposals. Please see the About page for details.');
-                    self.setState({visible: true})
-                }
-            } else {
-                console.error('error: ', error)
-        }})
+                    console.error('error: ', error)
+            }})
+        } else {
+            console.log("No MetaMask, therefore cannot vote as member");
+            this.setState({visible: true});
+        }
     }
 
     onExecuteProposal(proposal) {

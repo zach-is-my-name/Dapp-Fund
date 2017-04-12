@@ -92,7 +92,6 @@ export class MemberDapps extends React.Component {
                   <CardText>{dapp.username}</CardText>
                   <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>
                     <Link className="cardButton"  onClick={this.state.member === false ? this.handleReject  : ''} to="/submitproposal">Submit New Proposal</Link>
-                    >>>>>>> c752733e848f433e9f0bdfd334706532ed31421c
                   </Button>
                   <CardText></CardText>
                 </CardBlock>

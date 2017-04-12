@@ -24,6 +24,11 @@
 transform: translateX(0%);
 }
 
+#root {
+  z-index: 1;
+  background-color: white;
+}
+
 .top {
   border-top-right-radius: 0px !important;
   border-top-left-radius: 0px !important;
@@ -65,11 +70,11 @@ transform: translateX(0%);
 }
 
 .show {
-  display: inherit;
-  z-index: 999;
+/*  display: inherit;
+*/  z-index: 999;
   position: fixed;
   top: 40%;
-  right: 20%;
+  right: 40%;
 }
 
 #particles-js{

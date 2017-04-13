@@ -79,19 +79,19 @@ export class MemberDapps extends React.Component {
             return (
 
             <div className="memberDappsCard">
-                <Card key={index}  >
-                    <br></br>
-                    <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
-                    <CardBlock>
-                        <CardTitle><b>{dapp.dappname}</b></CardTitle>
-                        <br></br>
-                        <CardText > <p className="boldText">Description:</p></CardText>
+              <Card key={index}  >
+                <br></br>
+                <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
+                <CardBlock>
+                  <CardTitle><b>{dapp.dappname}</b></CardTitle>
+                  <br></br>
+                  <CardText > <p className="boldText">Description:</p></CardText>
 
-                        <CardText className="scroll" >{dapp.dappdescription}</CardText>
-                        <CardText ><p className="boldText">Creator: </p></CardText>
-                        <CardText>{dapp.username}</CardText>
-                        {/* <Button  color="gray" className="cardButton lightShadow"  > */}
-                        <Link className="cardButton lightShadow" onClick={() => {this.onSubmit(index); this.state.member === false ? this.handleReject  : ''}} to="/submitproposal">Submit New Proposal</Link>
+                  <CardText className="scroll" >{dapp.dappdescription}</CardText>
+                  <CardText ><p className="boldText">Creator: </p></CardText>
+                  <CardText>{dapp.username}</CardText>
+                  {/* <Button  color="gray" className="cardButton lightShadow"  > */}
+                  <Link className="cardButton lightShadow" onClick={() => {this.onSubmit(index); this.state.member === false ? this.handleReject  : ''}} to="/submitproposal">Submit New Proposal</Link>
                         {/* </Button> */}
                         <CardText></CardText>
                 </CardBlock>

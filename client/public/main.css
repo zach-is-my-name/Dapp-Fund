@@ -1,10 +1,10 @@
 
 .maindiv {
+  font-size: 10px;
 	margin: 0;
 	height: 100%;
 	width: 100%;
-/*	background-color: #3D3F47;
-*/	position: fixed;
+  position: fixed;
 	top: 0;
 	text-align: center;
 	transform: translateX(100%);
@@ -12,11 +12,14 @@
 }
 
 .maindiv h1 {
+  font-size: 30px;
   padding-left: 5px;
   padding-right: 5px; 
   position: absolute;
-  top: 40%;
-  left: 37%;
+  width: 200px;
+  top: 45%;
+  left: 50%;
+  margin-left: -100px;
   cursor: pointer;
 }
 
@@ -30,15 +33,17 @@ transform: translateX(0%);
 }
 
 .top {
+  font-size: 30px !important;
   border-top-right-radius: 0px !important;
   border-top-left-radius: 0px !important;
 }
 
 .bottom {
+  font-size: 30px !important;
   width: 100%;
   position: absolute;
   bottom: -7px;
-    border-bottom-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
 
 }
@@ -206,5 +211,37 @@ ul.work li.active {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3px;
+}
+
+@media only screen and (min-width: 414px) {
+  .maindiv h1 {
+      font-size: 40px;
+      width: 250px;
+      margin-left: -125px;
+  }
+
+  .top {
+    font-size: 40px !important;
+  }
+
+  .bottom {
+    font-size: 40px !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .maindiv h1 {
+      font-size: 70px;
+      width: 430px;
+      margin-left: -215px;
+  }
+
+  .top {
+    font-size: 70px !important;
+  }
+
+  .bottom {
+    font-size: 70px !important;
+  }
 }
 

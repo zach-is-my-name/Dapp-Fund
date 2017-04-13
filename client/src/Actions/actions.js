@@ -38,7 +38,7 @@ export const addContractToReducer = (contract) => ({
 export const submitApply = (inputs) => async dispatch => {
 console.log("FETCH INPUT", JSON.stringify(inputs))
     try {
-        let response = await fetch('/users', {
+        let response = await fetch('http://localhost:3001/users', {
             method: 'POST',
             body: JSON.stringify(inputs),
             headers: {
@@ -55,7 +55,7 @@ console.log("FETCH INPUT", JSON.stringify(inputs))
 
 export const fetchMemberDapps = () => async dispatch => {
     try {
-        let response = await fetch('/users', {
+        let response = await fetch('http://localhost:3001/users', {
             method: 'GET'
         })
     let _response = await response.json();
@@ -71,7 +71,7 @@ export const asyncPostProposal = (proposal) => async dispatch => {
     console.log('PROPOSALS ASYNC ACTION')
     console.log("proposal post INPUT", JSON.stringify(proposal))
     try {
-        let response = await fetch('/proposals', {
+        let response = await fetch('http://localhost:3001/proposals', {
             method: 'POST',
             body: JSON.stringify(proposal),
             headers: {
@@ -81,6 +81,7 @@ export const asyncPostProposal = (proposal) => async dispatch => {
         })
         let _response = await response.json();
         console.log("Response from Server", _response);
+        dispatch(fetchProposals());
     } catch (err) {
         console.error(err)
     }
@@ -88,7 +89,7 @@ export const asyncPostProposal = (proposal) => async dispatch => {
 
 export const fetchProposals = () => async dispatch => {
     try {
-        let response = await fetch('/proposals', {
+        let response = await fetch('http://localhost:3001/proposals', {
             method: 'GET'
         })
     let _response = await response.json();
@@ -105,7 +106,7 @@ export const asyncTallyVote = (proposal, vote) => async dispatch => {
     let id = proposal.id
     console.log("proposal PUT INPUT", JSON.stringify(id))
     try {
-        let response = await fetch(`/proposals/${id}/${vote}`, {
+        let response = await fetch(`http://localhost:3001/proposals/${id}/${vote}`, {
             method: 'PUT',
             body: JSON.stringify(proposal),
             headers: {
@@ -124,7 +125,7 @@ export const asyncTallyVote = (proposal, vote) => async dispatch => {
 export const asyncConfirmUser = (currentUserAddress) => async dispatch => {
     console.log("USERS CONFIRM PUT INPUT", JSON.stringify(currentUserAddress))
     try {
-        let response = await fetch(`/users/${currentUserAddress}`, {
+        let response = await fetch(`http://localhost:3001/users/${currentUserAddress}`, {
             method: 'PUT',
             body: JSON.stringify(currentUserAddress),
             headers: {
@@ -143,7 +144,7 @@ export const asyncConfirmUser = (currentUserAddress) => async dispatch => {
 export const asyncExecuteProposal = (proposalId) => async dispatch => {
     console.log("USERS CONFIRM PUT INPUT", JSON.stringify(proposalId))
     try {
-        let response = await fetch(`/execute/${proposalId}`, {
+        let response = await fetch(`http://localhost:3001/execute/${proposalId}`, {
             method: 'PUT',
             body: JSON.stringify(proposalId),
             headers: {

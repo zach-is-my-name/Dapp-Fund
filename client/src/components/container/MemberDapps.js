@@ -47,7 +47,7 @@ export class MemberDapps extends React.Component {
                 if (result.c[0] !== 0) {
                     console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
                     self.setState({member: true});
-                    self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
+                    // self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
                 } else {
                     console.log('YOU ARE NOT A MEMBER. GET OUT!!!!');
                 }
@@ -79,21 +79,21 @@ export class MemberDapps extends React.Component {
             return (
 
             <div className="memberDappsCard">
-              <Card key={index}  >
-                <br></br>
-                <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
-                <CardBlock>
-                  <CardTitle><b>{dapp.dappname}</b></CardTitle>
-                  <br></br>
-                  <CardText > <p className="boldText">Description:</p></CardText>
+                <Card key={index}  >
+                    <br></br>
+                    <CardImg top width="85%" src={dapp.dappimagelink} alt="Card image cap" />
+                    <CardBlock>
+                        <CardTitle><b>{dapp.dappname}</b></CardTitle>
+                        <br></br>
+                        <CardText > <p className="boldText">Description:</p></CardText>
 
-                  <CardText className="scroll" >{dapp.dappdescription}</CardText>
-                  <CardText ><p className="boldText">Creator: </p></CardText>
-                  <CardText>{dapp.username}</CardText>
-                  <Button  color="gray" className="cardButton lightShadow"  onClick={() => this.onSubmit(index)}>
-                    <Link className="cardButton"  onClick={this.state.member === false ? this.handleReject  : ''} to="/submitproposal">Submit New Proposal</Link>
-                  </Button>
-                  <CardText></CardText>
+                        <CardText className="scroll" >{dapp.dappdescription}</CardText>
+                        <CardText ><p className="boldText">Creator: </p></CardText>
+                        <CardText>{dapp.username}</CardText>
+                        {/* <Button  color="gray" className="cardButton lightShadow"  > */}
+                        <Link className="cardButton lightShadow" onClick={() => {this.onSubmit(index); this.state.member === false ? this.handleReject  : ''}} to="/submitproposal">Submit New Proposal</Link>
+                        {/* </Button> */}
+                        <CardText></CardText>
                 </CardBlock>
               </Card>
             </div>
@@ -112,8 +112,8 @@ export class MemberDapps extends React.Component {
                         </Alert>
 
                         <div className="space-out" > </div>
-                      <div className="">
-                        <h2 className="componentHeader">Member Dapps </h2>
+                        <div className="">
+                            <h2 className="componentHeader">Member Dapps </h2>
                         <p className="componentHeader">Browse through dapps created by fund investors.  If you like what you see, submit an investment proposal!</p>
                       </div>
                       <br></br>

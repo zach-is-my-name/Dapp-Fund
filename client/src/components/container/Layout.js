@@ -26,7 +26,7 @@ window.addEventListener('load', function() {
 
         // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
         window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:3000"));
-        alert('No web3? You should consider trying MetaMask! Please see the About page for details.')
+        // alert('No web3? You should consider trying MetaMask! Please see the About page for details.')
         }
 })
 

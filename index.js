@@ -17,6 +17,7 @@ else {
         router: {
             // Anything to /api goes to our backend
             'localhost:8080/api': 'http://localhost:3001'
+
         }
     }));
     app.listen(process.env.PORT || 8080);

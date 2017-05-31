@@ -40,7 +40,7 @@ export class ActiveProposals extends React.Component {
 
     // componentDidMount() {
     //     let congressContract = this.props.congressContract;
-    //     let currentUserAddress = web3.eth.defaultAccount // 
+    //     let currentUserAddress = web3.eth.defaultAccount //
     //     let self = this;
     //     congressContract.memberId(currentUserAddress, function(error,result) {
     //         console.log('CHECKING FOR FUND MEMBERSHIP....');
@@ -75,9 +75,9 @@ export class ActiveProposals extends React.Component {
      onVote (proposal, bool) {
         if (typeof web3 !== 'undefined') {
             let congressContract = this.props.congressContract;
-            let proposalId = proposal.id - 3; 
-        
-            let currentUserAddress = web3.eth.defaultAccount // 
+            let proposalId = proposal.id - 3;
+
+            let currentUserAddress = web3.eth.defaultAccount //
             let defaultGas = 1000000 //put this in store???
             let defaultBytes = '' //put this in store???
             let vote;
@@ -88,17 +88,17 @@ export class ActiveProposals extends React.Component {
             }
             let self = this;
 
-            console.log('proposal id vote', proposalId);
+            // console.log('proposal id vote', proposalId);
 
             congressContract.memberId(currentUserAddress, function(error,result) {
-                console.log('CHECKING FOR FUND MEMBERSHIP....');
+                // console.log('CHECKING FOR FUND MEMBERSHIP....');
                 if(!error) {
                     if (result.c[0] !== 0) {
-                        console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+                        // console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
                         congressContract.vote(proposalId, bool, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
-                            console.log('SUBMITTING YES VOTE');
+                            // console.log('SUBMITTING YES VOTE');
                             if(!error) {
-                                console.log('YES VOTE SUBMITTED! TRANSACTION: ', result)
+                                // console.log('YES VOTE SUBMITTED! TRANSACTION: ', result)
                                 self.props.dispatch(actions.asyncTallyVote(proposal, vote))
                             } else {
                                 console.error('error: ', error)
@@ -119,24 +119,24 @@ export class ActiveProposals extends React.Component {
     onExecuteProposal(proposal) {
         let congressContract = this.props.congressContract
         let congressContractAddress = this.props.congressContractAddress
-        let proposalId = proposal.id - 3; 
-        let currentUserAddress = web3.eth.defaultAccount // 
+        let proposalId = proposal.id - 3;
+        let currentUserAddress = web3.eth.defaultAccount //
         let defaultGas = 3000000 //put this in store???
         let defaultBytes = "" //put this in store???
         let self = this;
 
-        console.log('proposal id execute', proposalId);
+        // console.log('proposal id execute', proposalId);
 
         congressContract.memberId(currentUserAddress, function(error,result) {
-            console.log('CHECKING FOR FUND MEMBERSHIP....');
+            // console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
                 if (result.c[0] !== 0) {
-                    console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+                    // console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
                     congressContract.executeProposal(proposalId, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
-                        console.log('execute proposal');
+                        // console.log('execute proposal');
                         if(!error) {
-                            console.log('result: ', result)
-                            console.log('updating proposal status on back end')
+                            // console.log('result: ', result)
+                            // console.log('updating proposal status on back end')
                             let backEndProposalId = proposal.id;
                             self.props.dispatch(actions.asyncExecuteProposal(backEndProposalId));
                         } else {
@@ -151,7 +151,7 @@ export class ActiveProposals extends React.Component {
     }
 
     onDismiss() {
-        this.setState({ visible: false });  
+        this.setState({ visible: false });
     }
 
     render () {
@@ -163,26 +163,26 @@ export class ActiveProposals extends React.Component {
             proposals = this.props.activeProposals.map((proposal, index) => {
                 return (
                     <div className="activeProposalsCard" >
-                        <Card key={index} className="activeProposalsCard" >     
-                            <br></br>                                          
+                        <Card key={index} className="activeProposalsCard" >
+                            <br></br>
                             <CardImg top width="85%" src={proposal.dappimagelink} alt="Card image cap" />
                             <CardBlock className="fitContainer" >
                                 <CardTitle><b> {proposal.dappname}</b></CardTitle>
-                                <CardText className="scroll"><b><u>Description:</u></b> {proposal.dappdescription}</CardText>    
-                                <CardText><b><u>Creator:</u></b> {proposal.username}</CardText> 
-                                <hr className="my-2" /> 
-                                <CardText ><p className="boldText">Proposal</p></CardText>                
+                                <CardText className="scroll"><b><u>Description:</u></b> {proposal.dappdescription}</CardText>
+                                <CardText><b><u>Creator:</u></b> {proposal.username}</CardText>
+                                <hr className="my-2" />
+                                <CardText ><p className="boldText">Proposal</p></CardText>
                                 <CardText className="scroll"><b><u>Reason:</u></b> {proposal.proposaldescription}</CardText>
                                 <CardText><b><u>Amount:</u></b> {proposal.proposedfunding} ether</CardText>
-                                <hr className="my-2" />                                   
-                                <CardText ><p className="boldText">Current Results</p></CardText>  
+                                <hr className="my-2" />
+                                <CardText ><p className="boldText">Current Results</p></CardText>
                                 <CardText><b>Yes</b>: {proposal.yesvotes} <b>No:</b> {proposal.novotes}</CardText>
-                                <CardText>{proposal.timeLeft}</CardText>   
-                                <hr className="my-2" />                                     
-                                <CardText ><p className="boldText">Vote </p></CardText> 
-                                <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>  
-                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>    
-                            </CardBlock>                                            
+                                <CardText>{proposal.timeLeft}</CardText>
+                                <hr className="my-2" />
+                                <CardText ><p className="boldText">Vote </p></CardText>
+                                <Button color="success" size="lg" className="voteButton" onClick={() => this.onVote(proposal, true)}>Yes</Button>
+                                <Button color="danger" size="lg" className="voteButton" onClick={() => this.onVote(proposal, false)}>No</Button>
+                            </CardBlock>
 
                         </Card>
                     </div>
@@ -230,4 +230,3 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps)(ActiveProposals);
-

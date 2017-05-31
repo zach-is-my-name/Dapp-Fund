@@ -19,7 +19,7 @@ export default class NavBar extends React.Component {
   }
   setActive(e) {
     e.preventDefault();
-    console.log('event target', e.target);
+    // console.log('event target', e.target);
     e.target.className = 'active';
   }
 
@@ -38,7 +38,7 @@ export default class NavBar extends React.Component {
               </li>
               <li role='presentation' onClick={this.setActive}>
                 <Link to="/apply">Apply</Link>
-              </li>              
+              </li>
               <li role='presentation' onClick={this.setActive}>
                 <Link to="/memberdapps">Member Dapps</Link>
               </li>

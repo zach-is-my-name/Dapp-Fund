@@ -42,10 +42,10 @@ export class MemberDapps extends React.Component {
         let currentUserAddress = web3.eth.defaultAccount //
         let self = this;
         congressContract.memberId(currentUserAddress, function(error,result) {
-            console.log('CHECKING FOR FUND MEMBERSHIP....');
+            // console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
                 if (result.c[0] !== 0) {
-                    console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+                    // console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
                     self.setState({member: true});
                     // self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
                 } else {
@@ -57,9 +57,9 @@ export class MemberDapps extends React.Component {
     }
 
     onSubmit(index) {
-        console.log('index ', index)
+        // console.log('index ', index)
         let dappSelected = this.props.dappList[index]
-        console.log('dapp selected using index ', dappSelected)
+        // console.log('dapp selected using index ', dappSelected)
         this.props.dispatch(actions.userSelectedDapp(index))
     }
 
@@ -75,7 +75,7 @@ export class MemberDapps extends React.Component {
     render () {
 
         let dapps = this.props.dappList.map((dapp, index) => {
-            console.log("here is a dapp", dapp);
+            // console.log("here is a dapp", dapp);
             return (
 
             <div className="memberDappsCard">
@@ -101,7 +101,7 @@ export class MemberDapps extends React.Component {
         })
 
         if (this.props.isFetched)
-            console.log(this.props.dappList);
+            // console.log(this.props.dappList);
 
                 return (
                     <div className="container center">

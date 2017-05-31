@@ -82,12 +82,12 @@ export class ApplyForm extends React.Component {
                 to: congress,
                 value: web3.toWei(fee, 'ether')
             }, function(error, result) {
-                console.log('SENDING ENTRY FEE');
+                // console.log('SENDING ENTRY FEE');
                 if (!error) {
-                    console.log('result: ', result)
+                    // console.log('result: ', result)
                     web3.eth.getTransactionReceipt(result, function(error, result) {
                         if (!error) {
-                            console.log("Transaction Block #:", result.blockNumber)
+                            // console.log("Transaction Block #:", result.blockNumber)
                             // console.log(this);
                             result.blockNumber > 0
                                 ? self.setState({paid: true, successVisible: true})
@@ -97,11 +97,11 @@ export class ApplyForm extends React.Component {
                                 gas: defaultGas
                             }, function(error, result) {
                                 //Add alert to tell user to 'confirm membership by clicking 'accept''
-                                console.log("ADDING MEMBER");
+                                // console.log("ADDING MEMBER");
                                 if (!error) {
                                     self.props.dispatch(actions.asyncConfirmUser(currentUserAddress));
                                     // Add alert to tell user they have been added to the fund
-                                    console.log("MEMBER ADDED!", result)
+                                    // console.log("MEMBER ADDED!", result)
                                 } else {
                                     console.error('error', error)
                                 }
@@ -123,12 +123,12 @@ export class ApplyForm extends React.Component {
     }
 
     successDismiss() {
-        this.setState({ successVisible: false });  
+        this.setState({ successVisible: false });
     }
 
     errorDismiss() {
-        this.setState({ errorVisible: false });  
-    } 
+        this.setState({ errorVisible: false });
+    }
 
     render() {
         return (

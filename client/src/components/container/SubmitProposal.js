@@ -85,21 +85,21 @@ export class SubmitProposal extends React.Component {
 
         let self = this;
         congressContract.memberId(currentUserAddress, function(error,result) {
-            console.log('CHECKING FOR FUND MEMBERSHIP....');
+            // console.log('CHECKING FOR FUND MEMBERSHIP....');
             if(!error) {
                 if (result.c[0] !== 0) {
-                    console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
+                    // console.log('MEMBERSHIP CHECK PASSED, MEMBER ID: ', result.c[0])
                     congressContract.newProposal.sendTransaction(proposalRecipientAddress, fundingAmount, investmentThesis, defaultBytes, {from: currentUserAddress, gas: defaultGas}, function(error,result) {
-                        console.log('CREATING NEW PROPOSAL');
+                        // console.log('CREATING NEW PROPOSAL');
                         if(!error) {
-                           console.log('PROPOSAL CREATED! TRANSACTION: ', result)
-                           console.log('POSTING PROPOSAL TO BACKEND')
+                        //    console.log('PROPOSAL CREATED! TRANSACTION: ', result)
+                        //    console.log('POSTING PROPOSAL TO BACKEND')
                             self.props.dispatch(actions.asyncPostProposal(proposalObj))
                         } else {
                             console.error('error: ', error)
                     }})
                 } else {
-                    console.log('Only organization members are permitted to submit proposals. Please see the About page for details.')
+                    // console.log('Only organization members are permitted to submit proposals. Please see the About page for details.')
                 }
              } else {
                 console.error('error: ', error)

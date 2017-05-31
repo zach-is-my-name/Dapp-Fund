@@ -31,7 +31,7 @@ const initialState = {
 export const appReducer = (state = initialState, action) => {
 
   if (action.type === "ADD_CONTRACT_TO_REDUCER") {
-    setTimeout(()=> { console.log(store.getState(), "contract added to reducer?")}, 3000);
+    // setTimeout(()=> { console.log(store.getState(), "contract added to reducer?")}, 3000);
 
     return update(state, {
      congressContract:{$set: action.contract}
@@ -40,7 +40,7 @@ export const appReducer = (state = initialState, action) => {
 
   if (action.type === "FETCH_MEMBERDAPPS_SUCCESS"){
 
-    setTimeout(()=> { console.log(store.getState(), "FETCH_MEMBERDAPPS_SUCCESS")}, 3000);
+    // setTimeout(()=> { console.log(store.getState(), "FETCH_MEMBERDAPPS_SUCCESS")}, 3000);
 
     return update(state, {
      dappList:{$set: action.dappArray},
@@ -51,7 +51,7 @@ export const appReducer = (state = initialState, action) => {
   if (action.type === "USER_SELECTED_DAPP"){
 
 
-    setTimeout(()=> { console.log(store.getState(), "USER_SELECTED_DAPP")}, 3000);
+    // setTimeout(()=> { console.log(store.getState(), "USER_SELECTED_DAPP")}, 3000);
 
     return update(state, {
      dappSelected:{$set: action.index},
@@ -61,7 +61,7 @@ export const appReducer = (state = initialState, action) => {
   if (action.type === "FETCH_PROPOSALS_SUCCESS"){
 
 
-    setTimeout(()=> { console.log(store.getState(), "FETCH_PROPOSALS_SUCCESS")}, 3000);
+    // setTimeout(()=> { console.log(store.getState(), "FETCH_PROPOSALS_SUCCESS")}, 3000);
 
     return update(state, {
      activeProposals: {$set: action.proposals},

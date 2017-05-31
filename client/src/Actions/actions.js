@@ -34,7 +34,7 @@ export const addContractToReducer = (contract) => ({
 
 
 export const submitApply = (inputs) => async dispatch => {
-console.log("FETCH INPUT", JSON.stringify(inputs))
+// console.log("FETCH INPUT", JSON.stringify(inputs))
     try {
         let response = await fetch('/users', {
             method: 'POST',
@@ -45,7 +45,7 @@ console.log("FETCH INPUT", JSON.stringify(inputs))
             }
         })
         let _response = await response.json();
-        console.log("Response from Server", _response);
+        // console.log("Response from Server", _response);
     } catch (err) {
         console.error(err)
     }
@@ -57,7 +57,7 @@ export const fetchMemberDapps = () => async dispatch => {
             method: 'GET'
         })
     let _response = await response.json();
-    console.log("GET response from Server", _response);
+    // console.log("GET response from Server", _response);
     dispatch(fetchMemberDappsSuccess(_response))
     } catch (err) {
         console.error(err)
@@ -66,8 +66,8 @@ export const fetchMemberDapps = () => async dispatch => {
 
 
 export const asyncPostProposal = (proposal) => async dispatch => {
-    console.log('PROPOSALS ASYNC ACTION')
-    console.log("proposal post INPUT", JSON.stringify(proposal))
+    // console.log('PROPOSALS ASYNC ACTION')
+    // console.log("proposal post INPUT", JSON.stringify(proposal))
     try {
         let response = await fetch('/proposals', {
             method: 'POST',
@@ -78,7 +78,7 @@ export const asyncPostProposal = (proposal) => async dispatch => {
             }
         })
         let _response = await response.json();
-        console.log("Response from Server", _response);
+        // console.log("Response from Server", _response);
     } catch (err) {
         console.error(err)
     }
@@ -90,7 +90,7 @@ export const fetchProposals = () => async dispatch => {
             method: 'GET'
         })
     let _response = await response.json();
-    console.log("GET response from Server", _response);
+    // console.log("GET response from Server", _response);
     dispatch(fetchProposalsSuccess(_response))
     } catch (err) {
         console.error(err)
@@ -99,9 +99,9 @@ export const fetchProposals = () => async dispatch => {
 
 
 export const asyncTallyVote = (proposal, vote) => async dispatch => {
-    console.log('PROPOSALS ASYNC ACTION')
+    // console.log('PROPOSALS ASYNC ACTION')
     let id = proposal.id
-    console.log("proposal PUT INPUT", JSON.stringify(id))
+    // console.log("proposal PUT INPUT", JSON.stringify(id))
     try {
         let response = await fetch(`proposals/${id}/${vote}`, {
             method: 'PUT',
@@ -112,7 +112,7 @@ export const asyncTallyVote = (proposal, vote) => async dispatch => {
             }
         })
         let _response = await response.json();
-        console.log("Response from Server", _response);
+        // console.log("Response from Server", _response);
     } catch (err) {
         console.error(err)
     }
@@ -120,7 +120,7 @@ export const asyncTallyVote = (proposal, vote) => async dispatch => {
 
 
 export const asyncConfirmUser = (currentUserAddress) => async dispatch => {
-    console.log("USERS CONFIRM PUT INPUT", JSON.stringify(currentUserAddress))
+    // console.log("USERS CONFIRM PUT INPUT", JSON.stringify(currentUserAddress))
     try {
         let response = await fetch(`users/${currentUserAddress}`, {
             method: 'PUT',
@@ -131,7 +131,7 @@ export const asyncConfirmUser = (currentUserAddress) => async dispatch => {
             }
         })
         let _response = await response.json();
-        console.log("Response from Server", _response);
+        // console.log("Response from Server", _response);
     } catch (err) {
         console.error(err)
     }
@@ -139,7 +139,7 @@ export const asyncConfirmUser = (currentUserAddress) => async dispatch => {
 
 
 export const asyncExecuteProposal = (proposalId) => async dispatch => {
-    console.log("USERS CONFIRM PUT INPUT", JSON.stringify(proposalId))
+    // console.log("USERS CONFIRM PUT INPUT", JSON.stringify(proposalId))
     try {
         let response = await fetch(`execute/${proposalId}`, {
             method: 'PUT',
@@ -151,7 +151,7 @@ export const asyncExecuteProposal = (proposalId) => async dispatch => {
             }
         })
         let _response = await response.json();
-        console.log("Response from Server", _response);
+        // console.log("Response from Server", _response);
     } catch (err) {
         console.error(err)
     }

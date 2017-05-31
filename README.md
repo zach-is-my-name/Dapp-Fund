@@ -1,5 +1,8 @@
 # Dapp Advancement Syndicate
 
+
+[Quick Overall - Slide Deck](https://docs.google.com/presentation/d/1K3VdmbiJS1qytjugPaZgf1IXTq9no3PWXDijK5lbZcc/edit?usp=sharing)
+
 ## What is the Syndicate?
 
 The Syndicate is a decentralized investment fund located on the [Ethereum Blockchain](https://www.ethereum.org/). You can find the Syndicate's exact blockchain address at [0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562](https://ropsten.etherscan.io/tx/0xb04bc4eddaaa6e9fe70b9c811ef73aed885dcc21407e059c64505b90e15ad562). The Sydicate's democratic governance is based on the solidity code created by the Ethereum community and can be examined [here](https://www.ethereum.org/dao).
@@ -27,7 +30,7 @@ The Syndicate provides an accessible space for Ethereum develops to get honest f
 
 ### Connect to the Ethereum's blockchain
 
-This application requires an active connection to the Ethereum blockchain. The simplest way to connect to the Syndicate is by installing the MetaMask browser extension for Google Chrome. Visit [MetaMask's Chrome Web Store page](https://metamask.io/) to download the extension and learn more about it's role in running Ethereum applications. 
+This application requires an active connection to the Ethereum blockchain. The simplest way to connect to the Syndicate is by installing the MetaMask browser extension for Google Chrome. Visit [MetaMask's Chrome Web Store page](https://metamask.io/) to download the extension and learn more about it's role in running Ethereum applications.
 
 ### Join the Syndicate
 
